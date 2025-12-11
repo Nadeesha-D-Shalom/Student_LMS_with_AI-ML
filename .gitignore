@@ -1,0 +1,14 @@
+# Backend
+/Student_LMS_Backend/target/
+/Student_LMS_Backend/.idea/
+/Student_LMS_Backend/*.iml
+*.log
+
+# Frontend
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.angular/cache/
+
+# System
+.DS_Store
+*.zip
