@@ -1,0 +1,83 @@
+Grade 10 Science – Physics
+Chapter 18: Work, Energy and Power
+
+Work:
+An object is said to have done work if its position or shape changes under the action of a force.
+
+If a constant force moves an object through a distance in the direction of the force, work is done.
+
+Work done = Force × Displacement in the direction of the force
+
+Unit of work: Joule (J)
+
+Examples:
+If a force of 1 N moves an object by 1 m, work done is 1 J.
+If a force of 2 N moves an object by 1 m, work done is 2 J.
+
+Energy:
+Energy is the ability to do work.
+The unit of energy is the joule (J).
+
+Forms of energy:
+- Heat energy
+- Electrical energy
+- Mechanical energy
+- Light energy
+- Sound energy
+
+Mechanical Energy:
+There are two forms of mechanical energy:
+- Kinetic energy
+- Potential energy
+
+Kinetic Energy:
+The energy possessed by an object due to its motion is called kinetic energy.
+
+Kinetic energy depends on:
+- Mass of the object
+- Velocity of the object
+
+Kinetic energy = 1/2 mv²
+
+Unit: Joule (J)
+
+Potential Energy:
+The energy stored in an object due to its position or change in shape is called potential energy.
+
+Gravitational potential energy is the energy stored due to height.
+
+Potential energy = mgh
+
+Where:
+m = mass
+g = acceleration due to gravity
+h = height
+
+Elastic potential energy is stored when an object is stretched or compressed.
+
+Transformation of Energy:
+Kinetic energy can be converted into potential energy and potential energy can be converted into kinetic energy.
+
+Examples:
+- A moving bicycle climbing a hill
+- A swing in motion
+- Water stored in a reservoir
+
+Power:
+Power is the rate of doing work.
+
+Power = Work done / Time taken
+
+Unit of power: Watt (W)
+
+1 Watt = 1 Joule per second
+
+Examples:
+If 600 J of work is done in 10 s,
+Power = 600 / 10 = 60 W
+
+Summary:
+- Work is force multiplied by displacement
+- Energy is the ability to do work
+- Mechanical energy exists as kinetic and potential energy
+- Power is the rate of doing work

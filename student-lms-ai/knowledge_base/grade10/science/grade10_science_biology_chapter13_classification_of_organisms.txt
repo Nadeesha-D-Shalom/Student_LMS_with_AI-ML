@@ -1,0 +1,99 @@
+Grade 10 Science – Biology
+Chapter 13: Classification of Organisms
+
+It is believed that life originated on Earth about 3.6 billion years ago. It is accepted that life originated as unicellular organisms and thereafter complex multicellular organisms evolved gradually. Today about 8.7 million species are living on Earth. There is a great diversity among those organisms. Once organisms are classified, it is easy to study them and use them for different functions.
+
+Classification:
+Grouping of organisms into different levels based on their common characteristics is known as classification.
+
+Significance of Classification of Organisms:
+- Easy to study organisms
+- Ability to identify specific distinguishable characteristics of organisms
+- Ability to get an idea about the whole biosphere by studying selected organisms
+- Ability to reveal relationships between different groups of organisms
+- Identification of organisms with economic importance to humans
+
+Methods of Classification:
+Aristotle introduced the first scientific classification.
+Carolus Linnaeus introduced a successful classification system.
+
+Two main methods:
+1. Artificial classification
+2. Natural classification
+
+Artificial Classification:
+Based on external features and habitats.
+Does not depict evolutionary relationships.
+Example:
+- Plants grouped as ornamental, herbal, poisonous
+- Animals grouped as winged and non-winged
+
+Natural Classification:
+Depicts evolutionary relationships.
+Considers morphological, physiological, cytological and molecular features.
+Organisms are grouped into taxonomic levels in a hierarchy.
+
+Taxonomic Hierarchy:
+Domain
+Kingdom
+Phylum
+Class
+Order
+Family
+Genus
+Species
+
+Three Domain System:
+1. Domain Archaea
+2. Domain Bacteria
+3. Domain Eukarya
+
+Domain Archaea:
+Prokaryotes living in extreme environments.
+Not sensitive to antibiotics.
+Examples: Methanogens, Halophiles
+
+Domain Bacteria:
+Prokaryotic organisms sensitive to antibiotics.
+Bacteria and Cyanobacteria belong here.
+
+Domain Eukarya:
+Eukaryotic organisms.
+Four kingdoms:
+- Protista
+- Fungi
+- Plantae
+- Animalia
+
+Kingdom Protista:
+Mostly aquatic.
+Unicellular or multicellular without tissues.
+Algae and protozoans belong here.
+
+Kingdom Fungi:
+Eukaryotic organisms with chitinous cell walls.
+Unicellular or multicellular.
+Important decomposers.
+
+Kingdom Plantae:
+Multicellular, autotrophic.
+Possess chlorophyll.
+Divided into:
+- Non-flowering plants
+- Flowering plants
+
+Kingdom Animalia:
+Multicellular heterotrophic organisms.
+Divided into:
+- Invertebrates
+- Vertebrates
+
+Binomial Nomenclature:
+Introduced by Carl Linnaeus.
+Each organism has a two-word scientific name.
+Example: Homo sapiens
+
+Summary:
+- Organisms are classified to simplify study
+- Three domains exist
+- Scientific naming uses binomial nomenclature

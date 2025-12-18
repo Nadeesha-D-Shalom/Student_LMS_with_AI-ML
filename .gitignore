@@ -1,14 +1,13 @@
-# Backend
-/Student_LMS_Backend/target/
-/Student_LMS_Backend/.idea/
-/Student_LMS_Backend/*.iml
-*.log
+# IDEs
+.idea/
+.vscode/
 
-# Frontend
-/frontend/node_modules/
-/frontend/dist/
-/frontend/.angular/cache/
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
 
-# System
+# OS
 .DS_Store
-*.zip
+Thumbs.db

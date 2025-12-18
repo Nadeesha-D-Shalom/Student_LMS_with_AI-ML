@@ -1,0 +1,72 @@
+Grade 10 Science – Physics
+Chapter 19: Current Electricity
+
+Electricity exists in two forms:
+- Static electricity
+- Current electricity
+
+Static Electricity:
+Static electricity consists of electric charges accumulated on the surfaces of objects.
+These charges do not flow.
+
+Current Electricity:
+Current electricity is the flow of electric charges through a conductor.
+
+Electric Current:
+Electric current flows due to a potential difference.
+Free electrons in conductors contribute to electric current.
+
+Direction of Current:
+Electron flow occurs from negative terminal to positive terminal.
+Conventional current flows from positive terminal to negative terminal.
+
+Unit of Electric Current:
+SI unit of current is the ampere (A).
+Ammeter is used to measure electric current.
+
+Potential Difference:
+Potential difference is the electric pressure difference between two points in a circuit.
+Unit: volt (V).
+Measured using a voltmeter connected in parallel.
+
+Electromotive Force (EMF):
+EMF is the potential difference between terminals of a source when no current flows.
+
+Resistance:
+Resistance opposes the flow of electric current.
+Unit: ohm (Ω).
+
+Factors affecting resistance:
+- Length of conductor
+- Cross-sectional area
+- Material (resistivity)
+
+Ohm’s Law:
+When temperature is constant,
+V ∝ I
+V = IR
+
+Resistors:
+- Fixed resistors
+- Variable resistors
+- Light dependent resistors
+
+Resistor Colour Code:
+Used to identify resistance values.
+
+Combination of Resistors:
+Series combination:
+R = R₁ + R₂ + R₃
+
+Parallel combination:
+1/R = 1/R₁ + 1/R₂ + 1/R₃
+
+Electric Shock:
+Occurs when the human body becomes part of a circuit.
+Requires a potential difference and a complete path.
+
+Summary:
+- Electric current is flow of charges
+- Ohm’s law relates V, I and R
+- Resistance controls current
+- Resistors are used to regulate circuits

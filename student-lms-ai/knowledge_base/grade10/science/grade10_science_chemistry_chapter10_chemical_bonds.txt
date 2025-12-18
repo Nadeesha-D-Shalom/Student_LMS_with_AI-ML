@@ -1,0 +1,35 @@
+Grade 10 Science – Chemistry
+Chapter 10: Chemical Bonds
+
+The English alphabet contains 26 letters. Yet, the combination of them forms a large number of words. There is only a limited number of elements. In spite of that, millions of compounds are formed by their chemical combination.
+
+Though most of the elements form chemical compounds, there are some elements which do not form compounds under normal conditions. Helium, neon and argon are examples. These elements occurring as single atoms in nature exist as gases. They are known as noble gases.
+
+What is the reason why many elements form compounds but not the noble gases?
+This can be explained by taking into consideration the electronic configuration of elements.
+
+The outermost shell carrying electrons in an atom of an element is known as its valence shell. The valence shell of the atoms of neon and argon has eight electrons each. This electronic structure has been identified as a stable electronic configuration. Because of this stable configuration their reactivity is very low.
+
+The attractive forces or binding among the atoms or ions resulted by the rearrangement of electrons in the valence shell for stabilising the atoms of elements are called chemical bonds.
+
+According to the way the participating atoms behave when they chemically bind together, chemical bonds are divided into:
+1. Ionic bonds
+2. Covalent bonds
+
+Ionic bonds are formed due to strong electrostatic attractions between positive and negative ions produced by the exchange of electrons among atoms.
+
+Covalent bonds are formed by sharing of electrons between atoms. By sharing electrons, atoms acquire the noble gas configuration.
+
+When two atoms of unequal electronegativities are joined by a covalent bond, it becomes polar due to asymmetric distribution of electrons. Such bonds are called polar covalent bonds.
+
+Intermolecular bonds are attractive forces between molecules. These forces are weaker than covalent bonds but give special properties to substances such as water.
+
+Characteristics of Ionic Compounds:
+- High melting and boiling points
+- Exist as solids at room temperature
+- Conduct electricity in aqueous or molten state
+
+Characteristics of Covalent Compounds:
+- Low melting and boiling points
+- Exist as liquids or gases
+- Do not conduct electricity in aqueous solutions

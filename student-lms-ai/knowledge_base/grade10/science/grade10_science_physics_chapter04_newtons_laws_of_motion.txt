@@ -1,0 +1,51 @@
+Grade 10 Science – Physics
+Chapter 04: Newton’s Laws of Motion
+
+Force:
+A force is a push or a pull.
+Force can change shape, speed, or direction of motion.
+Force is a vector quantity.
+
+Newton’s First Law:
+A body remains at rest or continues to move with uniform velocity unless an unbalanced force acts on it.
+
+Examples:
+- Objects stop due to friction
+- Passengers fall forward when brakes are applied
+
+Newton’s Second Law:
+Acceleration is directly proportional to force and inversely proportional to mass.
+
+Formula:
+F = m × a
+
+Where:
+F = force (N)
+m = mass (kg)
+a = acceleration (m s⁻²)
+
+Newton’s Third Law:
+For every action, there is an equal and opposite reaction.
+
+Examples:
+- Walking
+- Swimming
+- Rocket propulsion
+- Balloon movement
+
+Momentum:
+Momentum = mass × velocity
+p = m × v
+
+Unit: kg m s⁻¹
+Momentum depends on mass and velocity.
+
+Mass and Weight:
+Mass is the amount of matter in an object (kg).
+Weight is the force due to gravity (N).
+
+Formula:
+Weight = mass × gravitational acceleration
+W = m × g
+
+Weight changes with gravity, mass does not.

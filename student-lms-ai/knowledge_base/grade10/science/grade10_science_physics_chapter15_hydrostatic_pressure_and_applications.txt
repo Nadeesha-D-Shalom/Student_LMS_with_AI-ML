@@ -1,0 +1,85 @@
+Grade 10 Science – Physics
+Chapter 15: Hydrostatic Pressure and Its Applications
+
+15.1 Pressure
+
+Pressure is the force acting per unit area.
+
+Pressure = Perpendicular force / Area
+
+The unit of pressure is N m⁻², which is known as the Pascal (Pa).
+Since pressure has only magnitude, it is a scalar quantity.
+
+15.2 Hydrostatic Pressure
+
+Liquids also exert pressure. The pressure exerted by a liquid acts in all directions.
+The pressure at the same level of a liquid is the same.
+The pressure in a liquid increases with depth.
+
+Characteristics of hydrostatic pressure:
+(i) Pressure increases with the height of the liquid column.
+(ii) Pressure at the same level of a liquid is the same.
+(iii) Pressure at a point acts in all directions.
+(iv) Pressure depends on the vertical height of the liquid column and not on its shape.
+
+Pressure due to a liquid column is given by:
+
+P = h × ρ × g
+
+where:
+h = height of liquid column
+ρ = density of liquid
+g = acceleration due to gravity
+
+15.3 Transmission of Pressure through Liquids
+
+Liquids are nearly incompressible. Therefore, pressure applied at one point in a liquid
+is transmitted equally in all directions.
+
+Hydraulic press operates on this principle.
+A small force applied on a small piston can generate a large force on a larger piston.
+
+Applications:
+- Hydraulic press
+- Hydraulic jack
+- Vehicle braking system
+
+15.4 Pressure Due to Gases
+
+Gases exert pressure.
+Atmospheric pressure is caused by the weight of air above a surface.
+
+Atmospheric pressure at sea level is equivalent to a mercury column of height 76 cm.
+
+Barometers:
+- Mercury barometer
+- Aneroid barometer
+
+Applications of atmospheric pressure:
+- Drinking with a straw
+- Siphon method
+- Rubber sucker
+
+15.5 Floatation
+
+When an object is immersed in a liquid, an upward force acts on it.
+This upward force is called upthrust.
+
+Archimedes’ Principle:
+When an object is partially or completely immersed in a liquid, the upthrust acting on it
+is equal to the weight of the liquid displaced by the object.
+
+If:
+- Upthrust < weight → object sinks
+- Upthrust = weight → object floats fully submerged
+- Upthrust > weight → object floats partially submerged
+
+Hydrometer:
+Used to measure the density of liquids.
+Works based on Archimedes’ principle.
+
+Summary:
+- Liquids and gases exert pressure
+- Pressure increases with depth
+- Atmospheric pressure exists due to air
+- Floating depends on upthrust and weight

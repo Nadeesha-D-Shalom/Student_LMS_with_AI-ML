@@ -1,0 +1,52 @@
+Grade 10 Science – Chapter 02
+Unit: Physics
+Topic: Motion in a Straight Line
+
+Distance and Displacement:
+Distance is the total length of the path travelled by an object and depends on the path taken.
+Displacement is the shortest straight-line distance between the initial and final positions and has direction.
+
+Scalar and Vector Quantities:
+Scalar quantities have magnitude only.
+Examples: distance, speed, mass, time.
+Vector quantities have both magnitude and direction.
+Examples: displacement, velocity, acceleration.
+
+Speed:
+Speed is the rate at which distance is travelled.
+Speed = distance / time
+Speed is a scalar quantity.
+Uniform speed occurs when equal distances are travelled in equal time intervals.
+Average speed is calculated as total distance divided by total time.
+
+Velocity:
+Velocity is the rate of change of displacement.
+Velocity = displacement / time
+Velocity is a vector quantity.
+Uniform velocity occurs when displacement changes equally in equal time intervals.
+
+Acceleration:
+Acceleration is the rate of change of velocity.
+Acceleration = change in velocity / time
+Unit of acceleration is m s⁻².
+Negative acceleration is called deceleration.
+
+Displacement–Time Graphs:
+A straight line indicates uniform velocity.
+The gradient of the graph represents velocity.
+
+Velocity–Time Graphs:
+The gradient of a velocity–time graph represents acceleration.
+The area under the velocity–time graph represents displacement.
+
+Gravitational Acceleration:
+The acceleration due to gravity is denoted by g.
+The average value of g near the Earth’s surface is approximately 9.8 m s⁻².
+A freely falling body increases its velocity by 9.8 m s⁻¹ every second.
+
+Summary:
+Distance is a scalar quantity.
+Displacement, velocity, and acceleration are vector quantities.
+Speed describes how fast an object moves.
+Velocity describes speed with direction.
+Acceleration describes how velocity changes with time.

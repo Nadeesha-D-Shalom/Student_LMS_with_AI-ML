@@ -1,0 +1,42 @@
+Grade 10 Science – Physics
+Chapter 11: Turning Effect of a Force
+
+By applying forces on objects, it is possible to push, pull or lift them. Similarly, it is possible to rotate objects by applying forces on them. That is, by applying a force we can rotate or turn an object around a given point.
+
+The ability of a force to rotate an object around a given point is called the turning effect of a force.
+
+Moment:
+The product of the force and the perpendicular distance from the line of action of the force to the axis of rotation is known as the moment of a force.
+
+Moment of a force = Force × Perpendicular distance
+Unit: N m
+
+The moment of a force depends on:
+- The magnitude of the force
+- The perpendicular distance from the axis of rotation
+
+Clockwise and Anticlockwise Moments:
+Depending on the direction of rotation, the moment can be clockwise or anticlockwise.
+
+If clockwise moment equals anticlockwise moment, the object remains in equilibrium.
+
+Turning Effect of a Force:
+To rotate an object around an axis, a moment is required. A moment is produced when a force is applied at a distance from the axis of rotation.
+
+Couple of Forces:
+Two equal forces acting in opposite directions along parallel lines form a couple.
+
+The resultant force of a couple is zero, but it produces rotation.
+
+Moment of a couple = Force × Perpendicular distance between the lines of action
+Unit: N m
+
+Applications of Couples:
+- Opening or closing a tap
+- Turning a steering wheel
+- Using a screwdriver
+
+Summary:
+- Moment causes rotation
+- Moment depends on force and distance
+- A couple produces rotation without linear motion

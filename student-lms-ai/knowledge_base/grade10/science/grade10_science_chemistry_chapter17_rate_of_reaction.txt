@@ -1,0 +1,75 @@
+Grade 10 Science – Chemistry
+Chapter 17: Rate of Reaction
+
+The cause of most changes around us is chemical reactions. Some examples of chemical changes are:
+- Rusting of iron
+- Ripening of fruits
+- Digestion of food
+- Manufacturing yoghurt from milk
+- Burning firewood
+- Reaction of zinc with dilute acid
+- Reaction of sodium metal with water
+- Ignition of petrol
+- Blast of a cracker
+
+The speeds of chemical reactions are different. Some reactions occur very fast while others are very slow.
+Reactions such as rusting of iron, digestion of food and ripening of fruits are slow reactions.
+Reactions such as combustion of petrol, reaction of zinc with acid and blasting of crackers are fast reactions.
+
+Rate of Reaction:
+When a chemical reaction occurs, reactants are used up and products are formed.
+The rate of reaction is defined as the amount of change occurring per unit time.
+
+Rate of reaction =
+Amount of reactants used up / Time taken
+or
+Amount of products formed / Time taken
+
+Determination of Rate of Reaction:
+The rate of a reaction can be determined by:
+1. Measuring the amount of reactants used up or products formed in a given time
+2. Measuring the time taken for a given amount of reactants to be used up or products to be formed
+
+Factors Affecting the Rate of Reactions:
+When a reaction occurs, particles of reactants must collide with each other.
+The rate of reaction depends on the frequency of effective collisions.
+
+The main factors affecting the rate of reaction are:
+- Surface area of reactants
+- Temperature of the reaction
+- Concentration of reactants (pressure for gases)
+- Presence of catalysts
+
+Surface Area of Reactants:
+When a solid reacts with a liquid or gas, the reaction occurs only at the surface.
+Increasing the surface area increases the number of collisions, thus increasing the rate of reaction.
+
+Temperature:
+Increasing temperature increases the kinetic energy of particles.
+This increases the number of effective collisions per unit time.
+Therefore, the rate of reaction increases with temperature.
+
+Concentration of Reactants:
+Increasing the concentration increases the number of reactant particles in a unit volume.
+This increases collision frequency and hence increases the rate of reaction.
+
+Pressure of Gaseous Reactants:
+For gaseous reactants, increasing pressure increases the rate of reaction by increasing collision frequency.
+
+Catalysts:
+Catalysts are substances that increase the rate of a reaction without being consumed.
+Catalysts remain chemically unchanged at the end of the reaction.
+
+Inhibitors:
+Substances that decrease the rate of reaction are called inhibitors.
+
+Uses of Rate of Reaction:
+Knowledge of rate of reaction is important in:
+- Chemical industries
+- Industrial processes
+- Day-to-day activities
+
+Summary:
+- Rate of reaction is the amount of change per unit time
+- Rate depends on surface area, temperature, concentration and catalysts
+- Catalysts speed up reactions without being consumed

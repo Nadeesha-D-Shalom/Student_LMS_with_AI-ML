@@ -1,0 +1,107 @@
+Grade 10 Science – Physics
+Chapter 19: Current Electricity
+
+Electricity is a very important form of energy. In the modern world, many instruments
+are manufactured to operate using electricity. Household equipment such as electric
+bulbs, electric irons and electric fans are examples.
+
+Electricity exists in two forms:
+- Static electricity
+- Current electricity
+
+Static Electricity:
+Static electricity consists of electric charges accumulated on the surfaces of objects.
+These charges do not flow.
+
+When certain objects are rubbed, they acquire the ability to attract small pieces of
+paper or light materials. This is due to static electric charges produced by rubbing.
+
+Atoms consist of electrons, protons and neutrons.
+- Protons are positively charged
+- Electrons are negatively charged
+- Neutrons have no charge
+
+Only electrons can be removed easily from atoms.
+When electrons are transferred during rubbing:
+- Loss of electrons → positive charge
+- Gain of electrons → negative charge
+
+Charges that remain stationary on an object are called electrostatic charges.
+
+Electric Current:
+When electrostatic charges begin to move, an electric current is produced.
+An electric current is the flow of electric charges through a conductor.
+
+Conductors:
+Materials that allow electric current to pass easily are called conductors.
+Metals such as copper, aluminium and iron are good conductors.
+
+Metals contain free electrons in their outermost shells.
+These free electrons move when a potential difference is applied.
+
+Direction of Current:
+Actual electron flow occurs from the negative terminal to the positive terminal.
+Conventionally, electric current is considered to flow from the positive terminal
+to the negative terminal.
+
+Electric Current Unit:
+The SI unit of electric current is the ampere (A).
+The instrument used to measure current is the ammeter.
+
+Potential Difference:
+The electric pressure difference between two points in a circuit is called the
+potential difference.
+Unit: Volt (V)
+
+Electromotive Force (EMF):
+The force by which electrons are supplied to a circuit by a source is called the
+electromotive force.
+
+Voltmeter:
+The instrument used to measure potential difference is the voltmeter.
+A voltmeter is connected in parallel with the component.
+
+Ohm’s Law:
+When the temperature of a conductor is constant, the current passing through it
+is directly proportional to the potential difference across it.
+
+V ∝ I
+V = IR
+
+Where:
+V = potential difference
+I = current
+R = resistance
+
+Resistance:
+Resistance is the property that opposes the flow of electric current.
+Unit: Ohm (Ω)
+
+Factors affecting resistance:
+- Length of the conductor
+- Cross-sectional area
+- Material of the conductor
+
+Resistors:
+Components used to control current in a circuit.
+Types of resistors:
+- Fixed resistors
+- Variable resistors
+- Light dependent resistors
+
+Combination of Resistors:
+Series combination:
+R = R₁ + R₂ + R₃
+
+Parallel combination:
+1/R = 1/R₁ + 1/R₂ + 1/R₃
+
+Electric Shock:
+Electric shock occurs when the human body becomes part of an electric circuit.
+A potential difference and a complete path are required for current to flow.
+
+Summary:
+- Electric current is the flow of charges
+- Current is measured in amperes
+- Ohm’s law relates V, I and R
+- Resistance controls current flow

@@ -1,0 +1,37 @@
+Grade 10 Science – Physics
+Chapter 12: Equilibrium of Forces
+
+An object is said to be in equilibrium when the resultant force acting on it is zero.
+
+Equilibrium under Two Forces:
+An object remains in equilibrium under two forces if:
+- The two forces are equal in magnitude
+- The two forces act in opposite directions
+- The two forces act along the same line
+
+Examples:
+- An object resting on a table
+- An object suspended by a string
+
+Equilibrium under Three Parallel Forces:
+An object remains in equilibrium if:
+- The three forces are coplanar
+- One force is equal in magnitude and opposite in direction to the resultant of the other two forces
+
+Examples:
+- A rod resting on two supports
+- A child sitting on a swing
+
+Equilibrium under Three Non-Parallel Forces:
+An object remains in equilibrium if:
+- The three forces are coplanar
+- The lines of action of the forces meet at a common point
+- The resultant of any two forces is equal and opposite to the third force
+
+Examples:
+- A picture frame hanging on a wall
+
+Summary:
+- Equilibrium occurs when resultant force is zero
+- Conditions vary for two-force and three-force systems
+- Equilibrium can exist under more than three forces

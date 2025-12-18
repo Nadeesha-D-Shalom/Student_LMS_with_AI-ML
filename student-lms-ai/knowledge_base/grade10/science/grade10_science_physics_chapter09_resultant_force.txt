@@ -1,0 +1,26 @@
+Grade 10 Science – Physics
+Chapter 09: Resultant Force
+
+When more than one force is applied on an object, the single force that gives the same result as all the contributing forces is known as the resultant force.
+
+Resultant of Two Collinear Forces Acting in the Same Direction:
+When two forces act along the same direction, the resultant force is equal to the sum of the two forces.
+
+Resultant force = F1 + F2
+
+Resultant of Two Collinear Forces Acting in Opposite Directions:
+When two forces act in opposite directions, the resultant force is equal to the difference between the two forces and acts in the direction of the larger force.
+
+Resultant force = Larger force − Smaller force
+
+Resultant of Two Parallel Forces:
+When two parallel forces act along the same direction, the resultant is equal to the sum of the two forces.
+
+Resultant of Two Inclined Forces:
+When two inclined forces act on an object, the resultant acts in a direction between the two forces.
+
+Summary:
+- Resultant force replaces the effect of multiple forces
+- Same direction → forces add
+- Opposite direction → forces subtract
+- Direction of resultant is the direction of the greater force

@@ -1,0 +1,60 @@
+Grade 10 Science – Chemistry
+Chapter 03: Structure of Matter
+
+Matter is anything that occupies space and has mass. Matter can be classified based on its physical nature and chemical composition.
+
+Classification of Matter:
+- Pure substances
+  - Elements (e.g. Iron, Oxygen, Copper)
+  - Compounds (e.g. Water, Carbon dioxide)
+- Mixtures
+  - Homogeneous mixtures (e.g. salt solution)
+  - Heterogeneous mixtures (e.g. sand and rice)
+
+Atom:
+The atom is the basic unit of matter.
+Atoms consist of:
+- Protons (positive charge)
+- Electrons (negative charge)
+- Neutrons (no charge)
+
+The nucleus contains protons and neutrons. Electrons revolve around the nucleus in energy levels.
+
+Atomic Number:
+Atomic number (Z) is the number of protons in an atom.
+In a neutral atom, number of protons equals number of electrons.
+
+Mass Number:
+Mass number (A) = number of protons + number of neutrons.
+
+Electronic Configuration:
+Arrangement of electrons in shells.
+Maximum electrons per shell:
+K = 2
+L = 8
+M = 18
+N = 32
+
+Example:
+Sodium (Na) → 2, 8, 1
+
+Periodic Table:
+Elements are arranged by increasing atomic number.
+- Periods indicate number of shells
+- Groups indicate number of valence electrons
+
+Isotopes:
+Atoms of the same element with same atomic number but different mass numbers.
+Example: Protium, Deuterium, Tritium
+
+Metals, Non-metals, Metalloids:
+- Metals: good conductors, malleable
+- Non-metals: poor conductors, brittle
+- Metalloids: properties of both
+
+Valency:
+Valency is the combining capacity of an element.
+Examples:
+H2O – Water
+NaCl – Sodium chloride
+CaO – Calcium oxide

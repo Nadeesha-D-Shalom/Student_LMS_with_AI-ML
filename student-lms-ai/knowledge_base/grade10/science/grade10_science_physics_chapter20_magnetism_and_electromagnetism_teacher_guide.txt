@@ -1,0 +1,63 @@
+Grade 10 Science – Physics
+Chapter 20: Magnetism and Electromagnetism
+
+Magnetism:
+Magnetism is the ability of certain materials to attract iron and other magnetic materials.
+
+Magnets:
+A magnet attracts iron, nickel and cobalt.
+
+Magnetic Poles:
+Every magnet has:
+- North pole
+- South pole
+
+Like poles repel each other.
+Unlike poles attract each other.
+
+Magnetic Field:
+The region around a magnet where magnetic force acts is called a magnetic field.
+
+Magnetic Field Lines:
+- Originate from north pole
+- End at south pole
+- Do not intersect
+- Closer lines indicate stronger field
+
+Electromagnetism:
+An electric current flowing through a conductor produces a magnetic field.
+
+Electromagnets:
+Temporary magnets produced by passing current through a coil around a soft iron core.
+
+Factors affecting strength of electromagnet:
+- Number of turns of the coil
+- Strength of current
+- Core material
+
+Uses of Electromagnets:
+- Electric bells
+- Relays
+- Electric cranes
+- Loudspeakers
+
+Permanent Magnets:
+Retain magnetism for a long time.
+
+Uses of Permanent Magnets:
+- Compasses
+- Motors
+- Loudspeakers
+
+Electromagnetic Induction:
+Electric current is produced when magnetic fields change.
+
+Applications:
+- Electric generators
+- Transformers
+
+Summary:
+- Magnets have two poles
+- Current produces magnetic fields
+- Electromagnets are temporary
+- Induction is used to generate electricity

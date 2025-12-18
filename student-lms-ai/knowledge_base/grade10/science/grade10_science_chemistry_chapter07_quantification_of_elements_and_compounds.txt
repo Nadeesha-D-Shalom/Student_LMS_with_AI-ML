@@ -1,0 +1,70 @@
+Grade 10 Science – Chemistry
+Chapter 07: Quantification of Elements and Compounds
+
+To measure the mass of objects such as a motor car, brick, loaf of bread or a tablet of medicine,
+units like kilogram, gram and milligram are used. However, these units are too large to measure
+the mass of atoms and molecules.
+
+The mass of very small particles such as atoms and molecules is extremely small.
+For example:
+Mass of a hydrogen atom = 1.674 × 10⁻²⁴ g
+Mass of a carbon atom = 1.993 × 10⁻²³ g
+Mass of a sodium atom = 3.819 × 10⁻²³ g
+Mass of a chlorine atom = 5.903 × 10⁻²³ g
+
+Using such values is inconvenient. Therefore, the concept of relative atomic mass was introduced.
+
+7.1 Relative Atomic Mass (Ar)
+
+Relative atomic mass is defined as how many times the mass of an atom of an element
+is heavier than 1/12 of the mass of a carbon-12 atom.
+
+At present, 1/12 of the mass of a carbon-12 isotope is used as the atomic mass unit.
+
+Relative atomic mass (Ar) has no unit.
+
+Examples of relative atomic masses:
+Hydrogen – 1
+Carbon – 12
+Oxygen – 16
+Sodium – 23
+Chlorine – 35.5
+
+7.2 Relative Molecular Mass (Mr)
+
+Relative molecular mass is the sum of the relative atomic masses of all atoms present
+in a molecule.
+
+Example:
+Relative molecular mass of water (H2O)
+= (2 × 1) + 16
+= 18
+
+Relative molecular mass has no unit.
+
+7.3 Avogadro Constant
+
+When the relative atomic mass of an element is taken in grams, it contains
+6.022 × 10²³ atoms.
+
+This number is called the Avogadro constant.
+
+Avogadro constant = 6.022 × 10²³ mol⁻¹
+
+7.4 Mole
+
+The mole is the SI unit used to measure the amount of a substance.
+
+One mole of a substance contains 6.022 × 10²³ particles (atoms, molecules or ions).
+
+Molar Mass:
+Molar mass is the mass of one mole of a substance.
+Unit: g mol⁻¹
+
+Formula:
+Number of moles (n) = Mass (m) / Molar mass (M)
+
+Summary:
+- Relative atomic mass and relative molecular mass have no units.
+- Mole is used to measure large numbers of particles.
+- Molar mass is expressed in g mol⁻¹.
