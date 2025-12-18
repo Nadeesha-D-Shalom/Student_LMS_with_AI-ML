@@ -5,7 +5,6 @@ from typing import Optional, List
 class AskRequest(BaseModel):
     question: str
 
-
 class AskResponse(BaseModel):
     type: str
     concept: Optional[str] = None

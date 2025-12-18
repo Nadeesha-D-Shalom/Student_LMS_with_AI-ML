@@ -5,7 +5,6 @@ from app.rag.retriever import retrieve_context
 
 router = APIRouter()
 
-
 @router.post("/ask", response_model=AskResponse)
 def ask_question(request: AskRequest):
     context = retrieve_context(request.question)

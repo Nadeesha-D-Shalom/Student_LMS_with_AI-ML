@@ -9,7 +9,6 @@ collection = client.get_or_create_collection(
     name="grade10_science"
 )
 
-
 def retrieve_context(question: str, top_k: int = 5) -> List[str]:
     results = collection.query(
         query_texts=[question],

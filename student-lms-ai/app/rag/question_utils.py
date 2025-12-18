@@ -1,6 +1,5 @@
 import re
 
-
 def detect_marks(question: str) -> int | None:
     q = question.lower()
 
