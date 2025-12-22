@@ -1,0 +1,78 @@
+Grade 11 Science – Chapter 13
+Unit: Physics
+Topic: Electromagnetism and Electromagnetic Induction
+
+Magnetism:
+Magnets are used in many applications such as lifting scrap iron, electric motors, medical equipment and electronic devices. There are two main types of magnets: permanent magnets and electromagnets. In electromagnets, magnetism exists only when current flows through the coil, while in permanent magnets magnetism is a permanent property of the material.
+
+Magnetic Materials:
+Objects made of iron, steel and nickel are attracted by magnets. Objects made of plastic, wood, paper and rubber are not attracted by magnets. This property helps to identify magnetic and non-magnetic materials.
+
+Magnetic Field:
+A magnetic field is the region around a magnet where its magnetic effect can be felt. A magnetic field cannot be seen directly but can be detected using a compass. The direction of the magnetic field at a point is shown by the direction in which the compass needle points.
+
+Direction of Magnetic Field:
+The direction of a magnetic field varies from point to point. A magnetic field has both magnitude and direction, making it a vector quantity.
+
+Magnetic Effect of Electric Current:
+When an electric current flows through a conductor, a magnetic field is produced around the conductor. This effect was first discovered by Hans Christian Oersted.
+
+Magnetic Field Around a Straight Conductor:
+When current flows through a straight conductor, a magnetic field is produced around it. The direction of this magnetic field depends on the direction of the current flow.
+
+Maxwell’s Corkscrew Rule:
+If a corkscrew is rotated so that its tip moves in the direction of current flow, the direction of rotation of the corkscrew gives the direction of the magnetic field around the conductor.
+
+Right Hand Grip Rule:
+If a straight conductor is held with the right hand such that the thumb points in the direction of current flow, the curled fingers show the direction of the magnetic field.
+
+Force Acting on a Current Carrying Conductor:
+A conductor placed in a magnetic field experiences a force when current flows through it. The direction of motion is perpendicular to both the magnetic field and the current.
+
+Factors Affecting the Force:
+The magnitude of the force depends on the magnitude of the current, the length of the conductor in the magnetic field, and the strength of the magnetic field.
+
+Fleming’s Left Hand Rule:
+When the thumb, index finger and middle finger of the left hand are held perpendicular to each other, the index finger shows the magnetic field direction, the middle finger shows the current direction, and the thumb shows the direction of the force.
+
+Loudspeaker:
+A loudspeaker works based on the force acting on a current-carrying conductor in a magnetic field. A varying current passing through a coil causes vibrations that produce sound waves.
+
+Direct Current Motor:
+A DC motor converts electrical energy into mechanical energy. When current flows through a coil placed in a magnetic field, a couple of forces causes the coil to rotate.
+
+Main Parts of a DC Motor:
+The main parts include the armature, magnetic poles, commutator, brushes and external power supply. The commutator reverses the direction of current to maintain continuous rotation.
+
+Electromagnetic Induction:
+Electromagnetic induction is the generation of an electromotive force when a conductor experiences a change in magnetic field. This phenomenon was discovered by Michael Faraday.
+
+Induced Electromotive Force:
+An induced electromotive force is produced when there is relative motion between a conductor and a magnetic field or when the magnetic field linked with the conductor changes.
+
+Factors Affecting Induced EMF:
+The magnitude of induced EMF depends on the number of turns in the coil, strength of the magnetic field, and the speed of motion of the magnet or conductor.
+
+Fleming’s Right Hand Rule:
+When the thumb, index finger and middle finger of the right hand are perpendicular to each other, the thumb shows the direction of motion, the index finger shows the magnetic field direction, and the middle finger shows the direction of induced current.
+
+Alternating Current Dynamo:
+An AC dynamo produces alternating current by rotating a coil in a magnetic field. The direction of induced current changes every half rotation.
+
+Moving Coil Magnetic Microphone:
+Sound waves cause a diaphragm and attached coil to vibrate in a magnetic field. This motion induces an alternating current that corresponds to the sound wave.
+
+Bicycle Dynamo:
+A bicycle dynamo produces alternating current by rotating a magnet near a coil. The brightness of the lamp increases with the speed of rotation.
+
+Transformers:
+A transformer changes the voltage of an alternating current using electromagnetic induction. It consists of primary and secondary coils wound on a soft iron core.
+
+Transformer Equation:
+The voltage ratio of a transformer is equal to the ratio of the number of turns in the primary and secondary coils.
+
+Step-up and Step-down Transformers:
+Step-up transformers increase voltage and have more turns in the secondary coil. Step-down transformers decrease voltage and have fewer turns in the secondary coil.
+
+Applications of Transformers:
+Transformers are used in power transmission, power distribution, electronic devices and power adapters.
