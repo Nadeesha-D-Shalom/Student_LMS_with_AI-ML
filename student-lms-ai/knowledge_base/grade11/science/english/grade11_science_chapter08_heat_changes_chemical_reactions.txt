@@ -1,0 +1,45 @@
+Grade 11 Science – Chapter 08
+Unit: Chemistry
+Topic: Heat Changes Associated with Chemical Reactions
+
+Heat Changes in Chemical Reactions:
+During every chemical reaction, a heat change occurs. The temperature change indicates whether heat is absorbed or released.
+
+Exothermic Reactions:
+Exothermic reactions are reactions in which heat is released to the surroundings. In these reactions, the energy content of the products is lower than that of the reactants.
+
+Example of an Exothermic Reaction:
+When magnesium reacts with dilute hydrochloric acid, heat is released and the temperature increases. The reaction produces magnesium chloride and hydrogen gas.
+
+Energy Level Diagram of Exothermic Reactions:
+In an exothermic reaction, the energy level of the products is lower than that of the reactants. The excess energy is released as heat.
+
+Endothermic Reactions:
+Endothermic reactions are reactions in which heat is absorbed from the surroundings. In these reactions, the energy content of the products is higher than that of the reactants.
+
+Example of an Endothermic Reaction:
+When citric acid reacts with sodium bicarbonate, the temperature decreases due to absorption of heat.
+
+Energy Level Diagram of Endothermic Reactions:
+In an endothermic reaction, the energy level of the products is higher than that of the reactants, showing absorption of energy.
+
+Measurement of Heat Change:
+Heat change in a reaction can be calculated using Q = mcθ. This calculation assumes no heat loss to surroundings.
+
+Experimental Determination of Heat Change:
+The reaction between sodium hydroxide and hydrochloric acid is used to measure heat change. Equal volumes of solutions are mixed and the maximum temperature is recorded.
+
+Heat of Neutralisation:
+The heat released when one mole of an acid reacts with one mole of a base is called the heat of neutralisation.
+
+Importance of Physical States:
+When expressing heat changes, the physical states of reactants and products must be stated because heat changes vary with physical state.
+
+Applications of Exothermic Reactions:
+Combustion of fuels, neutralisation reactions, cellular respiration and slaked lime production are exothermic reactions.
+
+Applications of Endothermic Reactions:
+Photosynthesis and thermal decomposition of compounds such as calcium carbonate are endothermic processes.
+
+Summary of Heat Changes:
+Chemical reactions involve heat changes. Exothermic reactions release heat and endothermic reactions absorb heat. Heat changes can be calculated quantitatively using experimental data.

@@ -1,0 +1,129 @@
+Grade 11 Science – Chapter 15
+Unit: Biology
+Topic: Biosphere
+
+Environmental Equilibrium:
+The physical and biological components in which interactions take place for the existence of organisms is known as the environment. Soil, water and air belong to the physical component, while plants, animals and microorganisms belong to the biological component. Environmental conditions such as temperature, rainfall, humidity and sunlight also influence life. A balanced relationship between organisms and the physical environment is called environmental equilibrium. Although ecosystems can restore balance after small changes, complex human activities have disturbed this equilibrium.
+
+Organizational Levels of the Biosphere:
+Living organisms in the biosphere are organized from the simplest level to the most complex level. These levels are individual, population, community, ecosystem and biosphere. Each level represents increasing complexity and interaction among living and non-living components.
+
+Individual:
+An individual is a single organism belonging to a particular species living in an environment. Examples include a coconut plant and an elephant. An individual represents the basic unit of biological organization.
+
+Species:
+A species is a group of similar organisms that can interbreed naturally and produce fertile offspring. Members of a species share common characteristics and genetic similarity.
+
+Population:
+A population is a group of organisms of the same species living in a particular geographical area during a specific time period. Examples include the number of elephants in Yala National Park in a given year and the human population of Sri Lanka in a specific year.
+
+Community:
+A community consists of different populations interacting with each other in a particular area. Examples include the animal community of Yala National Park and the mangrove plant community of the Negombo lagoon.
+
+Ecosystem:
+An ecosystem includes all living communities and the non-living components with which they interact in a particular area. Examples include a pond, a forest, a decaying log, and a rocky beach.
+
+Biosphere:
+The biosphere is the part of the Earth and its atmosphere inhabited by living organisms. It consists of the lithosphere, hydrosphere and atmosphere, which together support life on Earth.
+
+Population Density:
+Population density is the number of organisms of a species living in a unit area of a selected habitat. It is influenced by births, deaths, immigration and emigration. Changes in these factors cause variations in population size over time.
+
+Typical Population Growth Curve:
+The population growth of organisms follows a sigmoid or S-shaped curve with four phases: slow growth phase, high growth phase, deceleration phase and stationary phase. The maximum number of organisms that an environment can support is known as the carrying capacity.
+
+Human Population Growth:
+Unlike natural populations, human population growth follows a J-shaped curve, indicating exponential growth. Rapid population growth is due to increased birth rates, reduced death rates, technological development, medical advancement and increased food production.
+
+Food Web:
+A food web is the network of interconnected food chains in an ecosystem. It shows multiple feeding relationships among organisms and provides alternative food sources, increasing ecosystem stability.
+
+Food Chain:
+A food chain represents the linear flow of energy and nutrients from producers to consumers. It begins with producers and progresses through primary, secondary, tertiary and sometimes quaternary consumers.
+
+Trophic Levels:
+Each step in a food chain is known as a trophic level. Producers occupy the first trophic level, followed by primary, secondary and tertiary consumers. The number of trophic levels is usually limited due to energy loss.
+
+Autotrophs:
+Autotrophs are organisms that produce their own food using simple inorganic substances. Green plants, algae and some bacteria are autotrophs. They may be photo-autotrophs or chemo-autotrophs depending on the energy source.
+
+Heterotrophs:
+Heterotrophs are organisms that cannot produce their own food and depend on other organisms. They are classified as primary, secondary and tertiary consumers based on their feeding habits.
+
+Decomposers:
+Decomposers such as bacteria and fungi break down dead organisms and organic waste into simple substances. This process is called decomposition and is essential for nutrient recycling.
+
+Ecological Pyramids:
+Ecological pyramids represent relationships among trophic levels based on number, biomass or energy. Producers form the base, and consumers occupy successive levels.
+
+Number Pyramid:
+The number pyramid represents the number of organisms at each trophic level. It may be upright or inverted depending on ecosystem structure.
+
+Biomass Pyramid:
+The biomass pyramid represents the total dry mass of organisms at each trophic level. It is usually upright, but may be inverted in aquatic ecosystems.
+
+Energy Pyramid:
+The energy pyramid represents the flow of energy through trophic levels. Only about 10% of energy is transferred to the next level, making energy pyramids always upright.
+
+Flow of Energy:
+Energy enters ecosystems through sunlight captured by producers during photosynthesis. Energy flows through food chains and webs, with significant loss at each trophic level as heat.
+
+Biogeochemical Cycles:
+Biogeochemical cycles involve the circulation of essential elements such as carbon, nitrogen and phosphorus through the biosphere. These cycles maintain ecological balance.
+
+Carbon Cycle:
+Carbon is fixed by plants through photosynthesis and transferred through food chains. Respiration, decomposition and combustion release carbon dioxide back into the atmosphere.
+
+Nitrogen Cycle:
+Atmospheric nitrogen is fixed through biological, atmospheric and industrial methods. Nitrogen is converted into usable forms by bacteria and recycled through ecosystems.
+
+Environmental Pollution:
+Environmental pollution is the discharge of substances that cause harmful effects to the natural environment. Pollution may be soil, water or air pollution.
+
+Agrochemical Pollution:
+Excessive use of fertilizers, weedicides, insecticides and fungicides causes environmental and health problems. Pesticides are chemicals used to control pests.
+
+Greenhouse Effect:
+Greenhouse gases trap heat in the atmosphere and maintain Earth’s temperature. Excessive greenhouse gases lead to global warming.
+
+Heavy Metals:
+Heavy metals are dense metals such as mercury, lead and cadmium that accumulate in the environment. They enter food chains and cause serious health effects.
+
+Acid Rain:
+Acid rain forms due to sulphur dioxide and nitrogen oxides dissolving in rainwater. It damages crops, forests, aquatic ecosystems and buildings.
+
+Biomagnification:
+Biomagnification is the increasing concentration of toxic substances in organisms at higher trophic levels of a food chain.
+
+Eutrophication:
+Eutrophication occurs when excess nutrients cause rapid algal growth in water bodies. This reduces oxygen levels and harms aquatic life.
+
+Non-Contagious Diseases:
+Non-contagious diseases are not transmitted between individuals. Examples include diabetes, heart diseases, cancers and chronic kidney disease.
+
+Chronic Kidney Disease:
+Chronic kidney disease involves gradual loss of kidney function and is common in agricultural areas. Causes include agrochemicals, heavy metals, dehydration and hard water.
+
+Sustainable Development:
+Sustainable development is the smart use of natural resources while maintaining environmental balance for future generations.
+
+Environmental Management:
+Environmental management involves using natural resources in an environmentally friendly manner to meet human needs.
+
+Sustainable Agricultural Practices:
+Practices such as multiple cropping, biological pest control, use of organic fertilizers and reforestation support sustainability.
+
+Traditional Knowledge:
+Traditional agricultural, medical and irrigation practices contribute to sustainable development and environmental conservation.
+
+Carbon Footprint:
+Carbon footprint is the amount of carbon dioxide released due to activities of individuals or communities.
+
+Food Mile:
+Food mile is the distance food travels from producer to consumer. Reducing food miles improves sustainability.
+
+Waste Management:
+Waste management involves reduce, reuse, replace and recycle practices to minimize environmental impact.
+
+Energy Management:
+Energy management focuses on efficient use and conservation of energy to prevent energy crisis and environmental damage.

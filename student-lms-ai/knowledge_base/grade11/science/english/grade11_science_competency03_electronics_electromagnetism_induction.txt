@@ -1,0 +1,45 @@
+Grade 11 Science – Competency 3
+Unit: Physics
+Topic: Electronics, Electromagnetism and Electromagnetic Induction
+
+Semiconductors:
+Semiconductors are materials that conduct electricity better than insulators but less than conductors. Silicon and germanium are common semiconductors. Their conductivity can be increased by doping.
+
+Intrinsic Semiconductors:
+Intrinsic semiconductors are pure semiconductors in which free electrons and holes exist in equal numbers.
+
+Extrinsic Semiconductors:
+Extrinsic semiconductors are formed by doping intrinsic semiconductors with impurities. N-type semiconductors have excess free electrons, while P-type semiconductors have excess holes.
+
+Junction Diodes:
+A junction diode allows current to flow in one direction only. This property is used in rectification.
+
+Rectification:
+Rectification is the process of converting alternating current into direct current. Half-wave rectification allows current in one half cycle, while full-wave rectification allows current in both half cycles.
+
+Transistors:
+A transistor is a semiconductor device used as a switch or amplifier. It consists of emitter, base and collector regions.
+
+Transistor as a Switch:
+A transistor can control current flow in a circuit. A small base voltage can switch a larger current on or off.
+
+Transistor as an Amplifier:
+When a small input signal is applied to the base, a larger output signal is produced at the collector. This is known as amplification.
+
+Magnetic Effect of Current:
+A magnetic field is produced around a current-carrying conductor. The direction depends on the direction of current flow.
+
+Force on a Current Carrying Conductor:
+A conductor placed in a magnetic field experiences a force when current flows through it. This principle is used in motors and loudspeakers.
+
+Electromagnetic Induction:
+A current is induced in a conductor when the magnetic field linked with it changes. This principle is used in generators and transformers.
+
+Applications of Electromagnetic Induction:
+Electromagnetic induction is used in electric generators, transformers, bicycle dynamos and microphones.
+
+Transformers:
+Transformers operate only with alternating current. They are used to increase or decrease voltage levels efficiently.
+
+Energy Transformation:
+In generators, mechanical energy is converted into electrical energy. In motors, electrical energy is converted into mechanical energy.

@@ -1,0 +1,132 @@
+Grade 11 Science – Chapter 01
+Unit: Biology
+Topic: Living Tissues
+
+Tissue:
+A group of cells with a common origin that has been modified to perform a specific function in the body is known as a tissue. In multicellular organisms, cells of similar type are arranged together to perform specialized functions. Both plant tissues and animal tissues show diversity in structure and function.
+
+Plant Tissues:
+Plant tissues consist of groups of plant cells that perform specific functions. They are classified based on the ability of cells to divide.
+
+Classification of Plant Tissues:
+Plant tissues are classified into two main groups according to their ability of cell division. They are meristematic tissues and permanent tissues. Meristematic tissues are found in growing regions, while permanent tissues are found in mature regions.
+
+Meristematic Tissues:
+Meristematic tissues consist of cells that actively divide by mitosis to produce new cells. These cells are undifferentiated and responsible for plant growth.
+
+Features of Meristematic Tissues:
+Meristematic tissue consists of small living cells with a distinct nucleus. Intercellular spaces are absent or not prominent. Large central vacuoles are absent, though small vacuoles may be present. A large number of mitochondria are present.
+
+Types of Meristematic Tissues:
+Meristematic tissues are present in specific locations of the plant and are of three types: apical meristems, intercalary meristems and lateral meristems.
+
+Apical Meristems:
+Apical meristems are found at the shoot apex, root apex and axillary buds. Increase in plant height occurs due to the activity of apical meristems.
+
+Intercalary Meristems:
+Intercalary meristems are found at the nodes of plants, especially in grasses. Increase in the length of internodes occurs due to this tissue.
+
+Lateral Meristems:
+Lateral meristems are found parallel to the longitudinal axis of stems and roots. Increase in the diameter of the plant occurs due to their activity. Cambium in dicot plants is a lateral meristematic tissue.
+
+Permanent Tissues:
+Permanent tissues are specialized tissues that have lost the ability to divide and perform specific functions. They are formed from meristematic tissues.
+
+Classification of Permanent Tissues:
+Permanent tissues are classified into simple permanent tissues and complex permanent tissues based on the types of cells present.
+
+Simple Permanent Tissues:
+Simple permanent tissues consist of only one type of cell. They are parenchyma, collenchyma and sclerenchyma.
+
+Parenchyma Tissue:
+Parenchyma is the most abundant plant tissue and forms the soft parts of the plant body. It consists of living isodiametric cells with a large central vacuole and thin cellulose cell wall. Intercellular spaces are present.
+
+Locations of Parenchyma:
+Parenchyma is found in cortex and pith of stems, cortex and pith of roots, fleshy parts of fruits, seeds and mesophyll of leaves.
+
+Functions of Parenchyma:
+Parenchyma carries out photosynthesis, stores food, stores water in xerophytic plants and provides mechanical support in herbaceous plants through turgidity.
+
+Collenchyma Tissue:
+Collenchyma tissue provides mechanical support and strength to plant parts. It consists of living elongated cells with thickened cell wall corners.
+
+Features of Collenchyma:
+Collenchyma cells have cytoplasm, nucleus and central vacuole. Cells are elongated and polygonal in cross section. Intercellular spaces may or may not be present.
+
+Locations of Collenchyma:
+Collenchyma is found beneath the epidermis of herbaceous dicot stems and in the veins of dicot leaves.
+
+Functions of Collenchyma:
+Collenchyma provides mechanical support to stems and leaves and carries out photosynthesis in immature dicot stems.
+
+Sclerenchyma Tissue:
+Sclerenchyma tissue provides mechanical strength and support. It consists of dead cells with lignified cell walls.
+
+Features of Sclerenchyma:
+Cells are tightly packed with no intercellular spaces. Cell walls are uniformly thickened forming a central lumen.
+
+Types and Locations of Sclerenchyma:
+Sclerenchyma consists of fibres and sclereids. Fibres are found in xylem and phloem, while sclereids are found in coconut endocarp, seed coats and fruit pericarps.
+
+Complex Permanent Tissues:
+Complex permanent tissues consist of different types of cells working together. The two types are xylem and phloem.
+
+Xylem Tissue:
+Xylem is composed of vessel elements, tracheids, fibres and parenchyma. Vessel elements form continuous tubes for water transport. Tracheids also conduct water. Fibres provide support and parenchyma stores food.
+
+Functions of Xylem:
+Xylem transports water and minerals absorbed by roots and provides mechanical support.
+
+Phloem Tissue:
+Phloem consists of sieve tube elements, companion cells, phloem fibres and phloem parenchyma. Sieve tubes transport food mainly as sucrose solution.
+
+Functions of Phloem:
+Phloem transports synthesized food from leaves to all parts of the plant by translocation.
+
+Animal Tissues:
+Animal tissues consist of groups of cells with common origin performing specific functions. There are four main types of animal tissues.
+
+Types of Animal Tissues:
+The four main types are epithelial tissue, connective tissue, muscle tissue and nervous tissue.
+
+Epithelial Tissue:
+Epithelial tissue lines free surfaces of the body. Cells are tightly packed and placed on a basement membrane. Blood supply is absent but nerve supply is present.
+
+Functions of Epithelial Tissue:
+Epithelial tissue provides protection, absorption, secretion, perception of stimuli and filtration.
+
+Connective Tissue:
+Connective tissue consists of cells and fibres embedded in a large matrix. It connects tissues and organs and provides support.
+
+Blood Tissue:
+Blood is a connective tissue with plasma as matrix and cells such as red blood cells, white blood cells and platelets.
+
+Functions of Blood:
+Blood transports nutrients, gases, wastes and hormones, provides protection through immunity and maintains homeostasis.
+
+Muscle Tissue:
+Muscle tissue is made of muscle fibres capable of contraction and relaxation. It has a good blood supply.
+
+Types of Muscle Tissue:
+Muscle tissue is of three types: smooth muscle tissue, skeletal muscle tissue and cardiac muscle tissue.
+
+Smooth Muscle Tissue:
+Smooth muscle tissue consists of spindle-shaped uninucleate cells without striations. It is involuntary and does not fatigue quickly.
+
+Skeletal Muscle Tissue:
+Skeletal muscle fibres are long, cylindrical, multinucleate and striated. They are voluntary and fatigue easily.
+
+Cardiac Muscle Tissue:
+Cardiac muscle cells are short, striated, uninucleate and connected by intercalated discs. They contract rhythmically and never fatigue.
+
+Nervous Tissue:
+Nervous tissue is composed of neurons specialized for transmission of impulses.
+
+Structure of Neuron:
+A neuron consists of a cell body, dendrites and an axon. Dendrites receive impulses and axon transmits impulses away from the cell body.
+
+Types of Neurons:
+Neurons are classified as sensory neurons, motor neurons and interneurons based on function.
+
+Functions of Nervous Tissue:
+Nervous tissue receives information from receptors and transmits impulses to effectors or other neurons for coordination and response.
