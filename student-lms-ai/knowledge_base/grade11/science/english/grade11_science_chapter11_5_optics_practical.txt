@@ -1,0 +1,60 @@
+Grade 11 Science – Chapter 11.5
+Unit: Physics
+Topic: Practice Principles and Laws of Optics for Daily Needs and Scientific Purposes
+
+Learning Outcomes:
+This unit aims to develop practical understanding of image formation by curved mirrors. Students identify the pole, centre of curvature and focal point of curved mirrors. Ray diagrams are used to explain image formation by concave and convex mirrors. Practical applications of curved mirrors and refraction are demonstrated through activities.
+
+Creating a Small Light Beam:
+A narrow beam of light can be produced using simple household materials. Two books are kept at an angle and light from a torch is directed through the angle to observe a focused beam. The size of the beam depends on the distance between the torch and the angle formed by the books.
+
+Creating a Small Light Beam Using a Slit:
+A narrow slit is cut on a thick cardboard. Light from an LED is passed through the slit to obtain a sharp light beam. When the slit width is small, the beam becomes thinner and more focused.
+
+Observations on Light Beam Formation:
+When the light source is closer to the slit, the beam becomes sharper. When the slit is widened, the beam becomes broader. A parallel light beam is produced due to the concave mirror inside an electric torch. Near the bulb, the light spreads out as diverging rays.
+
+Reflection of Light by Plane and Curved Mirrors:
+Reflection of light is observed using a plane mirror and curved mirrors. A red LED is used in a dark environment. Light is directed perpendicular and at an angle to the mirror surface to observe reflected rays.
+
+Reflection Using a Spoon:
+The curved surface of a metal spoon is used as a mirror. The inner surface of the spoon behaves as a concave mirror, while the outer surface behaves as a convex mirror. Reflected rays change direction according to the shape of the surface.
+
+Laws of Reflection:
+When a light beam falls perpendicular to a plane mirror, it is reflected back along the same path. When a light beam falls at an angle, it follows the laws of reflection. The angle of incidence is equal to the angle of reflection.
+
+Burning Paper Using Reflected Sunlight:
+The polished base of an aluminium soft drink can is used to reflect sunlight. When sunlight is directed onto the polished surface, light rays converge to a bright spot. A piece of paper placed at this bright spot may burn due to concentrated energy.
+
+Energy Reflected by Mirrors:
+In addition to light energy, heat energy is also reflected by mirrors. Solar heat is concentrated at the focal point of concave mirrors. This principle is used in solar cookers and solar furnaces.
+
+Images Formed by Curved Mirrors:
+A lighted candle is placed in front of the concave side of a spoon. The image formed changes as the distance between the candle and the mirror changes. Similar observations are made using the convex side of the spoon.
+
+Nature of Images Formed by a Concave Mirror:
+When the object is placed closer than the focal length, the image is upright and magnified. When the object is at the focal point, no clear image is formed. When the object is between the focal point and centre of curvature, the image is inverted and magnified. When the object is at twice the focal length, the image is inverted and same size as the object. When the object is beyond twice the focal length, the image is inverted and diminished.
+
+Refraction Observations:
+A pencil placed in a water-filled transparent glass appears bent due to refraction. A coin placed in water appears raised when observed from above. Letters under a glass slab appear displaced due to refraction of light.
+
+Reason for Refraction Effects:
+Refraction occurs because the speed of light changes when it passes from one medium to another. Water and glass are optically denser than air, causing light to bend at the boundary.
+
+Preparing a Simple Telescope:
+A simple telescope is prepared using two convex lenses of equal focal length and a bristol board. The lenses are mounted in alignment to observe distant objects.
+
+Eyepiece and Objective Lens:
+The lens closer to the eye is called the eyepiece. The lens farther from the eye is called the objective lens. The eyepiece has a lower focal length, while the objective lens has a higher focal length.
+
+Use of Lenses in Optical Instruments:
+Convex lenses are used to construct optical instruments such as telescopes, microscopes and cameras. These instruments help observe distant or very small objects clearly.
+
+Applications of Geometrical Optics:
+Reflection and refraction principles are applied in mirrors, lenses, prisms and optical instruments. These principles are used in daily life, scientific instruments and technological applications.
+
+Evaluation and Practical Exploration:
+Students are encouraged to draw ray diagrams for reflection. Mirror images are identified using lateral inversion. Practical exploration is suggested to study the effect of water-filled bottles placed around houses and their interaction with light.
+
+Environmental Application of Optics:
+Water-filled bottles placed outdoors interact with light through refraction and reflection. Shape and colour of the bottle and water affect the optical behaviour. Observations should be recorded and reported scientifically.

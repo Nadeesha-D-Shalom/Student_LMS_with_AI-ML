@@ -1,0 +1,78 @@
+Grade 11 Science – Chapter 14
+Unit: Chemistry
+Topic: Hydrocarbons and Their Derivatives
+
+Hydrocarbons:
+Many materials used in daily life such as plastics, clothes, paints, cosmetics, agro-chemicals, tyres and food items contain carbon as a common element. Carbon is also abundant in plants and animals. Because of the large number of compounds formed by carbon and their special chemical properties, the study of carbon compounds is treated as a separate branch of chemistry called organic chemistry. Organic compounds necessarily contain carbon and may also contain hydrogen, oxygen, nitrogen, halogens, phosphorus and sulphur.
+
+Organic Compounds:
+Compounds that contain carbon are generally referred to as organic compounds. However, carbon oxides such as carbon dioxide and carbon monoxide, as well as carbonates and bicarbonates like sodium carbonate and sodium bicarbonate, are not considered organic compounds. Organic compounds are classified in various ways for convenience of study.
+
+Hydrocarbons:
+The simplest group of organic compounds are hydrocarbons. Hydrocarbons are organic compounds that contain only carbon and hydrogen. Based on their structure, hydrocarbons are classified into alkanes, alkenes and alkynes.
+
+Fuels and Hydrocarbons:
+Common fuels such as wax, petrol, methane, LPG, kerosene and diesel contain carbon and hydrogen. Firewood also contains oxygen and nitrogen in addition to carbon and hydrogen. This shows that carbon and hydrogen are essential components of most fuels.
+
+Presence of Carbon and Hydrogen in Wax:
+When candle wax is burned, water is produced, which turns anhydrous copper sulphate from white to blue, confirming the presence of hydrogen. Lime water turns milky due to the formation of carbon dioxide, confirming the presence of carbon. Therefore, candle wax contains both carbon and hydrogen.
+
+Petroleum Fuels:
+Petroleum fuels are produced by the distillation of crude oil. All compounds present in petroleum fuels are hydrocarbons. These fuels are widely used to meet global energy requirements.
+
+Alkanes:
+Alkanes are hydrocarbons in which carbon atoms are bonded only by single covalent bonds. Methane is the simplest alkane with the molecular formula CH4. Ethane is another alkane with the molecular formula C2H6. In alkanes, carbon–carbon bonds are single bonds.
+
+General Formula of Alkanes:
+All alkanes can be represented by the general formula CnH2n+2, where n is the number of carbon atoms in the molecule. Methane has n = 1 and ethane has n = 2. Using this formula, molecular formulae of alkanes can be derived.
+
+Common Alkanes:
+Methane (CH4), Ethane (C2H6), Propane (C3H8), Butane (C4H10) and Pentane (C5H12) are common alkanes. Petrol is a mixture of alkanes, with octane (C8H18) being the most abundant. LPG mainly contains propane and butane.
+
+Structural Formulae of Alkanes:
+Alkanes can be represented using structural formulae that show single bonds between carbon atoms and hydrogen atoms. Some alkanes such as butane and pentane can exist in more than one structural form.
+
+Alkenes:
+Alkenes are hydrocarbons that contain one or more double bonds between carbon atoms. Ethene is the simplest alkene with the molecular formula C2H4. Due to the presence of double bonds, alkenes are more reactive than alkanes.
+
+Derivatives of Ethene:
+Replacing hydrogen atoms in ethene with other atoms produces derivatives of ethene. Chloroethene is formed by replacing one hydrogen atom with chlorine and has the formula C2H3Cl. Tetrafluoroethene is formed by replacing all four hydrogen atoms with fluorine and has the formula C2F4.
+
+Uses of Ethene and Its Derivatives:
+Ethene and its derivatives are used in the manufacture of polymers such as polythene, styrofoam and Teflon, which are widely used in daily life.
+
+Polymers:
+Polymers are very large molecules formed by joining a large number of small molecules together. The process of forming polymers is called polymerization. The small molecules are known as monomers, and the repeating units formed in the polymer chain are called repeating units.
+
+Polythene:
+Polythene is produced by the polymerization of ethene molecules. During polymerization, the double bond in ethene breaks and a large number of ethene molecules join together. Polythene is a macromolecule made of repeating –CH2–CH2– units.
+
+Monomer, Repeating Unit and Polymer:
+In polythene, ethene is the monomer. The –CH2–CH2– unit is the repeating unit, and the long chain formed is the polymer. Polymers have very high relative molecular mass compared to monomers.
+
+Polychloroethene (PVC):
+Polychloroethene is formed by the polymerization of chloroethene. It is also known as polyvinyl chloride. The polymer contains repeating units derived from chloroethene.
+
+Polytetrafluoroethene (Teflon):
+Polytetrafluoroethene is formed by the polymerization of tetrafluoroethene. It is commonly known as Teflon and contains repeating units derived from tetrafluoroethene.
+
+Properties and Uses of Polymers:
+Polythene is an electrical insulator, light, durable and resistant to water and air, and is used to make bottles, toys and bags. PVC is fire-resistant, an electrical insulator and impervious to water, and is used to make pipes and conduits. Teflon is heat-resistant and an electrical insulator and is used in non-stick cookware.
+
+Classification of Polymers Based on Origin:
+Polymers are classified as natural or artificial based on their origin. Natural polymers include rubber, proteins, starch, cellulose, DNA and RNA. Artificial polymers include polythene, PVC, nylon, polyester, polystyrene and Bakelite.
+
+Rubber:
+Rubber is a natural polymer formed by the polymerization of isoprene. Vulcanization of rubber involves reacting rubber with sulphur to form cross-links, making rubber harder and less elastic.
+
+Classification of Polymers Based on Structure:
+Polymers can be classified as linear polymers, branched polymers and cross-linked polymers. Vulcanized rubber is an example of a cross-linked polymer.
+
+Importance of Polymers:
+Polymers are widely used because they can be synthesized with desired properties, shaped easily, coloured, and produced at low cost. They have replaced many natural materials in daily life.
+
+Environmental Impact of Polymers:
+Most artificial polymers are not biodegradable and accumulate in the environment, causing pollution. Burning polymers releases poisonous gases. Scientists are developing biodegradable and photodegradable polymers to reduce environmental problems.
+
+Clothing and Polymers:
+Clothes made from artificial polymers such as nylon and polyester do not absorb sweat effectively. Mixing natural polymers such as cotton and wool with artificial polymers reduces discomfort.
