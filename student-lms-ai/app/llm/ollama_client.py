@@ -13,18 +13,24 @@ class OllamaClient:
     async def generate(self, system_prompt: str, user_message: str):
         url = f"{self.base_url}/api/generate"
 
+        prompt = f"{system_prompt}\n\nQuestion:\n{user_message}"
+
         payload = {
             "model": self.model,
-            "prompt": f"{system_prompt}\n\nQuestion:\n{user_message}",
+            "prompt": prompt,
             "stream": False,
-            "options": {"temperature": self.temperature},
+            "options": {
+                "temperature": self.temperature
+            }
         }
 
         start = time.perf_counter()
         async with httpx.AsyncClient(timeout=self.timeout) as client:
-            res = await client.post(url, json=payload)
-            res.raise_for_status()
-            data = res.json()
+            response = await client.post(url, json=payload)
+            response.raise_for_status()
+            data = response.json()
 
-        latency = int((time.perf_counter() - start) * 1000)
-        return data.get("response", "").strip(), latency
+        latency_ms = int((time.perf_counter() - start) * 1000)
+        text = data.get("response", "").strip()
+
+        return text, latency_ms
