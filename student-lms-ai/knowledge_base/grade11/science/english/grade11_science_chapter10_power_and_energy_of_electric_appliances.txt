@@ -1,0 +1,72 @@
+Grade 11 Science – Chapter 10
+Unit: Physics
+Topic: Power and Energy of Electric Appliances
+
+Electric Energy and Appliances:
+Electric energy is widely used in daily life to perform various tasks conveniently. In electric appliances, electric energy is converted into other forms of energy such as heat, light, sound and kinetic energy. Devices that convert electric energy into other forms of energy are known as electric appliances.
+
+Energy Conversions in Electric Appliances:
+In an electric heater and electric oven, electric energy is converted mainly into heat energy. In electric motors, electric energy is converted into kinetic energy. In filament bulbs, electric energy is first converted into heat energy and then into light energy. In fluorescent lamps, electric energy is converted into ultraviolet radiation and then into visible light.
+
+Power Output of an Electric Appliance:
+Power is the rate of doing work or the rate of energy consumption. The power output of an electric appliance is the amount of electrical energy consumed per unit time. If an appliance operates with a potential difference V and draws a current I, the power P is given by P = VI.
+
+Unit of Power:
+When voltage is measured in volts and current in amperes, power is measured in watts. One watt is equal to one joule per second.
+
+Electric Energy Consumed by Appliances:
+Electric energy consumed depends on the power of the appliance and the time for which it operates. If the power is P and the operating time is t, the electric energy consumed E is given by E = Pt. Since P = VI, the relation E = VIt can also be used.
+
+Unit of Electric Energy:
+When power is measured in watts and time in seconds, electric energy is measured in joules. For domestic consumption, electric energy is measured in kilowatt hours.
+
+Efficiency of Electric Appliances:
+Efficiency is the ratio of useful energy output to the total energy input. Energy efficiency helps to reduce energy wastage. Appliances with higher efficiency use less energy to perform the same task.
+
+Comparison of Light Sources:
+Filament bulbs consume high power and have short lifetimes. Fluorescent lamps consume less power and last longer. CFL lamps consume still less power. LED lamps consume the least power and have the longest lifetime.
+
+Efficient Cooking Appliances:
+Old heating coil cookers have low efficiency due to high heat loss. Immersion heaters are highly efficient for heating water. Rice cookers have better efficiency due to reduced heat loss. Microwave ovens and induction cookers have high efficiency as heat is produced directly in the food or cooking vessel.
+
+Home Electric Circuits:
+Electricity is supplied to houses through the national grid. High voltages are reduced step by step using transformers before supplying 230 V alternating current to households.
+
+Supply Cable:
+Electricity is supplied using a service cable consisting of a live wire and a neutral wire. Current flows through these wires to the domestic electric circuit.
+
+Overload Circuit Breaker or Service Fuse:
+The overload circuit breaker limits the maximum current entering the house. If excessive current flows, the breaker disconnects the supply. In older systems, service fuses were used instead of breakers.
+
+Electric Meter:
+The electric meter measures the amount of electric energy consumed by the household. Energy consumption is recorded in kilowatt hours.
+
+Isolator or Main Switch:
+The isolator disconnects both live and neutral wires. It allows safe disconnection of the entire domestic circuit during repairs.
+
+Residual Current Circuit Breaker:
+The RCCB protects residents from electric shocks. It disconnects the power supply when current leakage to earth is detected.
+
+Distribution Box:
+Electricity is distributed inside the house through the distribution box. Lighting circuits and plug circuits are separated. Lighting circuits are limited to low currents, while plug circuits handle higher currents.
+
+Miniature Circuit Breakers:
+MCBs protect individual circuits from excessive currents. When excess current flows, the MCB disconnects only the affected circuit.
+
+Switches and Plug Sockets:
+Switches are connected to the live wire to control appliances safely. Plug sockets provide connections for appliances and include earth connections for safety.
+
+Domestic Circuit Arrangement:
+Bulbs and sockets are connected in parallel. This ensures equal voltage across all appliances and independent operation.
+
+Protective Measures:
+Domestic circuits use RCCBs and MCBs for safety. Proper fuses, correct plugs, dry hands, and switching off power during repairs are essential safety practices.
+
+Measuring Electric Energy:
+Electric energy is measured in kilowatt hours. One kilowatt hour is the energy consumed by a 1 kW appliance operating for one hour.
+
+Conversion of Units:
+One kilowatt hour is equal to 3.6 × 10⁶ joules. This unit is used because joules give very large numerical values for domestic consumption.
+
+Summary:
+Power is the rate of electric energy consumption. Electric energy depends on voltage, current and time. Domestic electric circuits include protective devices to ensure safety and efficient energy use.

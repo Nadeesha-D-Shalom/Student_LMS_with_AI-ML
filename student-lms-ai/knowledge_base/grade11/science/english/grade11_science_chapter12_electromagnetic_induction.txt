@@ -1,0 +1,39 @@
+Grade 11 Science – Chapter 12
+Unit: Physics
+Topic: Electromagnetic Induction
+
+Magnetic Fields:
+A magnetic field is the region around a magnet or current-carrying conductor where magnetic effects can be observed.
+
+Electromagnetic Induction:
+Electromagnetic induction is the production of an electric current due to a changing magnetic field.
+
+Faraday’s Law:
+The induced electromotive force in a conductor is proportional to the rate of change of magnetic flux linked with it.
+
+Lenz’s Law:
+The direction of the induced current is such that it opposes the change that produces it.
+
+Induced Current:
+When a conductor cuts magnetic field lines or when magnetic flux changes, an induced current flows in the conductor.
+
+Factors Affecting Induced EMF:
+Strength of the magnetic field, speed of motion and number of turns of the coil affect the induced EMF.
+
+Electric Generators:
+Electric generators convert mechanical energy into electrical energy using electromagnetic induction.
+
+Alternating Current:
+Alternating current changes direction periodically. It is used in domestic and industrial power supply.
+
+Transformers:
+Transformers change voltage levels in alternating current circuits. Step-up transformers increase voltage, while step-down transformers decrease voltage.
+
+Uses of Electromagnetic Induction:
+Electromagnetic induction is used in generators, transformers, induction cookers and electric motors.
+
+Energy Losses:
+Energy losses occur due to resistance and heat generation. Proper design reduces these losses.
+
+Summary:
+Electromagnetic induction explains the generation of electricity. Changing magnetic fields produce induced currents. This principle is essential for modern power generation and transmission.
