@@ -55,3 +55,4 @@ coverage/
 *.tmp
 *.temp
 chroma_db/ 
+student-lms-ai/chroma_db/ 

@@ -1,0 +1,105 @@
+Grade 11 Science – Chapter 09
+Unit: Physics
+Topic: Heat
+
+Temperature:
+Temperature is the physical quantity that describes the degree of hotness or coldness of an object. It is a fundamental property of matter and depends on the mean kinetic energy of the particles that form the object. Objects with higher particle kinetic energy have higher temperatures.
+
+Measuring Temperature:
+Touch can give only a rough idea about temperature and cannot provide numerical values. Therefore, instruments called thermometers are used to measure temperature accurately.
+
+Thermometers:
+A thermometer is a device used to measure temperature. The first thermometer was invented by Galileo Galilei around 1600 AD. Several types of thermometers are used today.
+
+Glass–Mercury Thermometer:
+A glass–mercury thermometer consists of a bulb filled with mercury connected to a narrow capillary tube. When temperature increases, mercury expands and rises along the tube. Mercury is suitable because it expands uniformly and remains liquid over a wide temperature range.
+
+Glass–Alcohol Thermometer:
+In this thermometer, ethanol is used instead of mercury. Ethanol has a very low melting point and is suitable for measuring very low temperatures. Since ethanol is colourless, it is dyed to make it visible.
+
+Digital Thermometer:
+Digital thermometers measure temperature using electrical properties that vary with temperature. The temperature can be read directly from a digital display.
+
+Temperature Scales:
+The commonly used temperature scales are Celsius, Fahrenheit and Kelvin. Fixed points are used to define these scales.
+
+Celsius Scale:
+In the Celsius scale, the melting point of ice is taken as 0 °C and the boiling point of water as 100 °C at atmospheric pressure. The interval between these points is divided into 100 equal parts.
+
+Fahrenheit Scale:
+In the Fahrenheit scale, the melting point of ice is 32 °F and the boiling point of water is 212 °F. The interval between these points is divided into 180 equal parts.
+
+Kelvin Scale:
+The Kelvin scale is based on absolute zero, the lowest possible temperature. Absolute zero is −273.15 °C. In the Kelvin scale, a temperature difference of 1 K is equal to a temperature difference of 1 °C. The SI unit of temperature is Kelvin.
+
+Relationship Between Celsius and Kelvin:
+To convert Celsius to Kelvin, 273 is added. To convert Kelvin to Celsius, 273 is subtracted.
+
+Heat:
+Heat is the energy transferred from one object to another due to a temperature difference. Heat flows from a body at a higher temperature to a body at a lower temperature until thermal equilibrium is reached.
+
+Thermal Equilibrium:
+When two bodies in contact reach the same temperature, heat transfer stops. This state is known as thermal equilibrium.
+
+Units of Heat:
+Heat is a form of energy and is measured in joules. The calorie is also used as a unit of heat.
+
+Heat Capacity:
+Heat capacity is the amount of heat required to raise the temperature of an object by one degree. It depends on the mass and the material of the object.
+
+Specific Heat Capacity:
+Specific heat capacity is the amount of heat required to raise the temperature of unit mass of a substance by one degree. It is a property of the substance. The unit is J kg⁻¹ K⁻¹.
+
+Relationship Between Heat, Mass and Temperature Change:
+The quantity of heat absorbed or released is given by Q = mcθ, where m is mass, c is specific heat capacity and θ is temperature change.
+
+Change of State of Matter:
+Matter exists as solids, liquids and gases. A change of state occurs when a substance changes from one state to another by absorbing or releasing heat.
+
+Melting Point:
+The melting point is the temperature at which a solid changes into a liquid. It depends on pressure.
+
+Freezing Point:
+The freezing point is the temperature at which a liquid changes into a solid. It has the same value as the melting point.
+
+Boiling Point:
+The boiling point is the temperature at which a liquid changes into vapour by forming bubbles throughout the liquid.
+
+Latent Heat:
+Latent heat is the heat absorbed or released during a change of state without a change in temperature.
+
+Latent Heat of Fusion:
+The latent heat of fusion is the heat required to convert a solid at its melting point into a liquid at the same temperature.
+
+Latent Heat of Vaporization:
+The latent heat of vaporization is the heat required to convert a liquid at its boiling point into a gas at the same temperature.
+
+Evaporation:
+Evaporation is the conversion of a liquid into vapour at temperatures below its boiling point. It occurs at the surface of the liquid and causes cooling.
+
+Thermal Expansion:
+Thermal expansion is the increase in length, area or volume of a substance when its temperature increases. Contraction occurs when temperature decreases.
+
+Expansion of Solids:
+Solids expand when heated and contract when cooled. This property is applied in railway tracks, bridges, bottle lids and bimetallic strips.
+
+Expansion of Liquids:
+Liquids expand when heated. This property is used in liquid thermometers.
+
+Expansion of Gases:
+Gases expand when heated and contract when cooled. This can be demonstrated using a bottle and a balloon.
+
+Heat Transfer:
+Heat transfer is the flow of heat from a region of higher temperature to a region of lower temperature. There are three methods of heat transfer.
+
+Conduction:
+Conduction is the transfer of heat through solids by particle collisions and free electrons in metals. Metals are good conductors, while wood and plastic are insulators.
+
+Convection:
+Convection is the transfer of heat by the movement of fluids. It occurs in liquids and gases due to density differences.
+
+Sea Breeze and Land Breeze:
+Sea breeze occurs during daytime when air moves from sea to land. Land breeze occurs at night when air moves from land to sea due to temperature differences.
+
+Radiation:
+Radiation is the transfer of heat in the form of electromagnetic waves without a material medium. Dark surfaces absorb heat effectively, while shiny surfaces reflect heat.

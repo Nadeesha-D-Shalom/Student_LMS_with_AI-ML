@@ -1,0 +1,99 @@
+Grade 11 Science – Chapter 05
+Unit: Physics
+Topic: Geometrical Optics
+
+Light and Vision:
+Light is required to produce visual sensation. An object can be seen only when light from that object reaches the eye. Objects that emit light are called luminous objects, while objects that do not emit light are called non-luminous objects and are seen due to reflection of light from their surfaces.
+
+Transparent, Translucent and Opaque Objects:
+Transparent objects allow light to pass through them completely. Translucent objects allow light to pass through partially with irregular changes in direction, making objects unclear. Opaque objects do not allow light to pass through them.
+
+Light Rays and Beams:
+A light ray is represented by a straight line with an arrow showing direction. A group of light rays is called a beam. Beams may be parallel, convergent or divergent depending on the direction of propagation.
+
+Reflection of Light:
+Reflection is the change in direction of light when it strikes a surface and returns to the same medium. Plane mirrors reflect light according to fixed laws.
+
+Incident Ray, Reflected Ray and Normal:
+The ray that strikes the reflecting surface is the incident ray. The ray that leaves the surface after reflection is the reflected ray. The imaginary line drawn perpendicular to the surface at the point of incidence is called the normal.
+
+Angle of Incidence and Angle of Reflection:
+The angle between the incident ray and the normal is called the angle of incidence. The angle between the reflected ray and the normal is called the angle of reflection.
+
+Laws of Reflection:
+The incident ray, the reflected ray and the normal at the point of incidence lie in the same plane. The angle of incidence is equal to the angle of reflection.
+
+Images Formed by Plane Mirrors:
+Images formed by plane mirrors are virtual, upright and equal in size to the object. The image distance is equal to the object distance. Plane mirror images are laterally inverted.
+
+Curved Mirrors:
+Mirrors with curved reflecting surfaces are called curved mirrors. If the surface is part of a sphere, the mirror is called a spherical mirror.
+
+Concave and Convex Mirrors:
+Concave mirrors have reflecting surfaces curved inward, while convex mirrors have reflecting surfaces curved outward. Concave mirrors can produce enlarged images, while convex mirrors produce diminished images.
+
+Pole, Centre of Curvature and Principal Axis:
+The centre of the reflecting surface is called the pole. The centre of the sphere of which the mirror is a part is called the centre of curvature. The line joining the pole and the centre of curvature is called the principal axis.
+
+Focal Point and Focal Length of Mirrors:
+Rays parallel to the principal axis of a concave mirror converge at a point called the focal point. Rays reflected from a convex mirror appear to diverge from the focal point. The distance between the pole and the focal point is the focal length.
+
+Reflection from a Concave Mirror:
+Rays along the principal axis return along the same path. Rays parallel to the principal axis pass through the focal point after reflection. Rays through the focal point reflect parallel to the principal axis. Rays through the centre of curvature retrace their path.
+
+Images Formed by a Concave Mirror:
+When the object is between the mirror and focal point, the image is virtual, upright and enlarged. When the object is at the focal point, the image is formed at infinity. For other positions, images may be real, inverted, enlarged or diminished depending on object distance.
+
+Reflection from a Convex Mirror:
+Rays parallel to the principal axis diverge after reflection. The image formed by a convex mirror is always virtual, upright and diminished regardless of object position.
+
+Refraction of Light:
+Refraction is the bending of light when it passes from one medium to another with different optical densities. This occurs due to change in speed of light.
+
+Dense and Rare Media:
+A medium in which light travels slower is called an optically dense medium. A medium in which light travels faster is called an optically rare medium.
+
+Angle of Refraction and Angle of Emergence:
+The angle between the refracted ray and the normal is the angle of refraction. The angle between the emergent ray and the normal is the angle of emergence.
+
+Laws of Refraction:
+The incident ray, refracted ray and the normal lie in the same plane. The ratio of the sine of the angle of incidence to the sine of the angle of refraction is constant for a given pair of media.
+
+Refractive Index:
+Refractive index is the ratio of the sine of the angle of incidence to the sine of the angle of refraction. It depends on the nature of the medium and has no unit.
+
+Critical Angle:
+The critical angle is the angle of incidence in the denser medium for which the angle of refraction is 90 degrees.
+
+Total Internal Reflection:
+When light travels from a denser medium to a rarer medium and the angle of incidence exceeds the critical angle, the light is completely reflected back into the denser medium. This phenomenon is called total internal reflection.
+
+Optical Fibres:
+Optical fibres are thin transparent fibres that transmit light by total internal reflection. They are used in telecommunications, medical instruments and decorative lighting.
+
+Prisms and Total Internal Reflection:
+Prisms use total internal reflection to change the direction of light rays. Right-angled prisms can bend light rays through 90 degrees.
+
+Lenses:
+A lens is a transparent optical device with curved surfaces that refracts light. Lenses are used in microscopes, telescopes, cameras and the human eye.
+
+Convex and Concave Lenses:
+Convex lenses converge light rays and concave lenses diverge light rays. Convex lenses can form real or virtual images, while concave lenses form only virtual images.
+
+Optical Centre and Principal Axis of a Lens:
+The optical centre is the point through which light passes without deviation. The principal axis is the line passing through the optical centre and centres of curvature.
+
+Focal Point and Focal Length of a Lens:
+Rays parallel to the principal axis converge at the focal point of a convex lens. The distance from the optical centre to the focal point is the focal length.
+
+Images Formed by Convex Lenses:
+When the object is within the focal length, the image is virtual, upright and magnified. At the focal point, the image is formed at infinity. Beyond the focal length, images are real and inverted.
+
+Images Formed by Concave Lenses:
+Concave lenses always produce virtual, upright and diminished images regardless of object distance.
+
+Simple Microscope:
+A simple microscope or hand lens is a convex lens used to view magnified images of small objects. It operates when the object is placed within the focal length.
+
+Applications of Lenses:
+Lenses are used in cameras, microscopes, telescopes, magnifying glasses and the human eye for image formation and vision.
