@@ -1,0 +1,103 @@
+/* src/App.css or src/index.css - Add these styles to the appropriate CSS file */
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  background-color: #ffffff;
+  padding: 20px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.hero {
+  text-align: center;
+  padding: 60px 0;
+  background-color: #e3f2fd; /* Light blue background */
+}
+
+.hero h1 {
+  font-size: 2.5em;
+  color: #1976d2; /* Blue accent */
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.cta {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.primary-cta {
+  background-color: #1976d2;
+  color: white;
+}
+
+.secondary-cta {
+  background-color: #4caf50; /* Green accent */
+  color: white;
+}
+
+.section {
+  padding: 40px 0;
+}
+
+h2 {
+  text-align: center;
+  color: #1976d2;
+  margin-bottom: 30px;
+}
+
+.steps, .subjects, .why-choose {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.step, .subject, .reason {
+  flex: 1 1 300px;
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.large-icon {
+  width: 300px;
+  height: auto;
+}
+
+.footer {
+  background-color: #e8eaf6;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9em;
+  color: #555;
+}

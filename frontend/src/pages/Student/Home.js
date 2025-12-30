@@ -1,13 +1,22 @@
-import React from "react";
+import Navbar from "../../features/home/Navbar";
+import HeroSection from "../../features/home/HeroSection";
+import AboutSection from "../../features/home/AboutSection";
+import ContactSection from "../../features/home/ContactSection";
+import Footer from "../../features/home/Footer";
+import ScrollToTop from "../../features/home/ScrollToTop";
 
-
-function Home() {
+const Home = () => {
   return (
-    <div className="home">
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the frontend home page.</p>
-    </div>
+    <>
+      <Navbar />
+      <HeroSection />
+      <AboutSection />
+      <ContactSection />
+      <ScrollToTop />
+      <Footer />
+      
+    </>
   );
-}
+};
 
 export default Home;
