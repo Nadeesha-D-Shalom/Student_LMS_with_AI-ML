@@ -1,0 +1,244 @@
+/* ================= PAGE ================= */
+
+.submission-page {
+  max-width: 900px;
+  padding: 24px;
+}
+
+/* ================= BREADCRUMB ================= */
+
+.breadcrumb {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.breadcrumb span {
+  cursor: pointer;
+}
+
+.breadcrumb span.active {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ================= HEADER ================= */
+
+.submission-header {
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.submission-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.assignment-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.status.pending {
+  color: #b45309;
+  font-weight: 600;
+}
+
+/* ================= INSTRUCTIONS ================= */
+
+.instruction-box {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.instruction-box h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.instruction-box p {
+  font-size: 14px;
+  color: #374151;
+}
+
+/* ================= STATUS TABLE (SLIIT STYLE) ================= */
+
+.status-table {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.status-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  padding: 10px 14px;
+  font-size: 13px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.status-row:last-child {
+  border-bottom: none;
+}
+
+.status-row.highlight {
+  background: #dcfce7;
+  font-weight: 600;
+}
+
+/* ================= SUBMISSION BOX ================= */
+
+.submit-box {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 20px;
+  background: #ffffff;
+}
+
+.submit-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* Drag & Drop area */
+.upload-dropzone {
+  border: 2px dashed #c7d2fe;
+  border-radius: 8px;
+  padding: 28px 16px;
+  text-align: center;
+  margin-bottom: 16px;
+  background: #f9fafb;
+}
+
+.upload-dropzone p {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 10px;
+}
+
+.upload-dropzone input {
+  font-size: 14px;
+}
+
+/* Note */
+.submission-note {
+  width: 100%;
+  min-height: 90px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+/* Submit button */
+.submit-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background: #1d4ed8;
+}
+
+/* ================= FILE PREVIEW ================= */
+
+.file-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 14px;
+  background: #f9fafb;
+}
+
+.file-preview p {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.draft-label {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.file-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.file-actions button {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.file-actions button:hover {
+  background: #f3f4f6;
+}
+
+.file-actions .danger {
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+/* ================= SUBMIT ACTIONS ================= */
+
+.submit-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.draft-btn {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  padding: 10px 16px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.draft-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ================= ERROR ================= */
+
+.error-text {
+  color: #b91c1c;
+  font-size: 13px;
+  margin-bottom: 10px;
+}

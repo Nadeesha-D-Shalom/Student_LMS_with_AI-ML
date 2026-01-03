@@ -1,0 +1,63 @@
+.class-assignments-page {
+  padding: 20px;
+  max-width: 900px;
+}
+
+.class-assignments-page h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.assignment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  background: #ffffff;
+}
+
+.assignment-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.assignment-info span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.assignment-status {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.assignment-status .submitted {
+  color: #16a34a;
+}
+
+.assignment-status .pending {
+  color: #ca8a04;
+}
+
+.assignment-status .overdue {
+  color: #dc2626;
+}
+
+.open-btn {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+.open-btn:hover {
+  background: #1d4ed8;
+}

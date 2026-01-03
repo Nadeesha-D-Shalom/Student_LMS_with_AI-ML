@@ -1,0 +1,40 @@
+.recordings-page {
+  padding: 20px;
+  max-width: 900px;
+}
+
+.recordings-page h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.recording-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  padding: 12px 14px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.recording-item span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.recording-item small {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.recording-item button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
