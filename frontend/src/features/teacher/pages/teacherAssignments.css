@@ -1,0 +1,107 @@
+.teacher-assignments-page {
+  max-width: 1100px;
+  padding-bottom: 40px;
+}
+
+.teacher-assignments-page h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+/* ===== SECTIONS ===== */
+.assign-class-box,
+.assign-form,
+.assign-list {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 22px;
+}
+
+/* ===== CLASS SELECT ===== */
+.assign-class-box h3,
+.assign-form h3,
+.assign-list h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin-bottom: 12px;
+}
+
+.assign-class-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  padding: 6px 4px;
+  cursor: pointer;
+}
+
+.assign-class-item input {
+  cursor: pointer;
+}
+
+/* ===== FORM ===== */
+.assign-form input,
+.assign-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+.assign-form input:focus,
+.assign-form textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+}
+
+.assign-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+/* ===== ASSIGNMENT LIST ===== */
+.assign-card {
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.assign-card:last-child {
+  border-bottom: none;
+}
+
+.assign-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.assign-desc {
+  font-size: 14px;
+  color: #374151;
+  margin: 4px 0;
+}
+
+.assign-meta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ===== EMPTY ===== */
+.empty {
+  font-size: 14px;
+  color: #6b7280;
+}

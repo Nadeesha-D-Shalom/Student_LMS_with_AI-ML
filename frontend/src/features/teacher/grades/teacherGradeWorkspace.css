@@ -1,0 +1,95 @@
+.teacher-grade-workspace {
+  max-width: 1100px;
+  padding-bottom: 40px;
+}
+
+/* ===== HEADER ===== */
+.teacher-grade-header {
+  margin-bottom: 18px;
+}
+
+.teacher-grade-header h2 {
+  font-size: 21px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.teacher-grade-header p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ===== CONTEXT BOX ===== */
+.teacher-context-box {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.teacher-context-box div {
+  display: flex;
+  flex-direction: column;
+}
+
+.teacher-context-box label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.teacher-context-box input {
+  margin-top: 4px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  font-size: 13px;
+}
+
+/* ===== SECTION ===== */
+.teacher-section {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 22px;
+}
+
+.teacher-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.teacher-section-header h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+/* ===== CONTENT PREVIEW ===== */
+.teacher-material-card {
+  padding: 12px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 10px;
+}
+
+.teacher-material-card strong {
+  font-size: 13px;
+  color: #2563eb;
+}
+
+.teacher-material-meta {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.teacher-empty {
+  font-size: 14px;
+  color: #6b7280;
+  padding: 10px 0;
+}

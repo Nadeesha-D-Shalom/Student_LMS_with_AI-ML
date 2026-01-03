@@ -1,0 +1,98 @@
+.student-workspace {
+  max-width: 1100px;
+  padding-bottom: 40px;
+}
+
+/* ===== HEADER ===== */
+.student-workspace-header {
+  margin-bottom: 18px;
+}
+
+.student-workspace-header h2 {
+  font-size: 21px;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ===== NOTICES ===== */
+.student-notice-section {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 26px;
+}
+
+.student-notice-section h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin-bottom: 12px;
+}
+
+.student-notice-card {
+  padding: 12px 14px;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 10px;
+}
+
+.student-notice-date {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+/* ===== WEEK BOX ===== */
+.student-week-box {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  margin-bottom: 28px;
+}
+
+.student-week-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #374151;
+  padding: 12px 16px;
+  background: #f9fafb;
+  border-left: 5px solid #2563eb;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+/* ===== MATERIAL LIST ===== */
+.student-material-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.student-material-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #1f2937;
+  cursor: pointer;
+}
+
+.student-material-item:last-child {
+  border-bottom: none;
+}
+
+.student-material-item:hover {
+  background: #f9fafb;
+}
+
+.student-material-icon {
+  font-size: 18px;
+}
+
+.student-material-name {
+  flex: 1;
+}
