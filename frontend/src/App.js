@@ -51,6 +51,7 @@ const App = () => (
       <Route path="/signup" element={<Signup />} />
       <Route path="/ai" element={<AIAssistant />} />
 
+
       {/* ========= STUDENT LMS ========= */}
       <Route path="/student" element={<StudentLayout />}>
         <Route index element={<Navigate to="dashboard" replace />} />
@@ -58,8 +59,14 @@ const App = () => (
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="classes" element={<Classes />} />
         <Route path="classes/:classId" element={<ClassGradeSelect />} />
-        <Route path="classes/:classId/grade/:gradeId" element={<ClassWorkspace />} />
-        <Route path="classes/:classId/grade/:gradeId/assignments/:assignmentId" element={<AssignmentSubmission />} />
+        <Route
+          path="classes/:classId/grade/:gradeId"
+          element={<ClassWorkspace />}
+        />
+        <Route
+          path="classes/:classId/grade/:gradeId/assignments/:assignmentId"
+          element={<AssignmentSubmission />}
+        />
 
         <Route path="live-classes" element={<LiveClasses />} />
         <Route path="recordings" element={<ClassRecordings />} />

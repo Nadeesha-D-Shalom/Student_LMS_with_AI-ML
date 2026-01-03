@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./classRecordings.css";
 
-const recordings = [
-  { id: 1, title: "Lecture 08 – Trees", date: "10 May 2025" },
-  { id: 2, title: "Lecture 09 – Recursion", date: "17 May 2025" }
-];
-
 const ClassRecordings = () => {
+  const [loading, setLoading] = useState(true);
+  const [recordings] = useState([]);
+
+  useEffect(() => {
+    /*
+      BACKEND (LATER)
+      GET /api/student/recordings
+    */
+    setLoading(false);
+  }, []);
+
   return (
     <div className="recordings-page">
-      <h2>Recorded Lessons</h2>
+      <div className="page-header">
+        <h1>Recorded Lessons</h1>
+        <p>Access all recorded lessons provided by your teachers.</p>
+      </div>
 
-      {recordings.map((r) => (
-        <div key={r.id} className="recording-item">
-          <span>{r.title}</span>
-          <small>{r.date}</small>
-          <button>Play</button>
+      {loading && (
+        <div className="page-loading">
+          Loading recorded lessons...
         </div>
-      ))}
+      )}
+
+      {!loading && recordings.length === 0 && (
+        <div className="empty-state">
+          <p>No recorded lessons available yet.</p>
+        </div>
+      )}
     </div>
   );
 };
