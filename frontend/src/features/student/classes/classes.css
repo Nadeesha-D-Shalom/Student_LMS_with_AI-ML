@@ -1,0 +1,73 @@
+.classes-page {
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+/* TABLE */
+
+.classes-table {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 4-column grid – matches JSX */
+.classes-header,
+.classes-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 2fr 100px;
+  align-items: center;
+}
+
+.classes-header {
+  background: #f9fafb;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.classes-row {
+  padding: 12px;
+  font-size: 13px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.classes-row:last-child {
+  border-bottom: none;
+}
+
+.subject {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* BUTTON */
+
+.enter-btn {
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #2563eb;
+  background: #ffffff;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.enter-btn:hover {
+  background: #2563eb;
+  color: #ffffff;
+}

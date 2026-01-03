@@ -1,0 +1,45 @@
+.grade-select-page {
+  padding: 24px;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.grade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.grade-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  background: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.grade-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.grade-card span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.grade-card:hover {
+  border-color: #2563eb;
+  background: #f8fafc;
+}

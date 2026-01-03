@@ -1,0 +1,85 @@
+/* =========================
+   MATERIALS PAGE
+========================= */
+
+.materials-page {
+  padding: 20px;
+  max-width: 1000px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   TABLE LAYOUT
+========================= */
+
+.materials-table {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+/* Header */
+.materials-header {
+  display: grid;
+  grid-template-columns: 3fr 1fr 2fr 1.5fr;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Rows */
+.materials-row {
+  display: grid;
+  grid-template-columns: 3fr 1fr 2fr 1.5fr;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.materials-row:last-child {
+  border-bottom: none;
+}
+
+/* File title */
+.material-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* File type badge */
+.material-type {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2563eb;
+}
+
+/* Download button */
+.download-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  background-color: #e0e7ff;
+}
+    
