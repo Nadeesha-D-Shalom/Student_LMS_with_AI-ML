@@ -1,0 +1,28 @@
+.results-page {
+  padding: 24px;
+}
+
+.page-header h1 {
+  margin-bottom: 4px;
+}
+
+.page-header p {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.page-loading {
+  color: #555;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.results-table th,
+.results-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}

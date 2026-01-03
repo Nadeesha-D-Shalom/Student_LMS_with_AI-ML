@@ -1,152 +1,129 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./aiAssistant.css";
 
-const STORAGE_KEY = "lms_ai_chat_history";
-
-const DEFAULT_MESSAGE = [
-  {
-    role: "assistant",
-    content: "Hello. I am your AI Learning Assistant. Ask me anything."
-  }
-];
-
 const AIAssistant = () => {
-  const [messages, setMessages] = useState(DEFAULT_MESSAGE);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-
-  const bottomRef = useRef(null);
   const textareaRef = useRef(null);
-
-  useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      setMessages(JSON.parse(saved));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping]);
+  const chatEndRef = useRef(null);
 
   const autoResize = () => {
     const el = textareaRef.current;
     if (!el) return;
-
     el.style.height = "auto";
-    el.style.height = Math.min(el.scrollHeight, 140) + "px";
+    el.style.height = el.scrollHeight + "px";
   };
 
   const sendMessage = () => {
     if (!input.trim()) return;
 
-    setMessages((prev) => [...prev, { role: "user", content: input }]);
-    setInput("");
-    setIsTyping(true);
+    const userMessage = {
+      id: Date.now(),
+      role: "user",
+      content: input.trim()
+    };
 
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "44px";
-    }
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
 
     setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content:
-            "This is a placeholder response. AI logic will be connected later."
-        }
-      ]);
-      setIsTyping(false);
-    }, 800);
+      if (textareaRef.current) textareaRef.current.style.height = "auto";
+    }, 0);
+
+    setTimeout(() => {
+      typeAIResponse(
+        "This is a simulated AI response with typing effect. Backend will be connected later."
+      );
+    }, 600);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage();
-    }
+  const typeAIResponse = (text) => {
+    const id = Date.now() + 1;
+    let index = 0;
+
+    setMessages((prev) => [...prev, { id, role: "ai", content: "" }]);
+
+    const interval = setInterval(() => {
+      index++;
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === id
+            ? { ...msg, content: text.slice(0, index) }
+            : msg
+        )
+      );
+
+      if (index >= text.length) clearInterval(interval);
+    }, 20);
   };
 
-  const handleNewChat = () => {
-    localStorage.removeItem(STORAGE_KEY);
-    setMessages(DEFAULT_MESSAGE);
-    setInput("");
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "44px";
-    }
-  };
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-  const isEmptyChat =
-    messages.length === 1 && messages[0].role === "assistant";
+  const copyText = (text) => {
+    navigator.clipboard.writeText(text);
+  };
 
   return (
-    <div className="ai-page">
-      {/* Header */}
-      <div className="ai-header">
-        <h2>AI Learning Assistant</h2>
-        <button className="new-chat-btn" onClick={handleNewChat}>
-          New Chat
-        </button>
-      </div>
-
-      {/* Chat Area */}
-      <div className="ai-chat">
-        <div className="ai-chat-inner">
-          {isEmptyChat ? (
-            <div className="ai-welcome">
-              <h1>Ready when you are.</h1>
-              <p>
-                Ask questions about subjects, lessons, assignments, or exam
-                preparation.
-              </p>
-              <p className="ai-hint">
-                Press <strong>Enter</strong> to send •{" "}
-                <strong>Shift + Enter</strong> for new line
-              </p>
+    <div className="chat-root">
+      <div className="chat-body">
+        {messages.length === 0 && (
+          <div className="chat-empty-wrapper">
+            <div className="chat-empty">
+              <h1>NexDS AI</h1>
+              <p>What do you want to know?</p>
             </div>
-          ) : (
-            <>
-              {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`ai-message-row ${msg.role}`}
-                >
-                  <div className="ai-message-bubble">
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
+          </div>
+        )}
 
-              {isTyping && (
-                <div className="ai-message-row assistant">
-                  <div className="ai-message-bubble typing">
-                    Typing…
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-          <div ref={bottomRef} />
-        </div>
+        {messages.map((msg) => (
+          <div key={msg.id} className={`chat-row ${msg.role}`}>
+            <div className="chat-bubble">
+              <span>{msg.content}</span>
+
+              <button
+                className="copy-btn"
+                onClick={() => copyText(msg.content)}
+                title="Copy"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+        ))}
+
+        <div ref={chatEndRef} />
       </div>
 
-      {/* Input Bar */}
-      <div className="ai-input-bar">
-        <div className="ai-input-container">
+      {/* INPUT */}
+      <div className="chat-input-wrapper">
+        <div className="chat-input">
           <textarea
             ref={textareaRef}
-            placeholder="Ask anything…"
+            placeholder="Ask anything"
             value={input}
             rows={1}
             onChange={(e) => {
               setInput(e.target.value);
               autoResize();
             }}
-            onKeyDown={handleKeyDown}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+              }
+            }}
           />
-          <button onClick={sendMessage}>Send</button>
+
+          <button
+            className="send-icon-btn"
+            onClick={sendMessage}
+            disabled={!input.trim()}
+            aria-label="Send"
+          >
+            ↑
+          </button>
         </div>
       </div>
     </div>

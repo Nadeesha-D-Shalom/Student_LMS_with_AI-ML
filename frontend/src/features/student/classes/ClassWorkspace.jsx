@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,71 +11,124 @@ import AskAICard from "../assistant/AskAICard";
 import "./classWorkspace.css";
 
 const ClassWorkspace = () => {
-    const { gradeId } = useParams();
+    const { classId, gradeId } = useParams();
     const navigate = useNavigate();
+
+    /* ================= UI STATES ================= */
+    const [loading, setLoading] = useState(true);
+    const [notices] = useState([]);
+    const [materials] = useState([]);
+    const [assignments] = useState([]);
+
+
+    useEffect(() => {
+        /*
+          BACKEND INTEGRATION (LATER)
+    
+          Example:
+          GET /api/student/classes/{classId}/grades/{gradeId}/workspace
+    
+          Response:
+          {
+            notices: [],
+            materials: [],
+            assignments: []
+          }
+        */
+
+        // Temporary: simulate initial load without mock data
+        setLoading(false);
+    }, [classId, gradeId]);
 
     return (
         <div className="workspace-layout">
             {/* LEFT */}
             <div className="workspace-main">
                 <div className="workspace-header">
-                    <h1>Physics</h1>
+                    <h1>Subject</h1>
                     <p className="workspace-grade">
                         {gradeId.replace("-", " ").toUpperCase()}
                     </p>
                 </div>
 
-                {/* Notices */}
-                <div className="notice-section">
-                    <h3>
-                        <FontAwesomeIcon icon={faBell} /> Notices
-                    </h3>
-
-                    <div className="notice-item">
-                        <FontAwesomeIcon icon={faBell} />
-                        <span>
-                            Final exam preparation session will be held on Friday at 6.00 PM.
-                        </span>
+                {/* ===== LOADING STATE ===== */}
+                {loading && (
+                    <div className="workspace-loading">
+                        Loading class content...
                     </div>
-                </div>
+                )}
 
-                {/* Materials */}
-                <div className="content-list">
-                    <div className="date-label">10 Jan 2026</div>
+                {/* ===== NOTICES ===== */}
+                {!loading && (
+                    <div className="notice-section">
+                        <h3>
+                            <FontAwesomeIcon icon={faBell} /> Notices
+                        </h3>
 
-                    <div className="content-item">
-                        <FontAwesomeIcon icon={faFilePdf} />
-                        <span>Introduction to Motion – Lecture Slides</span>
+                        {notices.length === 0 ? (
+                            <p className="empty-text">No notices available.</p>
+                        ) : (
+                            notices.map((notice) => (
+                                <div key={notice.id} className="notice-item">
+                                    <FontAwesomeIcon icon={faBell} />
+                                    <span>{notice.message}</span>
+                                </div>
+                            ))
+                        )}
                     </div>
+                )}
 
-                    <div className="content-item">
-                        <FontAwesomeIcon icon={faVideo} />
-                        <span>Recording – Lecture 01 (Motion)</span>
+                {/* ===== MATERIALS ===== */}
+                {!loading && (
+                    <div className="content-list">
+                        {materials.length === 0 ? (
+                            <p className="empty-text">No study materials uploaded yet.</p>
+                        ) : (
+                            materials.map((item) => (
+                                <div key={item.id} className="content-item">
+                                    <FontAwesomeIcon
+                                        icon={item.type === "pdf" ? faFilePdf : faVideo}
+                                    />
+                                    <span>{item.title}</span>
+                                </div>
+                            ))
+                        )}
                     </div>
-                </div>
+                )}
 
-                {/* Assignments (SMALL BANNERS) */}
-                <div className="assignment-section">
-                    <h3>
-                        <FontAwesomeIcon icon={faClipboardList} /> Assignments
-                    </h3>
+                {/* ===== ASSIGNMENTS ===== */}
+                {!loading && (
+                    <div className="assignment-section">
+                        <h3>
+                            <FontAwesomeIcon icon={faClipboardList} /> Assignments
+                        </h3>
 
-                    <div
-                        className="assignment-banner"
-                        onClick={() =>
-                            navigate(
-                                `/student/classes/1/grade/${gradeId}/assignments/1`
-                            )
-                        }
-                    >
-                        <div>
-                            <strong>Assignment 01 – Laws of Motion</strong>
-                            <p>Due date: 15 Jan 2026</p>
-                        </div>
+                        {assignments.length === 0 ? (
+                            <p className="empty-text">No assignments assigned yet.</p>
+                        ) : (
+                            assignments.map((assignment) => (
+                                <div
+                                    key={assignment.id}
+                                    className="assignment-banner"
+                                    onClick={() =>
+                                        navigate(
+                                            `/student/classes/${classId}/grade/${gradeId}/assignments/${assignment.id}`
+                                        )
+                                    }
+                                >
+                                    <div>
+                                        <strong>{assignment.title}</strong>
+                                        <p>Due date: {assignment.dueDate}</p>
+                                    </div>
 
-                        <span className="status pending">Not Submitted</span>
+                                    <span className={`status ${assignment.status}`}>
+                                        {assignment.statusLabel}
+                                    </span>
+                                </div>
+                            ))
+                        )}
                     </div>
-                </div>
+                )}
             </div>
 
             {/* RIGHT */}

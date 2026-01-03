@@ -1,0 +1,44 @@
+.tests-page {
+  padding: 24px;
+}
+
+.page-header h1 {
+  margin-bottom: 4px;
+}
+
+.page-header p {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.page-loading {
+  color: #555;
+}
+
+.tests-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tests-table th,
+.tests-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.status.not-attempted {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+.status.completed {
+  background: #d4edda;
+  color: #155724;
+}

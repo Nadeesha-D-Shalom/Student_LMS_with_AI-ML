@@ -1,0 +1,57 @@
+.assignments-page {
+  padding: 24px;
+}
+
+.page-header h1 {
+  margin-bottom: 4px;
+}
+
+.page-header p {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.page-loading {
+  color: #555;
+}
+
+.assignments-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.assignments-table th,
+.assignments-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.assignments-table tr {
+  cursor: pointer;
+}
+
+.assignments-table tr:hover {
+  background: #fafafa;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.status.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status.submitted {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.late {
+  background: #f8d7da;
+  color: #721c24;
+}
