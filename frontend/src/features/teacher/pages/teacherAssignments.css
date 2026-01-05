@@ -1,6 +1,10 @@
+/* =====================================================
+   PAGE
+===================================================== */
+
 .teacher-assignments-page {
   max-width: 1100px;
-  padding-bottom: 40px;
+  padding-bottom: 48px;
 }
 
 .teacher-assignments-page h2 {
@@ -13,49 +17,65 @@
 .subtitle {
   font-size: 14px;
   color: #6b7280;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-/* ===== SECTIONS ===== */
+/* =====================================================
+   SECTIONS (CARDS)
+===================================================== */
+
 .assign-class-box,
 .assign-form,
 .assign-list {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 22px;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 26px;
 }
 
-/* ===== CLASS SELECT ===== */
+/* Section titles */
 .assign-class-box h3,
 .assign-form h3,
 .assign-list h3 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: #1d4ed8;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
+
+/* =====================================================
+   CLASS SELECT
+===================================================== */
 
 .assign-class-item {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 14px;
-  padding: 6px 4px;
+  padding: 8px 6px;
+  border-radius: 8px;
   cursor: pointer;
+}
+
+.assign-class-item:hover {
+  background: #f9fafb;
 }
 
 .assign-class-item input {
+  accent-color: #2563eb;
   cursor: pointer;
 }
 
-/* ===== FORM ===== */
+/* =====================================================
+   FORM
+===================================================== */
+
 .assign-form input,
 .assign-form textarea {
   width: 100%;
   padding: 10px 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-size: 14px;
   border-radius: 10px;
   border: 1px solid #d1d5db;
@@ -73,9 +93,17 @@
   resize: vertical;
 }
 
-/* ===== ASSIGNMENT LIST ===== */
+/* Primary button spacing */
+.assign-form .teacher-primary-btn {
+  margin-top: 6px;
+}
+
+/* =====================================================
+   ASSIGNMENT LIST
+===================================================== */
+
 .assign-card {
-  padding: 12px 0;
+  padding: 14px 0;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -83,25 +111,33 @@
   border-bottom: none;
 }
 
+/* Title */
 .assign-title {
   font-size: 15px;
   font-weight: 700;
   color: #1d4ed8;
+  margin-bottom: 2px;
 }
 
+/* Description */
 .assign-desc {
   font-size: 14px;
   color: #374151;
-  margin: 4px 0;
+  margin-bottom: 6px;
 }
 
+/* Meta */
 .assign-meta {
   font-size: 12px;
   color: #6b7280;
 }
 
-/* ===== EMPTY ===== */
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
 .empty {
   font-size: 14px;
   color: #6b7280;
+  padding: 6px 0;
 }

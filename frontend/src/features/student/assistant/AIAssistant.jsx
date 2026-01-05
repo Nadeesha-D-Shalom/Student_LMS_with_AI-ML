@@ -32,9 +32,9 @@ const AIAssistant = () => {
 
     setTimeout(() => {
       typeAIResponse(
-        "This is a simulated AI response with typing effect. Backend will be connected later."
+        "This is a simulated AI response with typing effect. Backend integration will be added later."
       );
-    }, 600);
+    }, 500);
   };
 
   const typeAIResponse = (text) => {
@@ -54,7 +54,7 @@ const AIAssistant = () => {
       );
 
       if (index >= text.length) clearInterval(interval);
-    }, 20);
+    }, 18);
   };
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const AIAssistant = () => {
           <div className="chat-empty-wrapper">
             <div className="chat-empty">
               <h1>NexDS AI</h1>
-              <p>What do you want to know?</p>
+              <p>Your academic assistant. Ask questions clearly and precisely.</p>
             </div>
           </div>
         )}
@@ -82,13 +82,15 @@ const AIAssistant = () => {
             <div className="chat-bubble">
               <span>{msg.content}</span>
 
-              <button
-                className="copy-btn"
-                onClick={() => copyText(msg.content)}
-                title="Copy"
-              >
-                Copy
-              </button>
+              {msg.role === "ai" && (
+                <button
+                  className="copy-btn"
+                  onClick={() => copyText(msg.content)}
+                  title="Copy response"
+                >
+                  Copy
+                </button>
+              )}
             </div>
           </div>
         ))}
@@ -96,12 +98,12 @@ const AIAssistant = () => {
         <div ref={chatEndRef} />
       </div>
 
-      {/* INPUT */}
+      {/* INPUT AREA */}
       <div className="chat-input-wrapper">
         <div className="chat-input">
           <textarea
             ref={textareaRef}
-            placeholder="Ask anything"
+            placeholder="Ask NexDS AI anything about your studies"
             value={input}
             rows={1}
             onChange={(e) => {
@@ -124,6 +126,11 @@ const AIAssistant = () => {
           >
             ↑
           </button>
+        </div>
+
+        {/* DISCLAIMER */}
+        <div className="chat-disclaimer">
+          NexDS AI can make mistakes. Always verify important academic information.
         </div>
       </div>
     </div>
