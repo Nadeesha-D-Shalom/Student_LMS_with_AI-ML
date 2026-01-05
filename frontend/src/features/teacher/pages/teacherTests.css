@@ -1,0 +1,138 @@
+.teacher-tests-page {
+  max-width: 1100px;
+  padding-bottom: 48px;
+}
+
+.teacher-tests-page h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+/* ===== SECTIONS ===== */
+.test-class-box,
+.test-form,
+.test-list {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 26px;
+}
+
+.test-class-box h3,
+.test-form h3,
+.test-list h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin-bottom: 14px;
+}
+
+/* ===== CLASS SELECT ===== */
+.test-class-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.test-class-item:hover {
+  background: #f9fafb;
+}
+
+.test-class-item input {
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+/* ===== FORM ===== */
+.test-form input,
+.test-form select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+.test-form input:focus,
+.test-form select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.12);
+}
+
+/* ===== TEST LIST ===== */
+.test-card {
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.test-card:last-child {
+  border-bottom: none;
+}
+
+.test-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.test-desc {
+  font-size: 14px;
+  color: #374151;
+  margin: 4px 0;
+}
+
+.test-meta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ===== EMPTY ===== */
+.empty {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+
+/* ===== ERROR STATES ===== */
+.input-error {
+  border-color: #ef4444 !important;
+}
+
+.error-box {
+  border-color: #ef4444;
+}
+
+/* Error text */
+.form-error-text {
+  font-size: 13px;
+  color: #ef4444;
+  margin-bottom: 10px;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.35s;
+}

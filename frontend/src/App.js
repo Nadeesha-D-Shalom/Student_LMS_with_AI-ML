@@ -66,6 +66,9 @@ const TeacherTests = lazy(() =>
 const TeacherGradeWorkspace = lazy(() =>
   import("./features/teacher/grades/TeacherGradeWorkspace")
 );
+const TeacherHelp = lazy(() =>
+  import("./features/teacher/pages/TeacherHelp")
+);
 
 const App = () => (
   <BrowserRouter>
@@ -130,6 +133,8 @@ const App = () => (
           <Route path="content" element={<TeacherContent />} />
           <Route path="assignments" element={<TeacherAssignments />} />
           <Route path="tests" element={<TeacherTests />} />
+          <Route path="/teacher/help" element={<TeacherHelp />} />
+
         </Route>
 
       </Routes>
