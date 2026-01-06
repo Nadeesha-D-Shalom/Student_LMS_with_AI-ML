@@ -6,7 +6,7 @@ import Home from "./pages/Home/Home";
 import Login from "./features/Auth/Login";
 import Signup from "./features/Auth/Signup";
 
-/* ================= STUDENT LAYOUT ================= */
+/* ================= STUDENT ================= */
 import StudentLayout from "./features/student/layout/StudentLayout";
 import Dashboard from "./features/student/dashboard/Dashboard";
 
@@ -41,7 +41,7 @@ import Help from "./features/student/profile/Help";
 /* ================= AI ================= */
 import AIAssistant from "./features/student/assistant/AIAssistant";
 
-/* ================= TEACHER (LAZY LOADED) ================= */
+/* ================= TEACHER (LAZY) ================= */
 const TeacherLayout = lazy(() =>
   import("./features/teacher/layout/TeacherLayout")
 );
@@ -70,71 +70,141 @@ const TeacherHelp = lazy(() =>
   import("./features/teacher/pages/TeacherHelp")
 );
 
+/* ================= INSTITUTE ADMIN (LAZY) ================= */
+const InstituteAdminLayout = lazy(() =>
+  import("./features/InstituteAdmin/layout/AdminLayout")
+);
+const AdminDashboard = lazy(() =>
+  import("./features/InstituteAdmin/pages/Dashboard")
+);
+const AdminStudents = lazy(() =>
+  import("./features/InstituteAdmin/pages/Students")
+);
+const AdminTeachers = lazy(() =>
+  import("./features/InstituteAdmin/pages/Teachers")
+);
+const AdminAdmins = lazy(() =>
+  import("./features/InstituteAdmin/pages/Admins")
+);
+const AdminAttendance = lazy(() =>
+  import("./features/InstituteAdmin/pages/Attendance")
+);
+const AdminMessages = lazy(() =>
+  import("./features/InstituteAdmin/pages/Messages")
+);
+
+const AdminPayments = lazy(() =>
+  import("./features/InstituteAdmin/pages/Payments")
+);
+const AdminNotices = lazy(() =>
+  import("./features/InstituteAdmin/pages/Notices")
+);
+const AdminAdvertisements = lazy(() =>
+  import("./features/InstituteAdmin/pages/Advertisements")
+);
+const AdminReports = lazy(() =>
+  import("./features/InstituteAdmin/pages/Reports")
+);
+const AdminSettings = lazy(() =>
+  import("./features/InstituteAdmin/pages/Settings")
+);
+
+const CreateStudent = lazy(() =>
+  import("./features/InstituteAdmin/create/CreateStudent")
+);
+const CreateTeacher = lazy(() =>
+  import("./features/InstituteAdmin/create/CreateTeacher")
+);
+const CreateAdmin = lazy(() =>
+  import("./features/InstituteAdmin/create/CreateAdmin")
+);
+const CreateNotice = lazy(() =>
+  import("./features/InstituteAdmin/create/CreateNotice")
+);
+const CreateAdvertisement = lazy(() =>
+  import("./features/InstituteAdmin/create/CreateAdvertisement")
+);
+const AdminHelp = lazy(() =>
+  import("./features/InstituteAdmin/pages/Help")
+);
+
+
+
 const App = () => (
   <BrowserRouter>
-    <Suspense fallback={<div style={{ padding: 16 }}>Loading...</div>}>
+    <Suspense fallback={<div className="p-4">Loading...</div>}>
       <Routes>
 
-        {/* ========= PUBLIC ========= */}
+        {/* ===== PUBLIC ===== */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* ========= AI (Standalone) ========= */}
+        {/* ===== AI ===== */}
         <Route path="/ai" element={<AIAssistant />} />
 
-        {/* ========= STUDENT LMS ========= */}
+        {/* ===== STUDENT ===== */}
         <Route path="/student" element={<StudentLayout />}>
           <Route index element={<Navigate to="dashboard" replace />} />
-
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="classes" element={<Classes />} />
           <Route path="classes/:classId" element={<ClassGradeSelect />} />
-          <Route
-            path="classes/:classId/grade/:gradeId"
-            element={<ClassWorkspace />}
-          />
+          <Route path="classes/:classId/grade/:gradeId" element={<ClassWorkspace />} />
           <Route
             path="classes/:classId/grade/:gradeId/assignments/:assignmentId"
             element={<AssignmentSubmission />}
           />
-
           <Route path="live-classes" element={<LiveClasses />} />
           <Route path="recordings" element={<ClassRecordings />} />
-
           <Route path="assignments" element={<Assignments />} />
           <Route path="tests" element={<Tests />} />
           <Route path="results" element={<Results />} />
-
           <Route path="messages" element={<Messages />} />
           <Route path="questions" element={<Questions />} />
           <Route path="announcements" element={<Announcements />} />
-
           <Route path="calendar" element={<Calendar />} />
           <Route path="todo" element={<Todo />} />
           <Route path="progress" element={<Progress />} />
-
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
           <Route path="help" element={<Help />} />
         </Route>
 
-        {/* ========= TEACHER LMS ========= */}
+        {/* ===== TEACHER ===== */}
         <Route path="/teacher" element={<TeacherLayout />}>
           <Route index element={<Navigate to="dashboard" replace />} />
-
           <Route path="dashboard" element={<TeacherDashboard />} />
           <Route path="classes" element={<TeacherMyClasses />} />
-          <Route
-            path="classes/:classId/grade/:gradeId"
-            element={<TeacherGradeWorkspace />}
-          />
+          <Route path="classes/:classId/grade/:gradeId" element={<TeacherGradeWorkspace />} />
           <Route path="students" element={<TeacherStudents />} />
           <Route path="content" element={<TeacherContent />} />
           <Route path="assignments" element={<TeacherAssignments />} />
           <Route path="tests" element={<TeacherTests />} />
-          <Route path="/teacher/help" element={<TeacherHelp />} />
+          <Route path="help" element={<TeacherHelp />} />
+        </Route>
 
+        {/* ===== INSTITUTE ADMIN ===== */}
+        <Route path="/instituteadmin" element={<InstituteAdminLayout />}>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="students" element={<AdminStudents />} />
+          <Route path="teachers" element={<AdminTeachers />} />
+          <Route path="admins" element={<AdminAdmins />} />
+          <Route path="attendance" element={<AdminAttendance />} />
+          <Route path="messages" element={<AdminMessages />} />
+          <Route path="payments" element={<AdminPayments />} />
+          <Route path="notices" element={<AdminNotices />} />
+          <Route path="advertisements" element={<AdminAdvertisements />} />
+          <Route path="reports" element={<AdminReports />} />
+          <Route path="settings" element={<AdminSettings />} />
+          <Route path="help" element={<AdminHelp />} />
+
+              {/* ===== INSTITUTE ADMIN Create new profiles ===== */}
+          <Route path="students/new" element={<CreateStudent />} />
+          <Route path="teachers/new" element={<CreateTeacher />} />
+          <Route path="admins/new" element={<CreateAdmin />} />
+          <Route path="notices/new" element={<CreateNotice />} />
+          <Route path="advertisements/new" element={<CreateAdvertisement />} />
         </Route>
 
       </Routes>
