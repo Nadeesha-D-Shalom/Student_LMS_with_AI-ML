@@ -129,6 +129,42 @@ const AdminHelp = lazy(() =>
 );
 
 
+/* ================= IT ADMIN (LAZY) ================= */
+const ITAdminLayout = lazy(() =>
+  import("./features/ItAdmin/layouts/ITAdminLayout")
+);
+const ITAdminDashboard = lazy(() =>
+  import("./features/ItAdmin/pages/ITAdminDashboard")
+);
+const SystemLock = lazy(() =>
+  import("./features/ItAdmin/pages/SystemLock")
+);
+const SystemUpdates = lazy(() =>
+  import("./features/ItAdmin/pages/SystemUpdates")
+);
+const UserStats = lazy(() =>
+  import("./features/ItAdmin/pages/UserStats")
+);
+const AdminManagement = lazy(() =>
+  import("./features/ItAdmin/pages/AdminManagement")
+);
+const AuditLogs = lazy(() =>
+  import("./features/ItAdmin/pages/AuditLogs")
+);
+const Notifications = lazy(() =>
+  import("./features/ItAdmin/pages/Notifications")
+);
+const Backups = lazy(() =>
+  import("./features/ItAdmin/pages/Backups")
+);
+const ITAdminMessages = lazy(() =>
+  import("./features/ItAdmin/pages/Messages")
+);
+const ITAdminProfile = lazy(() =>
+  import("./features/ItAdmin/pages/Profile")
+);
+
+
 
 const App = () => (
   <BrowserRouter>
@@ -199,13 +235,30 @@ const App = () => (
           <Route path="settings" element={<AdminSettings />} />
           <Route path="help" element={<AdminHelp />} />
 
-              {/* ===== INSTITUTE ADMIN Create new profiles ===== */}
+          {/* ===== INSTITUTE ADMIN Create new profiles ===== */}
           <Route path="students/new" element={<CreateStudent />} />
           <Route path="teachers/new" element={<CreateTeacher />} />
           <Route path="admins/new" element={<CreateAdmin />} />
           <Route path="notices/new" element={<CreateNotice />} />
           <Route path="advertisements/new" element={<CreateAdvertisement />} />
         </Route>
+
+        {/* ===== IT ADMIN ===== */}
+        <Route path="/it-admin" element={<ITAdminLayout />}>
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<ITAdminDashboard />} />
+          <Route path="system-lock" element={<SystemLock />} />
+          <Route path="system-updates" element={<SystemUpdates />} />
+          <Route path="user-stats" element={<UserStats />} />
+          <Route path="admin-management" element={<AdminManagement />} />
+          <Route path="audit-logs" element={<AuditLogs />} />
+          <Route path="notifications" element={<Notifications />} />
+          <Route path="backups" element={<Backups />} />
+          <Route path="messages" element={<ITAdminMessages />} />
+          <Route path="profile" element={<ITAdminProfile />} />
+
+        </Route>
+
 
       </Routes>
     </Suspense>
