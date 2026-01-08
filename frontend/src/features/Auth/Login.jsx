@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./auth.css";
 import robotImage from "../../assets/images/home/login.png";
+import { apiFetch } from "../../api/api";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
+  const { user, loading } = useAuth();
+
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [typing, setTyping] = useState(false);
+
+  // ✅ AUTO REDIRECT IF ALREADY LOGGED IN
+  useEffect(() => {
+    if (!loading && user) {
+      window.location.replace("/student");
+    }
+  }, [user, loading]);
 
   const onChange = (e) => {
     setTyping(true);
@@ -19,7 +30,7 @@ const Login = () => {
     }, 600);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (!form.email || !form.password) {
@@ -27,13 +38,29 @@ const Login = () => {
       return;
     }
 
-    if (form.email !== "test@test.com" || form.password !== "1234") {
-      setError("Incorrect username or password. Check them.");
-      return;
-    }
+    try {
+      const data = await apiFetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify(form)
+      });
 
-    alert("Login success (temporary).");
+      localStorage.setItem("lms_token", data.token);
+
+      // Reload once so AuthContext re-runs
+      window.location.replace("/student");
+    } catch (err) {
+      if (err.message === "UNAUTHORIZED") {
+        setError("Invalid email or password.");
+      } else {
+        setError(err.message);
+      }
+    }
   };
+
+  // Prevent flicker while checking session
+  if (loading) {
+    return null;
+  }
 
   return (
     <div className="auth-page">
@@ -91,13 +118,11 @@ const Login = () => {
             }`}
           >
             <div className="robot-bg" />
-
             <img
               src={robotImage}
               alt="AI Assistant Robot"
               className="robot-image"
             />
-
             {error && (
               <div className="robot-bubble">
                 No. Incorrect user or password. Check them.

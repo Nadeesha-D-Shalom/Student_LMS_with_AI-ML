@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./features/Auth/Login";
 import Signup from "./features/Auth/Signup";
+import Unauthorized from "./pages/Unauthorized";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 /* ================= STUDENT ================= */
 import StudentLayout from "./features/student/layout/StudentLayout";
@@ -92,7 +94,6 @@ const AdminAttendance = lazy(() =>
 const AdminMessages = lazy(() =>
   import("./features/InstituteAdmin/pages/Messages")
 );
-
 const AdminPayments = lazy(() =>
   import("./features/InstituteAdmin/pages/Payments")
 );
@@ -108,63 +109,17 @@ const AdminReports = lazy(() =>
 const AdminSettings = lazy(() =>
   import("./features/InstituteAdmin/pages/Settings")
 );
-
-const CreateStudent = lazy(() =>
-  import("./features/InstituteAdmin/create/CreateStudent")
-);
-const CreateTeacher = lazy(() =>
-  import("./features/InstituteAdmin/create/CreateTeacher")
-);
-const CreateAdmin = lazy(() =>
-  import("./features/InstituteAdmin/create/CreateAdmin")
-);
-const CreateNotice = lazy(() =>
-  import("./features/InstituteAdmin/create/CreateNotice")
-);
-const CreateAdvertisement = lazy(() =>
-  import("./features/InstituteAdmin/create/CreateAdvertisement")
-);
 const AdminHelp = lazy(() =>
   import("./features/InstituteAdmin/pages/Help")
 );
 
-
-/* ================= IT ADMIN (LAZY) ================= */
+/* ================= IT ADMIN (OPTIONAL) ================= */
 const ITAdminLayout = lazy(() =>
   import("./features/ItAdmin/layouts/ITAdminLayout")
 );
 const ITAdminDashboard = lazy(() =>
   import("./features/ItAdmin/pages/ITAdminDashboard")
 );
-const SystemLock = lazy(() =>
-  import("./features/ItAdmin/pages/SystemLock")
-);
-const SystemUpdates = lazy(() =>
-  import("./features/ItAdmin/pages/SystemUpdates")
-);
-const UserStats = lazy(() =>
-  import("./features/ItAdmin/pages/UserStats")
-);
-const AdminManagement = lazy(() =>
-  import("./features/ItAdmin/pages/AdminManagement")
-);
-const AuditLogs = lazy(() =>
-  import("./features/ItAdmin/pages/AuditLogs")
-);
-const Notifications = lazy(() =>
-  import("./features/ItAdmin/pages/Notifications")
-);
-const Backups = lazy(() =>
-  import("./features/ItAdmin/pages/Backups")
-);
-const ITAdminMessages = lazy(() =>
-  import("./features/ItAdmin/pages/Messages")
-);
-const ITAdminProfile = lazy(() =>
-  import("./features/ItAdmin/pages/Profile")
-);
-
-
 
 const App = () => (
   <BrowserRouter>
@@ -175,12 +130,27 @@ const App = () => (
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
 
-        {/* ===== AI ===== */}
-        <Route path="/ai" element={<AIAssistant />} />
+        {/* ===== AI (Logged-in students only) ===== */}
+        <Route
+          path="/ai"
+          element={
+            <ProtectedRoute roles={["STUDENT"]}>
+              <AIAssistant />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* ===== STUDENT ===== */}
-        <Route path="/student" element={<StudentLayout />}>
+        {/* ===== STUDENT (STUDENT ONLY) ===== */}
+        <Route
+          path="/student"
+          element={
+            <ProtectedRoute roles={["STUDENT"]}>
+              <StudentLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="classes" element={<Classes />} />
@@ -206,8 +176,15 @@ const App = () => (
           <Route path="help" element={<Help />} />
         </Route>
 
-        {/* ===== TEACHER ===== */}
-        <Route path="/teacher" element={<TeacherLayout />}>
+        {/* ===== TEACHER (TEACHER ONLY) ===== */}
+        <Route
+          path="/teacher"
+          element={
+            <ProtectedRoute roles={["TEACHER"]}>
+              <TeacherLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<TeacherDashboard />} />
           <Route path="classes" element={<TeacherMyClasses />} />
@@ -219,8 +196,15 @@ const App = () => (
           <Route path="help" element={<TeacherHelp />} />
         </Route>
 
-        {/* ===== INSTITUTE ADMIN ===== */}
-        <Route path="/instituteadmin" element={<InstituteAdminLayout />}>
+        {/* ===== INSTITUTE ADMIN (ADMIN ONLY) ===== */}
+        <Route
+          path="/instituteadmin"
+          element={
+            <ProtectedRoute roles={["ADMIN"]}>
+              <InstituteAdminLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="students" element={<AdminStudents />} />
@@ -234,31 +218,20 @@ const App = () => (
           <Route path="reports" element={<AdminReports />} />
           <Route path="settings" element={<AdminSettings />} />
           <Route path="help" element={<AdminHelp />} />
-
-          {/* ===== INSTITUTE ADMIN Create new profiles ===== */}
-          <Route path="students/new" element={<CreateStudent />} />
-          <Route path="teachers/new" element={<CreateTeacher />} />
-          <Route path="admins/new" element={<CreateAdmin />} />
-          <Route path="notices/new" element={<CreateNotice />} />
-          <Route path="advertisements/new" element={<CreateAdvertisement />} />
         </Route>
 
-        {/* ===== IT ADMIN ===== */}
-        <Route path="/it-admin" element={<ITAdminLayout />}>
+        {/* ===== IT ADMIN (OPTIONAL) ===== */}
+        <Route
+          path="/it-admin"
+          element={
+            <ProtectedRoute roles={["IT_ADMIN"]}>
+              <ITAdminLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<ITAdminDashboard />} />
-          <Route path="system-lock" element={<SystemLock />} />
-          <Route path="system-updates" element={<SystemUpdates />} />
-          <Route path="user-stats" element={<UserStats />} />
-          <Route path="admin-management" element={<AdminManagement />} />
-          <Route path="audit-logs" element={<AuditLogs />} />
-          <Route path="notifications" element={<Notifications />} />
-          <Route path="backups" element={<Backups />} />
-          <Route path="messages" element={<ITAdminMessages />} />
-          <Route path="profile" element={<ITAdminProfile />} />
-
         </Route>
-
 
       </Routes>
     </Suspense>
