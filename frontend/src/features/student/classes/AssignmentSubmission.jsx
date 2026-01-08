@@ -9,20 +9,22 @@ import {
   faDownload,
   faFloppyDisk
 } from "@fortawesome/free-solid-svg-icons";
+import { apiFetch } from "../../../api/api";
 import "./assignmentSubmission.css";
 
 const MAX_FILE_SIZE_MB = 5;
 
 const AssignmentSubmission = () => {
-  const { classId, gradeId } = useParams();
+  const { classId, gradeId, assignmentId } = useParams();
   const navigate = useNavigate();
 
   const [file, setFile] = useState(null);
   const [draftSaved, setDraftSaved] = useState(false);
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const handleFileChange = (e) => {
-    const selected = e.target.files[0];
+    const selected = e.target.files?.[0];
     if (!selected) return;
 
     if (selected.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
@@ -42,6 +44,7 @@ const AssignmentSubmission = () => {
   };
 
   const downloadFile = () => {
+    if (!file) return;
     const url = URL.createObjectURL(file);
     const a = document.createElement("a");
     a.href = url;
@@ -55,20 +58,46 @@ const AssignmentSubmission = () => {
     setDraftSaved(true);
   };
 
+  const submitAssignment = async () => {
+    if (!file) {
+      setError("Please select a file before submitting.");
+      return;
+    }
+
+    if (!assignmentId) {
+      setError("Missing assignment id in route.");
+      return;
+    }
+
+    setSubmitting(true);
+    setError("");
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      await apiFetch(`/api/student/assignments/${assignmentId}/submit`, {
+        method: "POST",
+        body: formData
+      });
+
+      navigate(-1);
+    } catch (err) {
+      setError(err.message || "Submission failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="submission-page">
-
       {/* BREADCRUMB */}
       <div className="breadcrumb">
         <span onClick={() => navigate("/student/dashboard")}>Dashboard</span>
         <span>›</span>
         <span onClick={() => navigate("/student/classes")}>Classes</span>
         <span>›</span>
-        <span
-          onClick={() =>
-            navigate(`/student/classes/${classId}/grade/${gradeId}`)
-          }
-        >
+        <span onClick={() => navigate(`/student/classes/${classId}/grade/${gradeId}`)}>
           Physics
         </span>
         <span>›</span>
@@ -132,9 +161,7 @@ const AssignmentSubmission = () => {
             <div>
               <strong>{file.name}</strong>
               <p>{(file.size / 1024 / 1024).toFixed(2)} MB</p>
-              {draftSaved && (
-                <span className="draft-label">Draft saved</span>
-              )}
+              {draftSaved && <span className="draft-label">Draft saved</span>}
             </div>
 
             <div className="file-actions">
@@ -154,20 +181,19 @@ const AssignmentSubmission = () => {
         />
 
         <div className="submit-actions">
-          <button
-            className="draft-btn"
-            disabled={!file}
-            onClick={saveDraft}
-          >
+          <button className="draft-btn" disabled={!file} onClick={saveDraft}>
             <FontAwesomeIcon icon={faFloppyDisk} /> Save Draft
           </button>
 
-          <button className="submit-btn" disabled={!file}>
-            Submit Assignment
+          <button
+            className="submit-btn"
+            disabled={!file || submitting}
+            onClick={submitAssignment}
+          >
+            {submitting ? "Submitting..." : "Submit Assignment"}
           </button>
         </div>
       </div>
-
     </div>
   );
 };

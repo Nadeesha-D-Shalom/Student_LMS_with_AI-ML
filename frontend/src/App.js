@@ -19,6 +19,8 @@ import ClassWorkspace from "./features/student/classes/ClassWorkspace";
 import LiveClasses from "./features/student/classes/LiveClasses";
 import ClassRecordings from "./features/student/classes/ClassRecordings";
 import AssignmentSubmission from "./features/student/classes/AssignmentSubmission";
+import AssignmentDetail from "./features/student/assessments/AssignmentDetail";
+
 
 /* ================= STUDENT ASSESSMENTS ================= */
 import Assignments from "./features/student/assessments/Assignments";
@@ -163,6 +165,7 @@ const App = () => (
           <Route path="live-classes" element={<LiveClasses />} />
           <Route path="recordings" element={<ClassRecordings />} />
           <Route path="assignments" element={<Assignments />} />
+          <Route path="assignments/:assignmentId" element={<AssignmentDetail />} />
           <Route path="tests" element={<Tests />} />
           <Route path="results" element={<Results />} />
           <Route path="messages" element={<Messages />} />

@@ -4,11 +4,18 @@ const API_BASE_URL =
 export const apiFetch = async (endpoint, options = {}) => {
   const token = localStorage.getItem("lms_token");
 
+  const isFormData =
+    typeof FormData !== "undefined" && options.body instanceof FormData;
+
   const headers = {
-    "Content-Type": "application/json",
     ...(token && { Authorization: `Bearer ${token}` }),
     ...options.headers
   };
+
+  // Only set JSON content-type when NOT FormData
+  if (!isFormData && !headers["Content-Type"] && !headers["content-type"]) {
+    headers["Content-Type"] = "application/json";
+  }
 
   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
     ...options,
@@ -20,10 +27,15 @@ export const apiFetch = async (endpoint, options = {}) => {
     throw new Error("UNAUTHORIZED");
   }
 
-  const data = await response.json();
+  const contentType = response.headers.get("content-type") || "";
+  const data = contentType.includes("application/json")
+    ? await response.json()
+    : await response.text();
 
   if (!response.ok) {
-    throw new Error(data.error || "Request failed");
+    const message =
+      typeof data === "object" && data && data.error ? data.error : "Request failed";
+    throw new Error(message);
   }
 
   return data;

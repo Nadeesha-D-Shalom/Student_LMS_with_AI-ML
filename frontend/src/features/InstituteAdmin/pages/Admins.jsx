@@ -40,7 +40,6 @@ const Admins = () => {
   const navigate = useNavigate(); // FIX
   const [search, setSearch] = useState("");
   const [admins, setAdmins] = useState(DEFAULT_ADMINS);
-  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     const saved = storage.getAdmins();
