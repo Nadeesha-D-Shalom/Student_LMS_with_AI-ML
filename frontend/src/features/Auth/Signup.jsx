@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import "./auth.css";
 import robotImage from "../../assets/images/home/login.png";
+import InfoModal from "./InfoModal";
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -17,6 +18,9 @@ const Signup = () => {
   const [typing, setTyping] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState("");
   const [isValid, setIsValid] = useState(false);
+
+  /* IMPORTANT:
+     Signup is blocked → no success state */
   const [success, setSuccess] = useState(false);
 
   /* =========================
@@ -81,129 +85,128 @@ const Signup = () => {
   }, [validate]);
 
   /* =========================
-     SUBMIT
+     SUBMIT (BLOCKED SIGNUP)
   ========================= */
+  const [showPopup, setShowPopup] = useState(false);
+
   const onSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
 
     if (!validate()) return;
 
-    /* =========================================
-       BACKEND API – SIGNUP
-       -----------------------------------------
-       POST /api/auth/signup
-       Body:
-       {
-         name: form.name,
-         email: form.email,
-         password: form.password
-       }
-       ========================================= */
-
-    setSuccess(true);
-    alert("Signup success (temporary frontend validation).");
+    /* BLOCK REGISTRATION */
+    setSuccess(false);
+    setShowPopup(true);
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-shell">
+    <>
+      <div className="auth-page">
+        <div className="auth-shell">
 
-        {/* LEFT */}
-        <div className="auth-left">
-          <div className="auth-brand">Student LMS AI</div>
-          <h1 className="auth-title">Create your account</h1>
-          <p className="auth-subtitle">
-            Join the platform and start learning with AI support.
-          </p>
+          {/* LEFT */}
+          <div className="auth-left">
+            <div className="auth-brand">Student LMS AI</div>
+            <h1 className="auth-title">Create your account</h1>
+            <p className="auth-subtitle">
+              Please Contact Insitite Admin to Register to the LMS..!
+            </p>
 
-          <form className="auth-form" onSubmit={onSubmit} noValidate>
-            {/* NAME */}
-            <div className="auth-field">
-              <label>Full Name</label>
-              <input
-                name="name"
-                value={form.name}
-                onChange={onChange}
-                placeholder="Your name"
-              />
-              {(touched.name || submitted) && errors.name && (
-                <div className="auth-error">{errors.name}</div>
-              )}
-            </div>
+            <form className="auth-form" onSubmit={onSubmit} noValidate>
+              {/* NAME */}
+              <div className="auth-field">
+                <label>Full Name</label>
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={onChange}
+                  placeholder="Your name"
+                />
+                {(touched.name || submitted) && errors.name && (
+                  <div className="auth-error">{errors.name}</div>
+                )}
+              </div>
 
-            {/* EMAIL */}
-            <div className="auth-field">
-              <label>Email</label>
-              <input
-                name="email"
-                type="email"
-                value={form.email}
-                onChange={onChange}
-                placeholder="you@example.com"
-              />
-              {(touched.email || submitted) && errors.email && (
-                <div className="auth-error">{errors.email}</div>
-              )}
-            </div>
+              {/* EMAIL */}
+              <div className="auth-field">
+                <label>Email</label>
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={onChange}
+                  placeholder="you@example.com"
+                />
+                {(touched.email || submitted) && errors.email && (
+                  <div className="auth-error">{errors.email}</div>
+                )}
+              </div>
 
-            {/* PASSWORD */}
-            <div className="auth-field">
-              <label>Password</label>
-              <input
-                name="password"
-                type="password"
-                value={form.password}
-                onChange={onChange}
-                placeholder="Create a password"
-              />
+              {/* PASSWORD */}
+              <div className="auth-field">
+                <label>Password</label>
+                <input
+                  name="password"
+                  type="password"
+                  value={form.password}
+                  onChange={onChange}
+                  placeholder="Create a password"
+                />
 
-              {form.password && (
-                <div className={`password-strength ${passwordStrength}`}>
-                  {passwordStrength.toUpperCase()}
-                </div>
-              )}
+                {form.password && (
+                  <div className={`password-strength ${passwordStrength}`}>
+                    {passwordStrength.toUpperCase()}
+                  </div>
+                )}
 
-              {(touched.password || submitted) && errors.password && (
-                <div className="auth-error">{errors.password}</div>
-              )}
-            </div>
+                {(touched.password || submitted) && errors.password && (
+                  <div className="auth-error">{errors.password}</div>
+                )}
+              </div>
 
-            <button
-              className="auth-primary-btn"
-              type="submit"
-              disabled={!isValid}
-            >
-              Sign Up
-            </button>
+              <button
+                className="auth-primary-btn"
+                type="submit"
+                disabled={!isValid}
+              >
+                Sign Up
+              </button>
 
-            <div className="auth-footer">
-              <span>Already have an account?</span>{" "}
-              <Link to="/login">Login</Link>
-            </div>
-          </form>
-        </div>
-
-        {/* RIGHT – ROBOT */}
-        <div className="auth-right">
-          <div
-            className={`robot-stage
-              ${typing ? "typing" : ""}
-              ${(submitted && Object.keys(errors).length) ? "error" : ""}
-              ${success ? "success" : ""}
-            `}
-          >
-            <div className="robot-bg" />
-            <img
-              src={robotImage}
-              alt="AI Assistant Robot"
-              className="robot-image"
-            />
+              <div className="auth-footer">
+                <span>Already have an account?</span>{" "}
+                <Link to="/login">Login</Link>
+              </div>
+            </form>
           </div>
-        </div>
 
+          {/* RIGHT */}
+          <div className="auth-right">
+            <div
+              className={`robot-stage
+                ${typing ? "typing" : ""}
+                ${(submitted && Object.keys(errors).length) ? "error" : ""}
+                ${success ? "success" : ""}
+              `}
+            >
+              <div className="robot-bg" />
+              <img
+                src={robotImage}
+                alt="AI Assistant Robot"
+                className="robot-image"
+              />
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
+
+      {/* ERROR / RESTRICTION MODAL */}
+      <InfoModal
+        open={showPopup}
+        onClose={() => setShowPopup(false)}
+      />
+    </>
   );
 };
 
