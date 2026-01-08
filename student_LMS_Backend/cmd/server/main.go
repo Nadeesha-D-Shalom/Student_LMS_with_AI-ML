@@ -1,20 +1,32 @@
 package main
 
 import (
-	"net/http"
+	"log"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+
+	"student_LMS_Backend/internal/config"
+	"student_LMS_Backend/internal/database"
+	"student_LMS_Backend/internal/routes"
 )
 
 func main() {
-	router := gin.Default()
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("No .env file found")
+	}
 
-	router.GET("/health", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"status":  "ok",
-			"service": "student-lms-backend",
-		})
-	})
+	cfg := config.Load()
 
-	router.Run(":8080")
+	database.ConnectMySQL(cfg)
+
+	gin.SetMode(gin.ReleaseMode)
+
+	r := routes.SetupRouter()
+
+	log.Println("Starting:", cfg.AppName)
+	log.Println("Student LMS Backend running on :" + cfg.AppPort)
+
+	r.Run(":" + cfg.AppPort)
 }
