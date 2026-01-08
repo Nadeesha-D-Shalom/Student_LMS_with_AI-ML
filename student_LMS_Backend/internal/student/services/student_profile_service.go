@@ -3,8 +3,7 @@ package services
 import (
 	"errors"
 	"strings"
-
-	"student_LMS_Backend/internal/repositories"
+	"student_LMS_Backend/internal/student/repositories"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -19,27 +18,50 @@ func NewStudentProfileService() *StudentProfileService {
 	}
 }
 
+/* ===============================
+   GET PROFILE
+================================ */
+
 func (s *StudentProfileService) Get(userID uint64) (map[string]interface{}, error) {
 	return s.repo.GetProfile(userID)
 }
 
+/* ===============================
+   UPDATE PROFILE (NO EMAIL / FIRST NAME)
+================================ */
+
 func (s *StudentProfileService) Update(
 	userID uint64,
-	lastName, phone, address, bio, avatarURL string,
+	lastName string,
+	phone string,
+	address string,
+	avatarURL string,
 ) error {
+
 	lastName = strings.TrimSpace(lastName)
 	phone = strings.TrimSpace(phone)
 	address = strings.TrimSpace(address)
-	bio = strings.TrimSpace(bio)
 	avatarURL = strings.TrimSpace(avatarURL)
 
-	return s.repo.UpdateProfile(userID, lastName, phone, address, bio, avatarURL)
+	return s.repo.UpdateProfile(
+		userID,
+		lastName,
+		phone,
+		address,
+		avatarURL,
+	)
 }
+
+/* ===============================
+   CHANGE PASSWORD (VERIFIED)
+================================ */
 
 func (s *StudentProfileService) ChangePassword(
 	userID uint64,
-	currentPassword, newPassword string,
+	currentPassword string,
+	newPassword string,
 ) error {
+
 	currentPassword = strings.TrimSpace(currentPassword)
 	newPassword = strings.TrimSpace(newPassword)
 
@@ -52,14 +74,20 @@ func (s *StudentProfileService) ChangePassword(
 		return err
 	}
 
-	if err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(currentPassword)); err != nil {
+	if err := bcrypt.CompareHashAndPassword(
+		[]byte(hash),
+		[]byte(currentPassword),
+	); err != nil {
 		return errors.New("current password is incorrect")
 	}
 
-	newHashBytes, err := bcrypt.GenerateFromPassword([]byte(newPassword), bcrypt.DefaultCost)
+	newHash, err := bcrypt.GenerateFromPassword(
+		[]byte(newPassword),
+		bcrypt.DefaultCost,
+	)
 	if err != nil {
-		return errors.New("failed to hash new password")
+		return errors.New("failed to hash password")
 	}
 
-	return s.repo.UpdatePasswordHash(userID, string(newHashBytes))
+	return s.repo.UpdatePasswordHash(userID, string(newHash))
 }

@@ -5,9 +5,8 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"student_LMS_Backend/internal/repositories"
-
-	"student_LMS_Backend/internal/services"
+	"student_LMS_Backend/internal/student/repositories"
+	"student_LMS_Backend/internal/student/services"
 
 	"github.com/gin-gonic/gin"
 )

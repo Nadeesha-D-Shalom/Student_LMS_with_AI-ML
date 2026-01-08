@@ -2,6 +2,7 @@ package routes
 
 import (
 	"net/http"
+	handlers2 "student_LMS_Backend/internal/student/handlers"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -51,7 +52,7 @@ func SetupRouter() *gin.Engine {
 	api.GET(
 		"/student/dashboard",
 		middleware.RequireRole("STUDENT"),
-		handlers.StudentDashboard,
+		handlers2.StudentDashboard,
 	)
 
 	api.GET(
@@ -64,75 +65,75 @@ func SetupRouter() *gin.Engine {
 	api.GET(
 		"/student/classes",
 		middleware.RequireRole("STUDENT"),
-		handlers.GetStudentClasses,
+		handlers2.GetStudentClasses,
 	)
 
 	api.GET(
 		"/student/classes/:classId/grades",
 		middleware.RequireRole("STUDENT"),
-		handlers.GetClassGrades,
+		handlers2.GetClassGrades,
 	)
 
 	api.GET(
 		"/student/classes/:classId/grade/:gradeId/workspace",
 		middleware.RequireRole("STUDENT"),
-		handlers.GetStudentWorkspace,
+		handlers2.GetStudentWorkspace,
 	)
 
 	// ---------- Assignments ----------
 	api.GET(
 		"/student/assignments",
 		middleware.RequireRole("STUDENT"),
-		handlers.GetStudentAssignments,
+		handlers2.GetStudentAssignments,
 	)
 
 	api.GET(
 		"/student/assignments/:assignmentId",
 		middleware.RequireRole("STUDENT"),
-		handlers.GetStudentAssignmentDetail,
+		handlers2.GetStudentAssignmentDetail,
 	)
 
 	api.POST(
 		"/student/assignments/:assignmentId/submit",
 		middleware.RequireRole("STUDENT"),
-		handlers.SubmitStudentAssignment,
+		handlers2.SubmitStudentAssignment,
 	)
 
 	api.GET(
 		"/student/live-classes",
 		middleware.RequireRole("STUDENT"),
-		handlers.StudentLiveClasses,
+		handlers2.StudentLiveClasses,
 	)
 	// ---------- Student Profile ----------
 	api.GET(
 		"/student/profile",
 		middleware.RequireRole("STUDENT"),
-		handlers.GetStudentProfile,
+		handlers2.GetStudentProfile,
 	)
 
 	api.PUT(
 		"/student/profile",
 		middleware.RequireRole("STUDENT"),
-		handlers.UpdateStudentProfile,
+		handlers2.UpdateStudentProfile,
 	)
 
 	api.POST(
 		"/student/change-password",
 		middleware.RequireRole("STUDENT"),
-		handlers.ChangeStudentPassword,
+		handlers2.ChangeStudentPassword,
 	)
 
 	// ---------- Student Settings ----------
 	api.GET(
 		"/student/settings",
 		middleware.RequireRole("STUDENT"),
-		handlers.GetStudentSettings,
+		handlers2.GetStudentSettings,
 	)
 
 	api.PUT(
 		"/student/settings",
 		middleware.RequireRole("STUDENT"),
-		handlers.UpdateStudentSettings,
+		handlers2.UpdateStudentSettings,
 	)
 
 	return r

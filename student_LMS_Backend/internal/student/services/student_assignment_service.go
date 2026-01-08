@@ -2,8 +2,7 @@ package services
 
 import (
 	"errors"
-
-	"student_LMS_Backend/internal/repositories"
+	"student_LMS_Backend/internal/student/repositories"
 )
 
 type StudentAssignmentService struct {

@@ -3,8 +3,7 @@ package handlers
 import (
 	"net/http"
 	"strconv"
-
-	"student_LMS_Backend/internal/services"
+	"student_LMS_Backend/internal/student/services"
 
 	"github.com/gin-gonic/gin"
 )

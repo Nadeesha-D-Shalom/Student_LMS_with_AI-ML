@@ -2,8 +2,7 @@ package services
 
 import (
 	"strings"
-
-	"student_LMS_Backend/internal/repositories"
+	"student_LMS_Backend/internal/student/repositories"
 )
 
 type StudentSettingsService struct {

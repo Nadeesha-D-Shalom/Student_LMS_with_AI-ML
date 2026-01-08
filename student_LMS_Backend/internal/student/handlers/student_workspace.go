@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 	"strconv"
+	"student_LMS_Backend/internal/student/services"
 
 	"github.com/gin-gonic/gin"
-	"student_LMS_Backend/internal/services"
 )
 
 func GetStudentWorkspace(c *gin.Context) {

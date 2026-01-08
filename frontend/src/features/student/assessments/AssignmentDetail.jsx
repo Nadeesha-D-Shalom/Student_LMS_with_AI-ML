@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiFetch } from "../../../api/api";
 
@@ -12,13 +12,18 @@ const AssignmentDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const status = useMemo(() => (data?.status || "").toUpperCase(), [data]);
+  const status = useMemo(
+    () => (data?.status || "").toUpperCase(),
+    [data]
+  );
 
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     setError("");
     try {
-      const res = await apiFetch(`/api/student/assignments/${assignmentId}`);
+      const res = await apiFetch(
+        `/api/student/assignments/${assignmentId}`
+      );
       setData(res);
       setUrl(res?.submission_url || "");
     } catch (err) {
@@ -26,11 +31,11 @@ const AssignmentDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [assignmentId]);
 
   useEffect(() => {
     load();
-  }, [assignmentId]);
+  }, [load]);
 
   const submit = async () => {
     if (!url.trim()) {
@@ -41,10 +46,15 @@ const AssignmentDetail = () => {
     setSaving(true);
     setError("");
     try {
-      await apiFetch(`/api/student/assignments/${assignmentId}/submit`, {
-        method: "POST",
-        body: JSON.stringify({ submission_url: url.trim() })
-      });
+      await apiFetch(
+        `/api/student/assignments/${assignmentId}/submit`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            submission_url: url.trim()
+          })
+        }
+      );
       await load();
     } catch (err) {
       setError(err.message || "Submission failed");
@@ -77,21 +87,22 @@ const AssignmentDetail = () => {
             </h1>
             <p className="text-sm text-slate-600">
               Due: {(data?.due_date || "").toString().slice(0, 10)}{" "}
-              {data?.due_time || ""} · Total: {data?.total_marks || 0} marks
+              {data?.due_time || ""} · Total:{" "}
+              {data?.total_marks || 0} marks
             </p>
           </div>
 
           <div className="flex gap-2">
             <button
               onClick={() => navigate(-1)}
-              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50"
+              className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold"
             >
               Back
             </button>
 
             <button
               onClick={load}
-              className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50"
+              className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold"
             >
               Refresh
             </button>
@@ -107,12 +118,12 @@ const AssignmentDetail = () => {
 
       {/* Body */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        {/* Description */}
+        {/* Instructions */}
         <div className="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="text-sm font-semibold text-slate-900">
             Instructions
           </div>
-          <div className="mt-2 text-sm text-slate-700 leading-relaxed whitespace-pre-wrap">
+          <div className="mt-2 whitespace-pre-wrap text-sm text-slate-700">
             {data?.description || "No description provided."}
           </div>
         </div>
@@ -125,10 +136,10 @@ const AssignmentDetail = () => {
             </div>
             <span
               className={[
-                "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold",
+                "rounded-full px-2.5 py-1 text-xs font-semibold",
                 status === "SUBMITTED"
-                  ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"
-                  : "bg-amber-50 text-amber-700 ring-1 ring-amber-200"
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "bg-amber-50 text-amber-700"
               ].join(" ")}
             >
               {status === "SUBMITTED" ? "Submitted" : "Pending"}
@@ -142,21 +153,14 @@ const AssignmentDetail = () => {
             <input
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://drive.google.com/..."
-              className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 outline-none focus:border-slate-300"
+              className="mt-2 w-full rounded-xl border border-slate-200 px-4 py-2 text-sm"
             />
-            <div className="mt-2 text-xs text-slate-500">
-              Paste a Google Drive / OneDrive / PDF link.
-            </div>
           </div>
 
           <button
             onClick={submit}
             disabled={saving}
-            className={[
-              "mt-4 w-full rounded-xl px-4 py-2 text-sm font-semibold text-white transition",
-              saving ? "bg-slate-400" : "bg-slate-900 hover:bg-slate-800"
-            ].join(" ")}
+            className="mt-4 w-full rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
           >
             {saving ? "Submitting..." : "Submit"}
           </button>

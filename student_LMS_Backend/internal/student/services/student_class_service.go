@@ -3,7 +3,7 @@ package services
 import (
 	"errors"
 	"student_LMS_Backend/internal/database"
-	"student_LMS_Backend/internal/repositories"
+	"student_LMS_Backend/internal/student/repositories"
 )
 
 type StudentClassService struct {
