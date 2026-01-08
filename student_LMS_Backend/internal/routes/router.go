@@ -1,6 +1,9 @@
 package routes
 
 import (
+	"net/http"
+	handlers2 "student_LMS_Backend/internal/student/handlers"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
@@ -8,38 +11,48 @@ import (
 	"student_LMS_Backend/internal/middleware"
 )
 
+func EmptyList(c *gin.Context) {
+	c.JSON(http.StatusOK, []interface{}{})
+}
+
 func SetupRouter() *gin.Engine {
 	r := gin.New()
 
-	// ================= CORS (CRITICAL FOR FRONTEND) =================
+	// ===================== CORS =====================
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Authorization", "Content-Type"},
 		AllowCredentials: true,
 	}))
-	// ================================================================
+	// =================================================
 
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
-	// ================= PUBLIC ROUTES =================
+	// ===================== STATIC FILES =====================
+	// THIS ENABLES:
+	// http://localhost:8080/uploads/assignments/<file>.pdf
+	r.Static("/uploads", "./uploads")
+	// ========================================================
+
+	// ===================== PUBLIC ROUTES =====================
 	r.GET("/health", handlers.HealthCheck)
 	r.POST("/auth/register", handlers.Register)
 	r.POST("/auth/login", handlers.Login)
+	// =========================================================
 
-	// ================= PROTECTED ROUTES =================
+	// ===================== PROTECTED ROUTES =====================
 	api := r.Group("/api")
 	api.Use(middleware.AuthMiddleware())
 
-	// Logged-in user profile
 	api.GET("/me", handlers.GetMe)
 
-	// Role-based dashboards
+	// ---------- Dashboards ----------
 	api.GET(
 		"/student/dashboard",
 		middleware.RequireRole("STUDENT"),
-		handlers.StudentDashboard,
+		handlers2.StudentDashboard,
 	)
 
 	api.GET(
@@ -47,10 +60,80 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("ADMIN"),
 		handlers.AdminDashboard,
 	)
+
+	// ---------- Student Classes ----------
 	api.GET(
 		"/student/classes",
 		middleware.RequireRole("STUDENT"),
-		handlers.GetStudentClasses,
+		handlers2.GetStudentClasses,
+	)
+
+	api.GET(
+		"/student/classes/:classId/grades",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetClassGrades,
+	)
+
+	api.GET(
+		"/student/classes/:classId/grade/:gradeId/workspace",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetStudentWorkspace,
+	)
+
+	// ---------- Assignments ----------
+	api.GET(
+		"/student/assignments",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetStudentAssignments,
+	)
+
+	api.GET(
+		"/student/assignments/:assignmentId",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetStudentAssignmentDetail,
+	)
+
+	api.POST(
+		"/student/assignments/:assignmentId/submit",
+		middleware.RequireRole("STUDENT"),
+		handlers2.SubmitStudentAssignment,
+	)
+
+	api.GET(
+		"/student/live-classes",
+		middleware.RequireRole("STUDENT"),
+		handlers2.StudentLiveClasses,
+	)
+	// ---------- Student Profile ----------
+	api.GET(
+		"/student/profile",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetStudentProfile,
+	)
+
+	api.PUT(
+		"/student/profile",
+		middleware.RequireRole("STUDENT"),
+		handlers2.UpdateStudentProfile,
+	)
+
+	api.POST(
+		"/student/change-password",
+		middleware.RequireRole("STUDENT"),
+		handlers2.ChangeStudentPassword,
+	)
+
+	// ---------- Student Settings ----------
+	api.GET(
+		"/student/settings",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetStudentSettings,
+	)
+
+	api.PUT(
+		"/student/settings",
+		middleware.RequireRole("STUDENT"),
+		handlers2.UpdateStudentSettings,
 	)
 
 	return r

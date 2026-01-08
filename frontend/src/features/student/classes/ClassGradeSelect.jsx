@@ -1,55 +1,68 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { apiFetch } from "../../../api/api";
 import "./classGradeSelect.css";
-
-/* =========================
-   UI-ONLY GRADE DATA
-========================= */
-
-const gradesByClass = {
-  1: [
-    { id: "al12", label: "A/L Grade 12" },
-    { id: "al13", label: "A/L Grade 13" }
-  ],
-  2: [
-    { id: "al12", label: "A/L Grade 12" },
-    { id: "al13", label: "A/L Grade 13" }
-  ],
-  3: [
-    { id: "ol10", label: "O/L Grade 10" },
-    { id: "ol11", label: "O/L Grade 11" }
-  ]
-};
 
 const ClassGradeSelect = () => {
   const { classId } = useParams();
   const navigate = useNavigate();
 
-  const grades = gradesByClass[classId] || [];
+  const [grades, setGrades] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const loadGrades = useCallback(async () => {
+    try {
+      const res = await apiFetch(
+        `/api/student/classes/${classId}/grades`
+      );
+      setGrades(res.items || []);
+    } catch {
+      setError("Unable to load class details");
+    } finally {
+      setLoading(false);
+    }
+  }, [classId]);
+
+  useEffect(() => {
+    loadGrades();
+  }, [loadGrades]);
+
+  if (loading) {
+    return <div className="page-loading">Loading class...</div>;
+  }
 
   return (
     <div className="grade-select-page">
       <h1 className="page-title">Select Grade</h1>
       <p className="page-subtitle">
-        Choose your grade for this class
+        Choose your grade to access lessons, assignments, and exams
       </p>
 
-      <div className="grade-grid">
-        {grades.map((grade) => (
-          <div
-            key={grade.id}
-            className="grade-card"
-            onClick={() =>
-              navigate(
-                `/student/classes/${classId}/grade/${grade.id}`
-              )
-            }
-          >
-            <h3>{grade.label}</h3>
-            <span>View materials & assignments</span>
-          </div>
-        ))}
-      </div>
+      {error && <div className="page-error">{error}</div>}
+
+      {grades.length === 0 ? (
+        <div className="empty-state">
+          Grade information not available yet.
+        </div>
+      ) : (
+        <div className="grade-grid">
+          {grades.map((g) => (
+            <div
+              key={g.grade_id}
+              className="grade-card"
+              onClick={() =>
+                navigate(
+                  `/student/classes/${classId}/grade/${g.grade_id}`
+                )
+              }
+            >
+              <h3>{g.label}</h3>
+              <p>Access class workspace</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

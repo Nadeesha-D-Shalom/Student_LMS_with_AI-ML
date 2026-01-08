@@ -28,7 +28,7 @@ const ClassRecordings = () => {
 
       {!loading && recordings.length === 0 && (
         <div className="empty-state">
-          <p>No recorded lessons available yet.</p>
+          <p>This Option Will be Added Future</p>
         </div>
       )}
     </div>

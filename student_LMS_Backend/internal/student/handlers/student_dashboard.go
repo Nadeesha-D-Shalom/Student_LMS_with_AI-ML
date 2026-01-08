@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"net/http"
+	"student_LMS_Backend/internal/student/services"
 
 	"github.com/gin-gonic/gin"
-	"student_LMS_Backend/internal/services"
 )
 
 func StudentDashboard(c *gin.Context) {
