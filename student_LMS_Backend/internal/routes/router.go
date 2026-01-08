@@ -18,15 +18,12 @@ func EmptyList(c *gin.Context) {
 func SetupRouter() *gin.Engine {
 	r := gin.New()
 
-	// ===================== CORS =====================
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Authorization", "Content-Type"},
 		AllowCredentials: true,
 	}))
-	// =================================================
-
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
@@ -40,7 +37,6 @@ func SetupRouter() *gin.Engine {
 	r.GET("/health", handlers.HealthCheck)
 	r.POST("/auth/register", handlers.Register)
 	r.POST("/auth/login", handlers.Login)
-	// =========================================================
 
 	// ===================== PROTECTED ROUTES =====================
 	api := r.Group("/api")
