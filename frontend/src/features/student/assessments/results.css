@@ -3,26 +3,58 @@
 }
 
 .page-header h1 {
-  margin-bottom: 4px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .page-header p {
-  color: #666;
-  margin-bottom: 24px;
+  font-size: 13px;
+  color: #64748b;
 }
 
-.page-loading {
-  color: #555;
+.results-filters {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.results-filters select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 13px;
 }
 
 .results-table {
   width: 100%;
   border-collapse: collapse;
+  background: white;
 }
 
 .results-table th,
 .results-table td {
   padding: 12px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 13px;
+}
+
+.results-table th {
   text-align: left;
+  background: #f8fafc;
+}
+
+.empty-state {
+  padding: 24px;
+  text-align: center;
+  color: #64748b;
+}
+
+.page-loading {
+  padding: 24px;
+  font-size: 13px;
+}
+
+.page-error {
+  padding: 24px;
+  color: #dc2626;
 }
