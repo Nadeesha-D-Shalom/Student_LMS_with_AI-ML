@@ -26,6 +26,10 @@ import AssignmentDetail from "./features/student/assessments/AssignmentDetail";
 import Assignments from "./features/student/assessments/Assignments";
 import Tests from "./features/student/assessments/Tests";
 import Results from "./features/student/assessments/Results";
+import TestDetail from "./features/student/assessments/TestDetail";
+import TestAttempt from "./features/student/assessments/TestAttempt";
+import TestResult from "./features/student/assessments/TestResult";
+
 
 /* ================= STUDENT COMMUNICATION ================= */
 import Messages from "./features/student/communication/Messages";
@@ -166,7 +170,15 @@ const App = () => (
           <Route path="recordings" element={<ClassRecordings />} />
           <Route path="assignments" element={<Assignments />} />
           <Route path="assignments/:assignmentId" element={<AssignmentDetail />} />
-          <Route path="tests" element={<Tests />} />
+          <Route path="tests">
+            <Route index element={<Tests />} />
+            <Route path=":testId" element={<TestDetail />} />
+            <Route path=":testId/attempt" element={<TestAttempt />} />
+            <Route path=":testId/result" element={<TestResult />} />
+          </Route>
+
+
+          <Route path="tests/:testId" element={<TestDetail />} />
           <Route path="results" element={<Results />} />
           <Route path="messages" element={<Messages />} />
           <Route path="questions" element={<Questions />} />
