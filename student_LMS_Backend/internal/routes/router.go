@@ -135,6 +135,6 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("STUDENT"),
 		handlers2.UpdateStudentSettings,
 	)
-
+	// notification
 	return r
 }
