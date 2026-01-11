@@ -32,10 +32,10 @@ import TestResult from "./features/student/assessments/TestResult";
 
 
 /* ================= STUDENT COMMUNICATION ================= */
-import Messages from "./features/student/communication/Messages";
 import Questions from "./features/student/communication/Questions";
 import Announcements from "./features/student/communication/Announcements";
-
+import MessageInbox from "./features/student/communication/MessageInbox";
+import MessageThread from "./features/student/communication/MessageThread";
 /* ================= STUDENT PRODUCTIVITY ================= */
 import Calendar from "./features/student/productivity/Calendar";
 import Todo from "./features/student/productivity/Todo";
@@ -180,8 +180,9 @@ const App = () => (
 
           <Route path="tests/:testId" element={<TestDetail />} />
           <Route path="results" element={<Results />} />
-          <Route path="messages" element={<Messages />} />
           <Route path="questions" element={<Questions />} />
+          <Route path="messages" element={<MessageInbox />} /> 
+          <Route path="messages/:messageId" element={<MessageThread />} />
           <Route path="announcements" element={<Announcements />} />
           <Route path="calendar" element={<Calendar />} />
           <Route path="todo" element={<Todo />} />

@@ -3,13 +3,14 @@ package routes
 import (
 	"net/http"
 
-	handlers2 "student_LMS_Backend/internal/student/handlers"
-
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
+	"student_LMS_Backend/internal/database"
 	"student_LMS_Backend/internal/handlers"
 	"student_LMS_Backend/internal/middleware"
+	handlers2 "student_LMS_Backend/internal/student/handlers"
+	"student_LMS_Backend/internal/student/repositories"
 )
 
 func EmptyList(c *gin.Context) {
@@ -19,6 +20,7 @@ func EmptyList(c *gin.Context) {
 func SetupRouter() *gin.Engine {
 	r := gin.New()
 
+	/* ===================== CORS ===================== */
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -28,22 +30,21 @@ func SetupRouter() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
-	// ===================== STATIC FILES =====================
+	/* ===================== STATIC FILES ===================== */
 	r.Static("/uploads", "./uploads")
-	// ========================================================
 
-	// ===================== PUBLIC ROUTES =====================
+	/* ===================== PUBLIC ===================== */
 	r.GET("/health", handlers.HealthCheck)
 	r.POST("/auth/register", handlers.Register)
 	r.POST("/auth/login", handlers.Login)
 
-	// ===================== PROTECTED ROUTES =====================
+	/* ===================== PROTECTED ===================== */
 	api := r.Group("/api")
 	api.Use(middleware.AuthMiddleware())
 
 	api.GET("/me", handlers.GetMe)
 
-	// ---------- Dashboards ----------
+	/* ===================== DASHBOARDS ===================== */
 	api.GET(
 		"/student/dashboard",
 		middleware.RequireRole("STUDENT"),
@@ -56,7 +57,7 @@ func SetupRouter() *gin.Engine {
 		handlers.AdminDashboard,
 	)
 
-	// ---------- Student Classes ----------
+	/* ===================== STUDENT CLASSES ===================== */
 	api.GET(
 		"/student/classes",
 		middleware.RequireRole("STUDENT"),
@@ -75,7 +76,7 @@ func SetupRouter() *gin.Engine {
 		handlers2.GetStudentWorkspace,
 	)
 
-	// ---------- Assignments ----------
+	/* ===================== ASSIGNMENTS ===================== */
 	api.GET(
 		"/student/assignments",
 		middleware.RequireRole("STUDENT"),
@@ -94,13 +95,14 @@ func SetupRouter() *gin.Engine {
 		handlers2.SubmitStudentAssignment,
 	)
 
+	/* ===================== LIVE CLASSES ===================== */
 	api.GET(
 		"/student/live-classes",
 		middleware.RequireRole("STUDENT"),
 		handlers2.StudentLiveClasses,
 	)
 
-	// ---------- Student Profile ----------
+	/* ===================== PROFILE ===================== */
 	api.GET(
 		"/student/profile",
 		middleware.RequireRole("STUDENT"),
@@ -119,7 +121,7 @@ func SetupRouter() *gin.Engine {
 		handlers2.ChangeStudentPassword,
 	)
 
-	// ---------- Student Settings ----------
+	/* ===================== SETTINGS ===================== */
 	api.GET(
 		"/student/settings",
 		middleware.RequireRole("STUDENT"),
@@ -131,7 +133,8 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("STUDENT"),
 		handlers2.UpdateStudentSettings,
 	)
-	// ---------- Student Tests / Quizzes ----------
+
+	/* ===================== TESTS ===================== */
 	api.GET(
 		"/student/tests",
 		middleware.RequireRole("STUDENT"),
@@ -173,10 +176,46 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("STUDENT"),
 		handlers2.GetStudentTestResult,
 	)
+
 	api.GET(
 		"/student/results",
 		middleware.RequireRole("STUDENT"),
 		handlers2.GetStudentResults,
+	)
+
+	/* ===================== MESSAGES ===================== */
+	api.GET(
+		"/student/messages",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetStudentMessages,
+	)
+
+	api.GET(
+		"/student/messages/:id",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetStudentMessageThread,
+	)
+
+	api.GET(
+		"/student/messages-unread-count",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetUnreadMessageCount,
+	)
+
+	api.POST(
+		"/student/messages",
+		middleware.RequireRole("STUDENT"),
+		handlers2.CreateStudentMessage,
+	)
+
+	/* ===================== ANNOUNCEMENTS ===================== */
+	announcementRepo := repositories.NewAnnouncementRepository(database.DB)
+	announcementHandler := handlers2.NewAnnouncementHandler(announcementRepo)
+
+	api.GET(
+		"/student/announcements",
+		middleware.RequireRole("STUDENT"),
+		announcementHandler.GetStudentAnnouncements,
 	)
 
 	return r
