@@ -2,7 +2,6 @@ package routes
 
 import (
 	"net/http"
-
 	handlers2 "student_LMS_Backend/internal/student/handlers"
 
 	"github.com/gin-contrib/cors"
@@ -19,16 +18,21 @@ func EmptyList(c *gin.Context) {
 func SetupRouter() *gin.Engine {
 	r := gin.New()
 
+	// ===================== CORS =====================
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Authorization", "Content-Type"},
 		AllowCredentials: true,
 	}))
+	// =================================================
+
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
 	// ===================== STATIC FILES =====================
+	// THIS ENABLES:
+	// http://localhost:8080/uploads/assignments/<file>.pdf
 	r.Static("/uploads", "./uploads")
 	// ========================================================
 
@@ -36,6 +40,7 @@ func SetupRouter() *gin.Engine {
 	r.GET("/health", handlers.HealthCheck)
 	r.POST("/auth/register", handlers.Register)
 	r.POST("/auth/login", handlers.Login)
+	// =========================================================
 
 	// ===================== PROTECTED ROUTES =====================
 	api := r.Group("/api")
@@ -99,7 +104,6 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("STUDENT"),
 		handlers2.StudentLiveClasses,
 	)
-
 	// ---------- Student Profile ----------
 	api.GET(
 		"/student/profile",
@@ -131,53 +135,6 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("STUDENT"),
 		handlers2.UpdateStudentSettings,
 	)
-	// ---------- Student Tests / Quizzes ----------
-	api.GET(
-		"/student/tests",
-		middleware.RequireRole("STUDENT"),
-		handlers2.GetStudentTests,
-	)
-
-	api.GET(
-		"/student/tests/:testId",
-		middleware.RequireRole("STUDENT"),
-		handlers2.GetStudentTestDetail,
-	)
-
-	api.POST(
-		"/student/tests/:testId/start",
-		middleware.RequireRole("STUDENT"),
-		handlers2.StartStudentTest,
-	)
-
-	api.GET(
-		"/student/tests/:testId/questions",
-		middleware.RequireRole("STUDENT"),
-		handlers2.GetStudentTestQuestions,
-	)
-
-	api.POST(
-		"/student/tests/:testId/answer",
-		middleware.RequireRole("STUDENT"),
-		handlers2.SaveStudentTestAnswer,
-	)
-
-	api.POST(
-		"/student/tests/:testId/submit",
-		middleware.RequireRole("STUDENT"),
-		handlers2.SubmitStudentTest,
-	)
-
-	api.GET(
-		"/student/tests/:testId/result",
-		middleware.RequireRole("STUDENT"),
-		handlers2.GetStudentTestResult,
-	)
-	api.GET(
-		"/student/results",
-		middleware.RequireRole("STUDENT"),
-		handlers2.GetStudentResults,
-	)
-
+	// notification
 	return r
 }
