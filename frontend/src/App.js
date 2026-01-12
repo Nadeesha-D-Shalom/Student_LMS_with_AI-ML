@@ -5,8 +5,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./features/Auth/Login";
 import Signup from "./features/Auth/Signup";
-import Unauthorized from "./pages/Unauthorized";
+import Unauthorized from "./pages/Errors/Unauthorized";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import { useAuth } from "./context/AuthContext";
 
 /* ================= STUDENT ================= */
 import StudentLayout from "./features/student/layout/StudentLayout";
@@ -21,7 +22,6 @@ import ClassRecordings from "./features/student/classes/ClassRecordings";
 import AssignmentSubmission from "./features/student/classes/AssignmentSubmission";
 import AssignmentDetail from "./features/student/assessments/AssignmentDetail";
 
-
 /* ================= STUDENT ASSESSMENTS ================= */
 import Assignments from "./features/student/assessments/Assignments";
 import Tests from "./features/student/assessments/Tests";
@@ -30,12 +30,12 @@ import TestDetail from "./features/student/assessments/TestDetail";
 import TestAttempt from "./features/student/assessments/TestAttempt";
 import TestResult from "./features/student/assessments/TestResult";
 
-
 /* ================= STUDENT COMMUNICATION ================= */
 import Questions from "./features/student/communication/Questions";
 import Announcements from "./features/student/communication/Announcements";
 import MessageInbox from "./features/student/communication/MessageInbox";
 import MessageThread from "./features/student/communication/MessageThread";
+
 /* ================= STUDENT PRODUCTIVITY ================= */
 import Calendar from "./features/student/productivity/Calendar";
 import Todo from "./features/student/productivity/Todo";
@@ -50,95 +50,74 @@ import Help from "./features/student/profile/Help";
 import AIAssistant from "./features/student/assistant/AIAssistant";
 
 /* ================= TEACHER (LAZY) ================= */
-const TeacherLayout = lazy(() =>
-  import("./features/teacher/layout/TeacherLayout")
-);
-const TeacherDashboard = lazy(() =>
-  import("./features/teacher/pages/TeacherDashboard")
-);
-const TeacherMyClasses = lazy(() =>
-  import("./features/teacher/pages/TeacherMyClasses")
-);
-const TeacherStudents = lazy(() =>
-  import("./features/teacher/pages/TeacherStudents")
-);
-const TeacherContent = lazy(() =>
-  import("./features/teacher/pages/TeacherContent")
-);
-const TeacherAssignments = lazy(() =>
-  import("./features/teacher/pages/TeacherAssignments")
-);
-const TeacherTests = lazy(() =>
-  import("./features/teacher/pages/TeacherTests")
-);
-const TeacherGradeWorkspace = lazy(() =>
-  import("./features/teacher/grades/TeacherGradeWorkspace")
-);
-const TeacherHelp = lazy(() =>
-  import("./features/teacher/pages/TeacherHelp")
-);
+const TeacherLayout = lazy(() => import("./features/teacher/layout/TeacherLayout"));
+const TeacherDashboard = lazy(() => import("./features/teacher/pages/TeacherDashboard"));
+const TeacherMyClasses = lazy(() => import("./features/teacher/pages/TeacherMyClasses"));
+const TeacherStudents = lazy(() => import("./features/teacher/pages/TeacherStudents"));
+const TeacherContent = lazy(() => import("./features/teacher/pages/TeacherContent"));
+const TeacherAssignments = lazy(() => import("./features/teacher/pages/TeacherAssignments"));
+const TeacherTests = lazy(() => import("./features/teacher/pages/TeacherTests"));
+const TeacherGradeWorkspace = lazy(() => import("./features/teacher/grades/TeacherGradeWorkspace"));
+const TeacherHelp = lazy(() => import("./features/teacher/pages/TeacherHelp"));
 
 /* ================= INSTITUTE ADMIN (LAZY) ================= */
-const InstituteAdminLayout = lazy(() =>
-  import("./features/InstituteAdmin/layout/AdminLayout")
-);
-const AdminDashboard = lazy(() =>
-  import("./features/InstituteAdmin/pages/Dashboard")
-);
-const AdminStudents = lazy(() =>
-  import("./features/InstituteAdmin/pages/Students")
-);
-const AdminTeachers = lazy(() =>
-  import("./features/InstituteAdmin/pages/Teachers")
-);
-const AdminAdmins = lazy(() =>
-  import("./features/InstituteAdmin/pages/Admins")
-);
-const AdminAttendance = lazy(() =>
-  import("./features/InstituteAdmin/pages/Attendance")
-);
-const AdminMessages = lazy(() =>
-  import("./features/InstituteAdmin/pages/Messages")
-);
-const AdminPayments = lazy(() =>
-  import("./features/InstituteAdmin/pages/Payments")
-);
-const AdminNotices = lazy(() =>
-  import("./features/InstituteAdmin/pages/Notices")
-);
-const AdminAdvertisements = lazy(() =>
-  import("./features/InstituteAdmin/pages/Advertisements")
-);
-const AdminReports = lazy(() =>
-  import("./features/InstituteAdmin/pages/Reports")
-);
-const AdminSettings = lazy(() =>
-  import("./features/InstituteAdmin/pages/Settings")
-);
-const AdminHelp = lazy(() =>
-  import("./features/InstituteAdmin/pages/Help")
-);
+const InstituteAdminLayout = lazy(() => import("./features/InstituteAdmin/layout/AdminLayout"));
+const AdminDashboard = lazy(() => import("./features/InstituteAdmin/pages/Dashboard"));
+const AdminStudents = lazy(() => import("./features/InstituteAdmin/pages/Students"));
+const AdminTeachers = lazy(() => import("./features/InstituteAdmin/pages/Teachers"));
+const AdminAdmins = lazy(() => import("./features/InstituteAdmin/pages/Admins"));
+const AdminAttendance = lazy(() => import("./features/InstituteAdmin/pages/Attendance"));
+const AdminMessages = lazy(() => import("./features/InstituteAdmin/pages/Messages"));
+const AdminPayments = lazy(() => import("./features/InstituteAdmin/pages/Payments"));
+const AdminNotices = lazy(() => import("./features/InstituteAdmin/pages/Notices"));
+const AdminAdvertisements = lazy(() => import("./features/InstituteAdmin/pages/Advertisements"));
+const AdminReports = lazy(() => import("./features/InstituteAdmin/pages/Reports"));
+const AdminSettings = lazy(() => import("./features/InstituteAdmin/pages/Settings"));
+const AdminHelp = lazy(() => import("./features/InstituteAdmin/pages/Help"));
 
-/* ================= IT ADMIN (OPTIONAL) ================= */
-const ITAdminLayout = lazy(() =>
-  import("./features/ItAdmin/layouts/ITAdminLayout")
-);
-const ITAdminDashboard = lazy(() =>
-  import("./features/ItAdmin/pages/ITAdminDashboard")
-);
+/* ================= IT ADMIN (LAZY) ================= */
+const ITAdminLayout = lazy(() => import("./features/ItAdmin/layouts/ITAdminLayout"));
+const ITAdminDashboard = lazy(() => import("./features/ItAdmin/pages/ITAdminDashboard"));
+
+const RootRedirect = () => {
+  const { user, loading } = useAuth();
+
+  if (loading) return null;
+
+  if (!user) {
+    return <Navigate to="/home" replace />;
+  }
+
+  switch (user.role) {
+    case "STUDENT":
+      return <Navigate to="/student" replace />;
+    case "TEACHER":
+      return <Navigate to="/teacher" replace />;
+    case "ADMIN":
+      return <Navigate to="/instituteadmin" replace />;
+    case "IT_ADMIN":
+      return <Navigate to="/it-admin" replace />;
+    default:
+      return <Navigate to="/unauthorized" replace />;
+  }
+};
 
 const App = () => (
   <BrowserRouter>
     <Suspense fallback={<div className="p-4">Loading...</div>}>
       <Routes>
-
-        {/* ===== PUBLIC ===== */}
+        {/* Root decides by session */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+
+        {/* Public home */}
+        <Route path="/home" element={<Home />} />
+
+        {/* Public auth pages */}
+        <Route path="/login" element={<Login allowManualAccess />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
-        {/* ===== AI (Logged-in students only) ===== */}
+        {/* AI (students only) */}
         <Route
           path="/ai"
           element={
@@ -148,7 +127,7 @@ const App = () => (
           }
         />
 
-        {/* ===== STUDENT (STUDENT ONLY) ===== */}
+        {/* STUDENT */}
         <Route
           path="/student"
           element={
@@ -176,12 +155,9 @@ const App = () => (
             <Route path=":testId/attempt" element={<TestAttempt />} />
             <Route path=":testId/result" element={<TestResult />} />
           </Route>
-
-
-          <Route path="tests/:testId" element={<TestDetail />} />
           <Route path="results" element={<Results />} />
           <Route path="questions" element={<Questions />} />
-          <Route path="messages" element={<MessageInbox />} /> 
+          <Route path="messages" element={<MessageInbox />} />
           <Route path="messages/:messageId" element={<MessageThread />} />
           <Route path="announcements" element={<Announcements />} />
           <Route path="calendar" element={<Calendar />} />
@@ -192,7 +168,7 @@ const App = () => (
           <Route path="help" element={<Help />} />
         </Route>
 
-        {/* ===== TEACHER (TEACHER ONLY) ===== */}
+        {/* TEACHER */}
         <Route
           path="/teacher"
           element={
@@ -212,7 +188,7 @@ const App = () => (
           <Route path="help" element={<TeacherHelp />} />
         </Route>
 
-        {/* ===== INSTITUTE ADMIN (ADMIN ONLY) ===== */}
+        {/* INSTITUTE ADMIN */}
         <Route
           path="/instituteadmin"
           element={
@@ -236,7 +212,7 @@ const App = () => (
           <Route path="help" element={<AdminHelp />} />
         </Route>
 
-        {/* ===== IT ADMIN (OPTIONAL) ===== */}
+        {/* IT ADMIN */}
         <Route
           path="/it-admin"
           element={
@@ -249,6 +225,8 @@ const App = () => (
           <Route path="dashboard" element={<ITAdminDashboard />} />
         </Route>
 
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
   </BrowserRouter>
