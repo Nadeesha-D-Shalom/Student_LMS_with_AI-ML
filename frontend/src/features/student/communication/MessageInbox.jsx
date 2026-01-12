@@ -32,11 +32,18 @@ const MessageInbox = () => {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const loadInbox = async () => {
+    setLoading(true);
+    setError("");
+
     try {
       const res = await apiFetch("/api/student/messages");
       setMessages(res.items || []);
+    } catch (err) {
+      console.error("Inbox load failed:", err);
+      setError("Failed to load messages");
     } finally {
       setLoading(false);
     }
@@ -53,6 +60,20 @@ const MessageInbox = () => {
 
   if (loading) {
     return <div className="p-6 text-sm text-slate-500">Loading messages...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-sm text-red-700">
+        {error}
+        <button
+          onClick={loadInbox}
+          className="ml-4 rounded bg-red-600 px-3 py-1 text-white"
+        >
+          Retry
+        </button>
+      </div>
+    );
   }
 
   if (messages.length === 0) {
@@ -83,7 +104,6 @@ const MessageInbox = () => {
               </div>
             </div>
 
-            {/* CORRECT PROP */}
             <StatusBadge status={m.status} />
           </div>
         </div>

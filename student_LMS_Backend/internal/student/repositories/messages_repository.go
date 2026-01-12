@@ -90,14 +90,15 @@ func (r *MessageRepository) GetThread(studentID, messageID uint64) (*models.Mess
 
 	/*
 		Auto mark as SEEN
-		ONLY if still PENDING
+		ONLY if it was replied
 	*/
-	if m.Status == "PENDING" {
+	if m.Status == "REPLIED" {
 		_, _ = r.DB.Exec(`
 			UPDATE messages
 			SET status = 'SEEN'
 			WHERE id = ?
 		`, messageID)
+
 		m.Status = "SEEN"
 	}
 

@@ -1,17 +1,17 @@
-
 import React from "react";
-import Home from "../pages/Student/Home";
-import StudentRouterHome from "./student-router-home";
-//import React from "react";
-import { Routes, Route } from "react-router-dom";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { AuthProvider } from "./context/AuthContext";
 
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </React.StrictMode>
+);
 
-const IndexRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/StudentHome/*" element={<StudentRouterHome />} />   
-    </Routes>
-  );
-};
-
-export default IndexRoutes;
+reportWebVitals();

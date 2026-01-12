@@ -1,0 +1,88 @@
+/* ===== PAGE WRAPPER ===== */
+.unauthorized-page {
+  position: relative;
+  min-height: 100vh;
+  
+  display: flex;
+  align-items: center;
+
+  background-image: url("../../assets/images/unauthorized-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ===== BACKGROUND OVERLAY (OPACITY CONTROL) ===== */
+.unauthorized-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);
+  z-index: 0;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.unauthorized-container {
+  position: relative;
+  z-index: 1;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(251, 251, 251, 0.9);
+  border-radius: 12px;
+}
+
+/* ===== CONTENT ===== */
+.unauthorized-content {
+  max-width: 500px;
+}
+
+.error-code {
+  font-size: 64px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.error-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.error-description {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 28px;
+  margin-right: 80px;
+}
+
+/* ===== ACTION BUTTON ===== */
+.error-actions .btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.error-actions .btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* ===== IMAGE ===== */
+.unauthorized-image img {
+  max-width: 480px;
+  max-height: 480px;
+  width: 100%;
+}

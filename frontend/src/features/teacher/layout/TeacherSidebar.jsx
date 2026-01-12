@@ -52,8 +52,10 @@ export default function TeacherSidebar() {
             </NavLink>
           </li>
           <li className="logout">
-            <FontAwesomeIcon icon={faRightFromBracket} />
-            <span>Logout</span>
+            <NavLink to="/login" className="flex  gap-3 px-4 py-2 text-sm text-red-600 cursor-pointer hover:bg-red-50 rounded-xl">
+              <FontAwesomeIcon icon={faRightFromBracket} />
+              Logout
+            </NavLink>
           </li>
         </ul>
       </div>

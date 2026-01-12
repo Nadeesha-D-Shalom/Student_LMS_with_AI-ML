@@ -23,14 +23,18 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, []);
 
+  const refresh = async () => {
+    setLoading(true);
+    await loadUser();
+  };
+
   const logout = () => {
     localStorage.removeItem("lms_token");
     setUser(null);
-    window.location.replace("/login");
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, logout }}>
+    <AuthContext.Provider value={{ user, loading, logout, refresh }}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 /* ================= PUBLIC ================= */
 import Home from "./pages/Home/Home";
+
 import Login from "./features/Auth/Login";
 import Signup from "./features/Auth/Signup";
 import Unauthorized from "./pages/Errors/Unauthorized";
@@ -83,10 +84,7 @@ const RootRedirect = () => {
   const { user, loading } = useAuth();
 
   if (loading) return null;
-
-  if (!user) {
-    return <Navigate to="/home" replace />;
-  }
+  if (!user) return <Navigate to="/login" replace />;
 
   switch (user.role) {
     case "STUDENT":
@@ -106,18 +104,19 @@ const App = () => (
   <BrowserRouter>
     <Suspense fallback={<div className="p-4">Loading...</div>}>
       <Routes>
-        {/* Root decides by session */}
+
+        {/* PUBLIC WEBSITE */}
         <Route path="/" element={<Home />} />
 
-        {/* Public home */}
-        <Route path="/home" element={<Home />} />
+        {/* SESSION RESOLVER */}
+        <Route path="/redirect" element={<RootRedirect />} />
 
-        {/* Public auth pages */}
+        {/* AUTH */}
         <Route path="/login" element={<Login allowManualAccess />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
-        {/* AI (students only) */}
+        {/* AI */}
         <Route
           path="/ai"
           element={
@@ -141,10 +140,7 @@ const App = () => (
           <Route path="classes" element={<Classes />} />
           <Route path="classes/:classId" element={<ClassGradeSelect />} />
           <Route path="classes/:classId/grade/:gradeId" element={<ClassWorkspace />} />
-          <Route
-            path="classes/:classId/grade/:gradeId/assignments/:assignmentId"
-            element={<AssignmentSubmission />}
-          />
+          <Route path="classes/:classId/grade/:gradeId/assignments/:assignmentId" element={<AssignmentSubmission />} />
           <Route path="live-classes" element={<LiveClasses />} />
           <Route path="recordings" element={<ClassRecordings />} />
           <Route path="assignments" element={<Assignments />} />
@@ -225,7 +221,6 @@ const App = () => (
           <Route path="dashboard" element={<ITAdminDashboard />} />
         </Route>
 
-        {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>

@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./auth.css";
 import robotImage from "../../assets/images/home/login.png";
 import { apiFetch } from "../../api/api";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
-  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+  const { refresh } = useAuth();
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [typing, setTyping] = useState(false);
-
-  // ✅ AUTO REDIRECT IF ALREADY LOGGED IN
-  useEffect(() => {
-    if (!loading && user) {
-      window.location.replace("/student");
-    }
-  }, [user, loading]);
 
   const onChange = (e) => {
     setTyping(true);
@@ -39,6 +33,8 @@ const Login = () => {
     }
 
     try {
+      localStorage.removeItem("lms_token");
+
       const data = await apiFetch("/auth/login", {
         method: "POST",
         body: JSON.stringify(form)
@@ -46,8 +42,12 @@ const Login = () => {
 
       localStorage.setItem("lms_token", data.token);
 
-      // Reload once so AuthContext re-runs
-      window.location.replace("/student");
+      // ✅ FORCE AuthContext to reload user
+      await refresh();
+
+      // ✅ ONLY redirect entry point
+      navigate("/redirect", { replace: true });
+
     } catch (err) {
       if (err.message === "UNAUTHORIZED") {
         setError("Invalid email or password.");
@@ -57,16 +57,10 @@ const Login = () => {
     }
   };
 
-  // Prevent flicker while checking session
-  if (loading) {
-    return null;
-  }
-
   return (
     <div className="auth-page">
       <div className="auth-shell">
 
-        {/* LEFT */}
         <div className="auth-left">
           <div className="auth-brand">Student LMS AI</div>
           <h1 className="auth-title">Welcome back</h1>
@@ -110,24 +104,11 @@ const Login = () => {
           </form>
         </div>
 
-        {/* RIGHT – ROBOT */}
         <div className="auth-right">
-          <div
-            className={`robot-stage ${typing ? "typing" : ""} ${
-              error ? "error" : ""
-            }`}
-          >
+          <div className={`robot-stage ${typing ? "typing" : ""} ${error ? "error" : ""}`}>
             <div className="robot-bg" />
-            <img
-              src={robotImage}
-              alt="AI Assistant Robot"
-              className="robot-image"
-            />
-            {error && (
-              <div className="robot-bubble">
-                No. Incorrect user or password. Check them.
-              </div>
-            )}
+            <img src={robotImage} alt="AI Assistant Robot" className="robot-image" />
+            {error && <div className="robot-bubble">No. Incorrect user or password. Check them.</div>}
           </div>
         </div>
 

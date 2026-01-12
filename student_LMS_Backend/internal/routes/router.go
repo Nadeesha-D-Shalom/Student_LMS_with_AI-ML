@@ -2,7 +2,9 @@ package routes
 
 import (
 	"net/http"
+	"student_LMS_Backend/internal/database"
 	handlers2 "student_LMS_Backend/internal/student/handlers"
+	"student_LMS_Backend/internal/student/repositories"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -135,6 +137,66 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("STUDENT"),
 		handlers2.UpdateStudentSettings,
 	)
-	// notification
+	// ---------------- ANNOUNCEMENTS ----------------
+	announcementRepo := repositories.NewAnnouncementRepository(database.DB)
+	announcementHandler := handlers2.NewAnnouncementHandler(announcementRepo)
+
+	/* -------- STUDENT -------- */
+	api.GET(
+		"/student/announcements",
+		middleware.RequireRole("STUDENT"),
+		announcementHandler.GetStudentAnnouncements,
+	)
+
+	/* -------- STAFF (TEACHER / ADMIN / IT_ADMIN) -------- */
+	api.GET(
+		"/staff/announcements",
+		middleware.RequireRole("TEACHER", "ADMIN", "IT_ADMIN"),
+		announcementHandler.GetAllAnnouncements,
+	)
+
+	api.POST(
+		"/staff/announcements",
+		middleware.RequireRole("TEACHER", "ADMIN", "IT_ADMIN"),
+		announcementHandler.CreateAnnouncement,
+	)
+
+	api.PUT(
+		"/staff/announcements/:id",
+		middleware.RequireRole("TEACHER", "ADMIN", "IT_ADMIN"),
+		announcementHandler.UpdateAnnouncement,
+	)
+
+	api.DELETE(
+		"/staff/announcements/:id",
+		middleware.RequireRole("TEACHER", "ADMIN", "IT_ADMIN"),
+		announcementHandler.DeleteAnnouncement,
+	)
+
+	// ---------- Student Messages ----------
+	api.GET(
+		"/student/messages",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetStudentMessages,
+	)
+
+	api.GET(
+		"/student/messages/:id",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetStudentMessageThread,
+	)
+
+	api.GET(
+		"/student/messages-unread-count",
+		middleware.RequireRole("STUDENT"),
+		handlers2.GetUnreadMessageCount,
+	)
+
+	api.POST(
+		"/student/messages",
+		middleware.RequireRole("STUDENT"),
+		handlers2.CreateStudentMessage,
+	)
+
 	return r
 }

@@ -100,14 +100,22 @@
   background: #f3f4f6;
 }
 
-.sidebar-footer li.logout {
+.sidebar-footer li.logout a {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.sidebar-footer li.logout a:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.sidebar-footer li.logout a svg {
   color: #dc2626;
 }
-
-.sidebar-footer li.logout:hover {
-  background: #fee2e2;
+.sidebar-footer li.logout a:hover svg {
+  color: #b91c1c;
 }
-
 /* ================= MAIN ================= */
 .teacher-main {
   flex: 1;
