@@ -48,8 +48,7 @@ import Settings from "./features/student/profile/Settings";
 import Help from "./features/student/profile/Help";
 
 /* ================= AI ================= */
-import AIAssistant from "./features/student/assistant/AIAssistant";
-
+import AIAssistant from "./features/student/assistant/AIAssistant";   
 /* ================= TEACHER (LAZY) ================= */
 const TeacherLayout = lazy(() => import("./features/teacher/layout/TeacherLayout"));
 const TeacherDashboard = lazy(() => import("./features/teacher/pages/TeacherDashboard"));

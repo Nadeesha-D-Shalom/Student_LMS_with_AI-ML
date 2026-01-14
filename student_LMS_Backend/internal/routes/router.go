@@ -11,6 +11,8 @@ import (
 
 	"student_LMS_Backend/internal/handlers"
 	"student_LMS_Backend/internal/middleware"
+
+	"student_LMS_Backend/internal/ai"
 )
 
 func EmptyList(c *gin.Context) {
@@ -197,6 +199,9 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("STUDENT"),
 		handlers2.CreateStudentMessage,
 	)
+
+	// ---------- AI Assistant ----------
+	ai.RegisterAIRoutes(api)
 
 	return r
 }

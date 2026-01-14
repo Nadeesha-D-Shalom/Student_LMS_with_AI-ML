@@ -9,10 +9,16 @@ ollama = OllamaClient()
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(req: ChatRequest):
-    if not req.message.strip():
-        raise HTTPException(status_code=400, detail="Message required")
+    # ---------- VALIDATION ----------
+    if not req.message or not req.message.strip():
+        raise HTTPException(status_code=400, detail="Message is required")
 
-    system_prompt = build_system_prompt(req.grade, req.subject)
+    # ---------- BUILD SYSTEM PROMPT ----------
+    system_prompt = build_system_prompt(
+        user_message=req.message,
+        grade=req.grade,
+        subject=req.subject
+    )
 
     try:
         answer, latency = await ollama.generate(system_prompt, req.message)

@@ -5,6 +5,7 @@ from app.core.logging import setup_logging
 from app.api.routes_chat import router as chat_router
 from app.api.routes_health import router as health_router
 
+## uvicorn app.main:app --reload
 
 def create_app():
     setup_logging(settings.app_env)

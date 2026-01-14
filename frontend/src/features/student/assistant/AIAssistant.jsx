@@ -1,9 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import { apiFetch } from "../../../api/api";
+import ThinkingDot from "./ThinkingDot";
 import "./aiAssistant.css";
 
 const AIAssistant = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const textareaRef = useRef(null);
   const chatEndRef = useRef(null);
 
@@ -14,31 +19,8 @@ const AIAssistant = () => {
     el.style.height = el.scrollHeight + "px";
   };
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
-
-    const userMessage = {
-      id: Date.now(),
-      role: "user",
-      content: input.trim()
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
-
-    setTimeout(() => {
-      if (textareaRef.current) textareaRef.current.style.height = "auto";
-    }, 0);
-
-    setTimeout(() => {
-      typeAIResponse(
-        "This is a simulated AI response with typing effect. Backend integration will be added later."
-      );
-    }, 500);
-  };
-
   const typeAIResponse = (text) => {
-    const id = Date.now() + 1;
+    const id = Date.now();
     let index = 0;
 
     setMessages((prev) => [...prev, { id, role: "ai", content: "" }]);
@@ -54,16 +36,45 @@ const AIAssistant = () => {
       );
 
       if (index >= text.length) clearInterval(interval);
-    }, 18);
+    }, 15);
+  };
+
+  const sendMessage = async () => {
+    if (!input.trim() || loading) return;
+
+    const userMessage = {
+      id: Date.now(),
+      role: "user",
+      content: input.trim()
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setInput("");
+    setLoading(true);
+
+    setTimeout(() => {
+      if (textareaRef.current) textareaRef.current.style.height = "auto";
+    }, 0);
+
+    try {
+      const data = await apiFetch("/api/ai/chat", {
+        method: "POST",
+        body: JSON.stringify({ message: userMessage.content })
+      });
+
+      typeAIResponse(data.answer_markdown);
+    } catch {
+      typeAIResponse("Sorry, I could not generate a response right now.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, loading]);
 
-  const copyText = (text) => {
-    navigator.clipboard.writeText(text);
-  };
+  const copyText = (text) => navigator.clipboard.writeText(text);
 
   return (
     <div className="chat-root">
@@ -71,8 +82,8 @@ const AIAssistant = () => {
         {messages.length === 0 && (
           <div className="chat-empty-wrapper">
             <div className="chat-empty">
-              <h1>NexDS AI</h1>
-              <p>Your academic assistant. Ask questions clearly and precisely.</p>
+              <h1>NexDS Intelligence</h1>
+              <p>Your academic assistant. Ask questions clearly.</p>
             </div>
           </div>
         )}
@@ -80,13 +91,12 @@ const AIAssistant = () => {
         {messages.map((msg) => (
           <div key={msg.id} className={`chat-row ${msg.role}`}>
             <div className="chat-bubble">
-              <span>{msg.content}</span>
+              <ReactMarkdown>{msg.content}</ReactMarkdown>
 
               {msg.role === "ai" && (
                 <button
                   className="copy-btn"
                   onClick={() => copyText(msg.content)}
-                  title="Copy response"
                 >
                   Copy
                 </button>
@@ -95,15 +105,22 @@ const AIAssistant = () => {
           </div>
         ))}
 
+        {loading && (
+          <div className="chat-row ai">
+            <div className="chat-bubble">
+              <ThinkingDot />
+            </div>
+          </div>
+        )}
+
         <div ref={chatEndRef} />
       </div>
 
-      {/* INPUT AREA */}
       <div className="chat-input-wrapper">
         <div className="chat-input">
           <textarea
             ref={textareaRef}
-            placeholder="Ask NexDS AI anything about your studies"
+            placeholder="Ask NexDS AI Intelligence..."
             value={input}
             rows={1}
             onChange={(e) => {
@@ -117,20 +134,17 @@ const AIAssistant = () => {
               }
             }}
           />
-
           <button
             className="send-icon-btn"
             onClick={sendMessage}
-            disabled={!input.trim()}
-            aria-label="Send"
+            disabled={!input.trim() || loading}
           >
             ↑
           </button>
         </div>
 
-        {/* DISCLAIMER */}
         <div className="chat-disclaimer">
-          NexDS AI can make mistakes. Always verify important academic information.
+          NexDS AI Intelligence may make mistakes. Verify academic information.
         </div>
       </div>
     </div>
