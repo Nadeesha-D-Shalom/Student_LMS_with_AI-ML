@@ -11,7 +11,7 @@ const Announcements = () => {
     setError("");
 
     try {
-      const res = await apiFetch("/api/student/announcements");
+      const res = await apiFetch("/api/student/notices");
       setItems(res.items || []);
     } catch {
       setError("Failed to load announcements. Please try again later.");

@@ -246,3 +246,41 @@
   padding: 10px 20px;
   border-bottom: 1px solid #e5e7eb;
 }
+
+
+
+.student-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.student-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.student-body {
+  display: flex;
+  flex: 1;
+  padding: 16px;
+  gap: 20px;
+}
+
+.student-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* RIGHT AI PANEL */
+.student-ai-panel {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+/* Responsive: hide AI card on small screens */
+@media (max-width: 1200px) {
+  .student-ai-panel {
+    display: none;
+  }
+}

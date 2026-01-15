@@ -230,3 +230,11 @@
 .teacher-secondary-btn:hover {
   background: #e5e7eb;
 }
+
+
+.content-mode-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* small clean space */
+  margin-bottom: 20px;
+}

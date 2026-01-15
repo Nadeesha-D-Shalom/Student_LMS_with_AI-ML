@@ -1,199 +1,489 @@
-import React, { useState } from "react";
-import "./teacherContent.css";
+import { useEffect, useMemo, useState } from "react";
+import { apiFetch } from "../../../api/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBook,
+  faBell,
+  faTrash,
+  faEdit,
+  faSave,
+  faUpload,
+  faTimes
+} from "@fortawesome/free-solid-svg-icons";
+import ConfirmModal from "../../components/ConfirmModal";
 
 export default function TeacherContent() {
-  /* ================= CLASSES ================= */
-  const teacherClasses = [
-    { id: "ict-grade-10", subject: "ICT", grade: 10 },
-    { id: "physics-grade-12", subject: "Physics", grade: 12 }
-  ];
+  const [mode, setMode] = useState("MATERIALS");
+  const [classes, setClasses] = useState([]);
+  const [classId, setClassId] = useState("");
 
-  const [selectedClass, setSelectedClass] = useState("");
-
-  /* ================= NOTICES ================= */
-  const [noticeText, setNoticeText] = useState("");
+  // Notices
   const [notices, setNotices] = useState([]);
+  const [noticeDraft, setNoticeDraft] = useState("");
+  const [editingNotice, setEditingNotice] = useState(null);
 
-  /* ================= WEEKS ================= */
-  const [weekTitle, setWeekTitle] = useState("");
-  const [weeks, setWeeks] = useState([]);
+  // Materials
+  const [materials, setMaterials] = useState([]);
+  const [file, setFile] = useState(null);
+  const [weekInput, setWeekInput] = useState("");
 
-  const [material, setMaterial] = useState({
-    file: null,
-    link: ""
-  });
+  // Week notes (DB)
+  const [weekNotes, setWeekNotes] = useState([]);
+  // Week notes UI drafts per week_title
+  const [noteDrafts, setNoteDrafts] = useState({});
+  const [savingWeek, setSavingWeek] = useState(null);
 
-  /* ================= HANDLERS ================= */
+  // Week rename
+  const [renamingWeek, setRenamingWeek] = useState(null);
+  const [weekRenameDraft, setWeekRenameDraft] = useState("");
 
-  const addNotice = () => {
-    if (!noticeText || !selectedClass) return;
+  // Confirm modal
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [confirmText, setConfirmText] = useState("");
+  const [confirmAction, setConfirmAction] = useState(null);
 
-    setNotices((prev) => [
-      {
-        id: Date.now(),
-        classId: selectedClass,
-        text: noticeText,
-        date: new Date().toLocaleDateString()
-      },
-      ...prev
-    ]);
+  /* -------------------- LOAD -------------------- */
+  useEffect(() => {
+    apiFetch("/api/teacher/classes").then(r => setClasses(r.items || []));
+  }, []);
 
-    setNoticeText("");
-  };
+  useEffect(() => {
+    if (!classId) return;
 
-  const addWeek = () => {
-    if (!weekTitle || !selectedClass) return;
-
-    setWeeks((prev) => [
-      {
-        id: Date.now(),
-        classId: selectedClass,
-        title: weekTitle,
-        items: []
-      },
-      ...prev
-    ]);
-
-    setWeekTitle("");
-  };
-
-  const addMaterialToWeek = (weekId) => {
-    if (!material.file && !material.link) return;
-
-    setWeeks((prev) =>
-      prev.map((w) =>
-        w.id === weekId
-          ? {
-              ...w,
-              items: [
-                ...w.items,
-                {
-                  id: Date.now(),
-                  name: material.file
-                    ? material.file.name
-                    : material.link,
-                  type: material.file ? "file" : "link"
-                }
-              ]
-            }
-          : w
-      )
+    apiFetch(`/api/teacher/notices?class_id=${classId}`).then(r =>
+      setNotices(r.items || [])
     );
 
-    setMaterial({ file: null, link: "" });
+    apiFetch(`/api/teacher/materials?class_id=${classId}`).then(r =>
+      setMaterials(r.items || [])
+    );
+
+    apiFetch(`/api/teacher/weeks/notes?class_id=${classId}`).then(r =>
+      setWeekNotes(r.items || [])
+    );
+  }, [classId]);
+
+  /* -------------------- GROUP BY WEEK -------------------- */
+  const materialsByWeek = useMemo(() => {
+    return materials.reduce((acc, m) => {
+      const w = m.week_title || "General";
+      if (!acc[w]) acc[w] = [];
+      acc[w].push(m);
+      return acc;
+    }, {});
+  }, [materials]);
+
+  const weeks = useMemo(() => {
+    // IMPORTANT: weeks come from materials only (your requirement)
+    return Object.keys(materialsByWeek).sort();
+  }, [materialsByWeek]);
+
+  /* -------------------- WEEK NOTE HELPERS -------------------- */
+  const getSavedNote = (weekTitle) =>
+    weekNotes.find(w => w.week_title === weekTitle)?.note || "";
+
+  const getDraftNote = (weekTitle) => {
+    if (noteDrafts[weekTitle] !== undefined) return noteDrafts[weekTitle];
+    return getSavedNote(weekTitle);
   };
 
-  /* ================= FILTERED ================= */
-  const filteredNotices = notices.filter(
-    (n) => n.classId === selectedClass
-  );
+  const refreshWeekNotes = async () => {
+    const r = await apiFetch(`/api/teacher/weeks/notes?class_id=${classId}`);
+    setWeekNotes(r.items || []);
+  };
 
-  const filteredWeeks = weeks.filter(
-    (w) => w.classId === selectedClass
-  );
+  const saveWeekNote = async (weekTitle) => {
+    const note = (noteDrafts[weekTitle] ?? "").trim();
 
+    setSavingWeek(weekTitle);
+    try {
+      await apiFetch("/api/teacher/weeks/note", {
+        method: "PUT",
+        body: JSON.stringify({
+          class_id: Number(classId),
+          week_title: weekTitle,
+          note
+        })
+      });
+
+      await refreshWeekNotes();
+
+      // keep drafts in sync with saved
+      setNoteDrafts(prev => ({
+        ...prev,
+        [weekTitle]: note
+      }));
+    } finally {
+      setSavingWeek(null);
+    }
+  };
+
+  /* -------------------- WEEK RENAME -------------------- */
+  const refreshMaterials = async () => {
+    const r = await apiFetch(`/api/teacher/materials?class_id=${classId}`);
+    setMaterials(r.items || []);
+  };
+
+  const renameWeek = async (oldWeekTitle) => {
+    const newTitle = weekRenameDraft.trim();
+    if (!newTitle) return;
+
+    await apiFetch("/api/teacher/weeks/rename", {
+      method: "PUT",
+      body: JSON.stringify({
+        class_id: Number(classId),
+        old_week_title: oldWeekTitle,
+        new_week_title: newTitle
+      })
+    });
+
+    setRenamingWeek(null);
+    setWeekRenameDraft("");
+
+    await refreshMaterials();
+    await refreshWeekNotes();
+
+    // move draft if existed
+    setNoteDrafts(prev => {
+      if (prev[oldWeekTitle] === undefined) return prev;
+      const clone = { ...prev };
+      clone[newTitle] = clone[oldWeekTitle];
+      delete clone[oldWeekTitle];
+      return clone;
+    });
+  };
+
+  /* -------------------- MATERIAL UPLOAD -------------------- */
+  const uploadMaterial = async () => {
+    const wk = weekInput.trim();
+    if (!wk || !file) return;
+
+    const fd = new FormData();
+    fd.append("class_id", classId);
+    fd.append("week_title", wk);
+    fd.append("file", file);
+
+    await apiFetch("/api/teacher/materials", {
+      method: "POST",
+      body: fd
+    });
+
+    setFile(null);
+    setWeekInput("");
+
+    await refreshMaterials();
+  };
+
+  const askDelete = (text, action) => {
+    setConfirmText(text);
+    setConfirmAction(() => action);
+    setConfirmOpen(true);
+  };
+
+  /* -------------------- NOTICES -------------------- */
+  const refreshNotices = async () => {
+    const r = await apiFetch(`/api/teacher/notices?class_id=${classId}`);
+    setNotices(r.items || []);
+  };
+
+  const saveNotice = async () => {
+    const content = noticeDraft.trim();
+    if (!content) return;
+
+    if (editingNotice) {
+      await apiFetch(`/api/teacher/notices/${editingNotice.id}`, {
+        method: "PUT",
+        body: JSON.stringify({ content })
+      });
+      setEditingNotice(null);
+    } else {
+      await apiFetch("/api/teacher/notices", {
+        method: "POST",
+        body: JSON.stringify({
+          class_id: Number(classId),
+          content
+        })
+      });
+    }
+
+    setNoticeDraft("");
+    await refreshNotices();
+  };
+
+  /* -------------------- UI -------------------- */
   return (
-    <div className="teacher-content-page">
-      <h2>Materials & Notices</h2>
+    <div className="max-w-5xl mx-auto p-6 space-y-6">
+      <h2 className="text-xl font-semibold">Class Content</h2>
 
-      {/* ================= CLASS SELECT ================= */}
-      <div className="class-selector">
-        <label>Select Class</label>
-        <select
-          value={selectedClass}
-          onChange={(e) => setSelectedClass(e.target.value)}
+      {/* MODE SWITCH */}
+      <div className="flex gap-3">
+        <button
+          onClick={() => setMode("MATERIALS")}
+          className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ${
+            mode === "MATERIALS" ? "bg-blue-600 text-white" : "bg-gray-100"
+          }`}
         >
-          <option value="">Select class</option>
-          {teacherClasses.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.subject} — Grade {c.grade}
-            </option>
-          ))}
-        </select>
+          <FontAwesomeIcon icon={faBook} />
+          Materials
+        </button>
+
+        <button
+          onClick={() => setMode("NOTICES")}
+          className={`px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2 ${
+            mode === "NOTICES" ? "bg-blue-600 text-white" : "bg-gray-100"
+          }`}
+        >
+          <FontAwesomeIcon icon={faBell} />
+          Notices
+        </button>
       </div>
 
-      {/* ================= NOTICES ================= */}
-      {selectedClass && (
-        <div className="notice-section">
-          <h3>Notices</h3>
+      {/* CLASS SELECT */}
+      <select
+        className="w-full border rounded-lg px-3 py-2"
+        value={classId}
+        onChange={e => setClassId(e.target.value)}
+      >
+        <option value="">Select class</option>
+        {classes.map(c => (
+          <option key={c.id} value={c.id}>
+            {c.name}
+          </option>
+        ))}
+      </select>
 
+      {/* NOTICES */}
+      {mode === "NOTICES" && classId && (
+        <div className="bg-white border rounded-xl p-4 space-y-4">
           <textarea
-            placeholder="Write notice for this class..."
-            value={noticeText}
-            onChange={(e) => setNoticeText(e.target.value)}
+            value={noticeDraft}
+            onChange={e => setNoticeDraft(e.target.value)}
+            placeholder="Write notice..."
+            className="w-full border rounded-md p-3"
           />
 
-          <button
-            className="teacher-primary-btn"
-            onClick={addNotice}
-          >
-            Add Notice
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={saveNotice}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md"
+            >
+              {editingNotice ? "Save Notice" : "Publish Notice"}
+            </button>
 
-          {filteredNotices.map((n) => (
-            <div key={n.id} className="notice-card">
-              <div className="notice-date">{n.date}</div>
-              <div>{n.text}</div>
+            {editingNotice && (
+              <button
+                onClick={() => {
+                  setEditingNotice(null);
+                  setNoticeDraft("");
+                }}
+                className="px-4 py-2 rounded-md border bg-white"
+              >
+                <FontAwesomeIcon icon={faTimes} /> Cancel
+              </button>
+            )}
+          </div>
+
+          {notices.map(n => (
+            <div
+              key={n.id}
+              className="border rounded-md p-3 flex justify-between items-start gap-3"
+            >
+              <div className="flex-1">{n.content}</div>
+
+              <div className="flex gap-2">
+                <button
+                  className="text-blue-700"
+                  onClick={() => {
+                    setEditingNotice(n);
+                    setNoticeDraft(n.content);
+                  }}
+                  title="Edit"
+                >
+                  <FontAwesomeIcon icon={faEdit} />
+                </button>
+
+                <button
+                  className="text-red-600"
+                  onClick={() =>
+                    askDelete("Delete notice?", async () => {
+                      await apiFetch(`/api/teacher/notices/${n.id}`, {
+                        method: "DELETE"
+                      });
+                      await refreshNotices();
+                      setConfirmOpen(false);
+                    })
+                  }
+                  title="Delete"
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              </div>
             </div>
           ))}
         </div>
       )}
 
-      {/* ================= WEEK CREATION ================= */}
-      {selectedClass && (
-        <div className="week-create">
-          <h3>Add Week / Date Range</h3>
-          <input
-            placeholder="Week 1 or 10 February – 16 February"
-            value={weekTitle}
-            onChange={(e) => setWeekTitle(e.target.value)}
-          />
-          <button
-            className="teacher-primary-btn"
-            onClick={addWeek}
-          >
-            Create Week
-          </button>
-        </div>
-      )}
-
-      {/* ================= WEEKS ================= */}
-      {filteredWeeks.map((week) => (
-        <div key={week.id} className="week-box">
-          <div className="week-title">{week.title}</div>
-
-          <div className="material-add">
+      {/* MATERIALS */}
+      {mode === "MATERIALS" && classId && (
+        <>
+          {/* UPLOAD SECTION */}
+          <div className="bg-white border rounded-xl p-4 space-y-3">
             <input
-              type="file"
-              onChange={(e) =>
-                setMaterial({ file: e.target.files[0], link: "" })
-              }
+              value={weekInput}
+              onChange={e => setWeekInput(e.target.value)}
+              placeholder="Week title"
+              className="w-full border rounded-md p-3"
             />
-            <input
-              placeholder="Or add link"
-              value={material.link}
-              onChange={(e) =>
-                setMaterial({ link: e.target.value, file: null })
-              }
-            />
-            <button
-              className="teacher-secondary-btn"
-              onClick={() => addMaterialToWeek(week.id)}
-            >
-              Add
-            </button>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <input
+                type="file"
+                onChange={e => setFile(e.target.files?.[0] || null)}
+              />
+
+              <button
+                onClick={uploadMaterial}
+                className="bg-blue-600 text-white px-4 py-2 rounded-md flex items-center gap-2"
+              >
+                <FontAwesomeIcon icon={faUpload} />
+                Upload
+              </button>
+            </div>
           </div>
 
-          <ul className="material-list">
-            {week.items.map((i) => (
-              <li key={i.id} className="material-item">
-                {i.type === "file" ? "📄" : "🔗"} {i.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+          {/* WEEK CARDS */}
+          {weeks.length === 0 ? (
+            <div className="text-sm text-gray-600">
+              No materials uploaded yet.
+            </div>
+          ) : (
+            weeks.map(weekTitle => (
+              <div key={weekTitle} className="bg-white border rounded-xl p-4 space-y-3">
+                {/* WEEK HEADER + RENAME */}
+                <div className="flex items-center gap-2">
+                  {renamingWeek === weekTitle ? (
+                    <>
+                      <input
+                        value={weekRenameDraft}
+                        onChange={e => setWeekRenameDraft(e.target.value)}
+                        className="border px-3 py-2 rounded-md w-full"
+                      />
+                      <button
+                        onClick={() => renameWeek(weekTitle)}
+                        className="px-3 py-2 rounded-md bg-blue-600 text-white"
+                        title="Save week title"
+                      >
+                        <FontAwesomeIcon icon={faSave} />
+                      </button>
+                      <button
+                        onClick={() => {
+                          setRenamingWeek(null);
+                          setWeekRenameDraft("");
+                        }}
+                        className="px-3 py-2 rounded-md border bg-white"
+                        title="Cancel"
+                      >
+                        <FontAwesomeIcon icon={faTimes} />
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="font-semibold text-base">{weekTitle}</div>
+                      <button
+                        className="text-blue-700"
+                        onClick={() => {
+                          setRenamingWeek(weekTitle);
+                          setWeekRenameDraft(weekTitle);
+                        }}
+                        title="Rename week"
+                      >
+                        <FontAwesomeIcon icon={faEdit} />
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                {/* WEEK NOTE (THIS IS WHAT YOU ASKED) */}
+                <div className="border rounded-lg p-3 bg-gray-50 space-y-2">
+                  <div className="text-sm font-medium text-gray-800">
+                    Week note
+                  </div>
+
+                  <textarea
+                    value={getDraftNote(weekTitle)}
+                    onChange={e =>
+                      setNoteDrafts(prev => ({
+                        ...prev,
+                        [weekTitle]: e.target.value
+                      }))
+                    }
+                    placeholder="Add a short week note (important message)..."
+                    className="w-full border rounded-md p-3 text-sm bg-white"
+                    rows={3}
+                  />
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => saveWeekNote(weekTitle)}
+                      className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2"
+                      disabled={savingWeek === weekTitle}
+                    >
+                      <FontAwesomeIcon icon={faSave} />
+                      {savingWeek === weekTitle ? "Saving..." : "Save Note"}
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        setNoteDrafts(prev => ({
+                          ...prev,
+                          [weekTitle]: getSavedNote(weekTitle)
+                        }))
+                      }
+                      className="px-4 py-2 rounded-md border bg-white text-sm"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </div>
+
+                {/* MATERIALS LIST */}
+                {(materialsByWeek[weekTitle] || []).map(m => (
+                  <div
+                    key={m.id}
+                    className="flex justify-between items-center border rounded-md p-3"
+                  >
+                    <div className="text-sm">{m.title}</div>
+
+                    <button
+                      className="text-red-600"
+                      onClick={() =>
+                        askDelete("Delete material?", async () => {
+                          await apiFetch(`/api/teacher/materials/${m.id}`, {
+                            method: "DELETE"
+                          });
+                          await refreshMaterials();
+                          setConfirmOpen(false);
+                        })
+                      }
+                      title="Delete"
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ))
+          )}
+        </>
+      )}
+
+      <ConfirmModal
+        open={confirmOpen}
+        title="Confirm"
+        message={confirmText}
+        onCancel={() => setConfirmOpen(false)}
+        onConfirm={() => confirmAction && confirmAction()}
+      />
     </div>
   );
 }
-

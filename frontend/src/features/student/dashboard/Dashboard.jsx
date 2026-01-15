@@ -70,7 +70,7 @@ const Dashboard = () => {
 
     try {
       const [annRes, classRes] = await Promise.all([
-        apiFetch("/api/student/announcements"),
+        apiFetch("/api/student/notices"),
         apiFetch("/api/student/classes")
       ]);
 

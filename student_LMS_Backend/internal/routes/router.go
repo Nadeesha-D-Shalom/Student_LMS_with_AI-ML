@@ -2,17 +2,26 @@ package routes
 
 import (
 	"net/http"
+	"os"
+	"path/filepath"
+	"strings"
+
 	"student_LMS_Backend/internal/database"
+
+	// ----------------- student imports --------------------
 	handlers2 "student_LMS_Backend/internal/student/handlers"
-	"student_LMS_Backend/internal/student/repositories"
+	studentRepos "student_LMS_Backend/internal/student/repositories"
 
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
+	// ----------------- teacher imports --------------------
+	teacherHandlers "student_LMS_Backend/internal/teacher/handlers"
+	teacherRepos "student_LMS_Backend/internal/teacher/repositories"
 
+	"student_LMS_Backend/internal/ai"
 	"student_LMS_Backend/internal/handlers"
 	"student_LMS_Backend/internal/middleware"
 
-	"student_LMS_Backend/internal/ai"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 func EmptyList(c *gin.Context) {
@@ -29,16 +38,45 @@ func SetupRouter() *gin.Engine {
 		AllowHeaders:     []string{"Authorization", "Content-Type"},
 		AllowCredentials: true,
 	}))
-	// =================================================
+	// ===============================================
 
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
-	// ===================== STATIC FILES =====================
-	// THIS ENABLES:
-	// http://localhost:8080/uploads/assignments/<file>.pdf
-	r.Static("/uploads", "./uploads")
-	// ========================================================
+	// =====================================================
+	// FILE SERVER (PDF / DOC / SLIDE SAFE SERVING)
+	// FIXES about:blank#blocked AND 404
+	// =====================================================
+	r.GET("/uploads/*filepath", func(c *gin.Context) {
+		// Clean and secure path
+		relPath := strings.TrimPrefix(c.Param("filepath"), "/")
+		fullPath := filepath.Join("uploads", relPath)
+
+		// File must exist
+		if _, err := os.Stat(fullPath); os.IsNotExist(err) {
+			c.Status(http.StatusNotFound)
+			return
+		}
+
+		ext := strings.ToLower(filepath.Ext(fullPath))
+
+		switch ext {
+		case ".pdf":
+			c.Header("Content-Type", "application/pdf")
+			c.Header("Content-Disposition", "inline")
+		case ".doc", ".docx":
+			c.Header("Content-Type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+			c.Header("Content-Disposition", "inline")
+		case ".ppt", ".pptx":
+			c.Header("Content-Type", "application/vnd.openxmlformats-officedocument.presentationml.presentation")
+			c.Header("Content-Disposition", "inline")
+		default:
+			c.Header("Content-Disposition", "attachment")
+		}
+
+		c.File(fullPath)
+	})
+	// =====================================================
 
 	// ===================== PUBLIC ROUTES =====================
 	r.GET("/health", handlers.HealthCheck)
@@ -108,6 +146,7 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("STUDENT"),
 		handlers2.StudentLiveClasses,
 	)
+
 	// ---------- Student Profile ----------
 	api.GET(
 		"/student/profile",
@@ -139,40 +178,25 @@ func SetupRouter() *gin.Engine {
 		middleware.RequireRole("STUDENT"),
 		handlers2.UpdateStudentSettings,
 	)
-	// ---------------- ANNOUNCEMENTS ----------------
-	announcementRepo := repositories.NewAnnouncementRepository(database.DB)
-	announcementHandler := handlers2.NewAnnouncementHandler(announcementRepo)
 
-	/* -------- STUDENT -------- */
+	// ---------- Student Notices ----------
+	studentNoticeRepo := studentRepos.NewStudentNoticeRepository(database.DB)
+	studentNoticeHandler := handlers2.NewStudentNoticeHandler(studentNoticeRepo)
+
 	api.GET(
-		"/student/announcements",
+		"/student/notices",
 		middleware.RequireRole("STUDENT"),
-		announcementHandler.GetStudentAnnouncements,
+		studentNoticeHandler.List,
 	)
 
-	/* -------- STAFF (TEACHER / ADMIN / IT_ADMIN) -------- */
+	// ---------- Student Materials ----------
+	studentMaterialRepo := studentRepos.NewStudentMaterialRepository(database.DB)
+	studentMaterialHandler := handlers2.NewStudentMaterialHandler(studentMaterialRepo)
+
 	api.GET(
-		"/staff/announcements",
-		middleware.RequireRole("TEACHER", "ADMIN", "IT_ADMIN"),
-		announcementHandler.GetAllAnnouncements,
-	)
-
-	api.POST(
-		"/staff/announcements",
-		middleware.RequireRole("TEACHER", "ADMIN", "IT_ADMIN"),
-		announcementHandler.CreateAnnouncement,
-	)
-
-	api.PUT(
-		"/staff/announcements/:id",
-		middleware.RequireRole("TEACHER", "ADMIN", "IT_ADMIN"),
-		announcementHandler.UpdateAnnouncement,
-	)
-
-	api.DELETE(
-		"/staff/announcements/:id",
-		middleware.RequireRole("TEACHER", "ADMIN", "IT_ADMIN"),
-		announcementHandler.DeleteAnnouncement,
+		"/student/materials",
+		middleware.RequireRole("STUDENT"),
+		studentMaterialHandler.List,
 	)
 
 	// ---------- Student Messages ----------
@@ -200,8 +224,122 @@ func SetupRouter() *gin.Engine {
 		handlers2.CreateStudentMessage,
 	)
 
+	// ---------- Student Week Notes ----------
+	studentWeekNoteRepo := studentRepos.NewStudentWeekNoteRepository(database.DB)
+	studentWeekNoteHandler := handlers2.NewStudentWeekNoteHandler(studentWeekNoteRepo)
+
+	api.GET(
+		"/student/weeks/notes",
+		middleware.RequireRole("STUDENT"),
+		studentWeekNoteHandler.List,
+	)
+
 	// ---------- AI Assistant ----------
 	ai.RegisterAIRoutes(api)
+
+	// ---------- Teacher Classes ----------
+	teacherClassRepo := teacherRepos.NewTeacherClassRepository(database.DB)
+	teacherClassHandler := teacherHandlers.NewTeacherClassHandler(teacherClassRepo)
+
+	api.GET(
+		"/teacher/classes",
+		middleware.RequireRole("TEACHER"),
+		teacherClassHandler.List,
+	)
+
+	api.POST(
+		"/teacher/classes",
+		middleware.RequireRole("TEACHER"),
+		teacherClassHandler.Create,
+	)
+
+	// ---------- Teacher Notices ----------
+	teacherNoticeRepo := teacherRepos.NewTeacherNoticeRepository(database.DB)
+	teacherNoticeHandler := teacherHandlers.NewTeacherNoticeHandler(teacherNoticeRepo)
+
+	api.POST(
+		"/teacher/notices",
+		middleware.RequireRole("TEACHER"),
+		teacherNoticeHandler.Create,
+	)
+
+	api.GET(
+		"/teacher/notices",
+		middleware.RequireRole("TEACHER"),
+		teacherNoticeHandler.List,
+	)
+
+	api.PUT(
+		"/teacher/notices/:id",
+		middleware.RequireRole("TEACHER"),
+		teacherNoticeHandler.Update,
+	)
+
+	api.DELETE(
+		"/teacher/notices/:id",
+		middleware.RequireRole("TEACHER"),
+		teacherNoticeHandler.Delete,
+	)
+
+	// ---------- Teacher Materials ----------
+	teacherMaterialRepo := teacherRepos.NewTeacherMaterialRepository(database.DB)
+	teacherMaterialHandler := teacherHandlers.NewTeacherMaterialHandler(teacherMaterialRepo)
+
+	api.POST(
+		"/teacher/materials",
+		middleware.RequireRole("TEACHER"),
+		teacherMaterialHandler.Upload,
+	)
+
+	api.GET(
+		"/teacher/materials",
+		middleware.RequireRole("TEACHER"),
+		teacherMaterialHandler.List,
+	)
+
+	api.PUT(
+		"/teacher/materials/:id",
+		middleware.RequireRole("TEACHER"),
+		teacherMaterialHandler.Update,
+	)
+
+	api.DELETE(
+		"/teacher/materials/:id",
+		middleware.RequireRole("TEACHER"),
+		teacherMaterialHandler.Delete,
+	)
+
+	// ---------- Week Notes ----------
+	weekNoteRepo := teacherRepos.NewWeekNoteRepository(database.DB)
+	weekNoteHandler := teacherHandlers.NewWeekNoteHandler(weekNoteRepo)
+
+	api.GET(
+		"/teacher/weeks/notes",
+		middleware.RequireRole("TEACHER"),
+		weekNoteHandler.List,
+	)
+
+	api.PUT(
+		"/teacher/weeks/note",
+		middleware.RequireRole("TEACHER"),
+		weekNoteHandler.Upsert,
+	)
+
+	api.DELETE(
+		"/teacher/weeks/note/:id",
+		middleware.RequireRole("TEACHER"),
+		weekNoteHandler.Delete,
+	)
+
+	// ---------- Week Rename ----------
+	weekTitleRepo := teacherRepos.NewWeekTitleRepository(database.DB)
+	weekTitleHandler := teacherHandlers.NewWeekTitleHandler(weekTitleRepo)
+
+	api.PUT(
+		"/teacher/weeks/rename",
+		middleware.RequireRole("TEACHER"),
+		weekTitleHandler.Rename,
+	)
 
 	return r
 }

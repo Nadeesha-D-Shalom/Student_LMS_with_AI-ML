@@ -86,21 +86,18 @@ const Sidebar = () => {
       {/* Navigation */}
       <nav className="flex-1 px-3 py-4 space-y-4 overflow-y-auto">
 
-        {/* AI */}
-        <div>
-          <p className="px-4 text-xs font-bold text-slate-400 mb-2">
-            AI ASSISTANT
-          </p>
-          <a
-            href="/ai"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-3 px-4 py-2 rounded-xl text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600"
-          >
-            <FontAwesomeIcon icon={faRobot} />
-            NexDS AI
-          </a>
-        </div>
+        <a
+          href="/ai"
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-3 px-4 py-2 rounded-xl text-sm
+             bg-blue-30 text-blue-800 font-medium
+             border border-blue-100"
+        >
+          <FontAwesomeIcon icon={faRobot} />
+          NexDS AI
+        </a>
+
 
         {/* LEARNING */}
         <div>

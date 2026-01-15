@@ -12,7 +12,6 @@ export const apiFetch = async (endpoint, options = {}) => {
     ...options.headers
   };
 
-  // Only set JSON content-type when NOT FormData
   if (!isFormData && !headers["Content-Type"] && !headers["content-type"]) {
     headers["Content-Type"] = "application/json";
   }
@@ -22,7 +21,6 @@ export const apiFetch = async (endpoint, options = {}) => {
     headers
   });
 
-  // IMPORTANT: do NOT redirect from here (causes refresh loops)
   if (response.status === 401) {
     localStorage.removeItem("lms_token");
     throw new Error("UNAUTHORIZED");
@@ -35,7 +33,9 @@ export const apiFetch = async (endpoint, options = {}) => {
 
   if (!response.ok) {
     const message =
-      typeof data === "object" && data && data.error ? data.error : "Request failed";
+      typeof data === "object" && data?.error
+        ? data.error
+        : "Request failed";
     throw new Error(message);
   }
 
