@@ -48,8 +48,10 @@ import Settings from "./features/student/profile/Settings";
 import Help from "./features/student/profile/Help";
 
 /* ================= AI ================= */
-import AIAssistant from "./features/student/assistant/AIAssistant";   
+import AIAssistant from "./features/student/assistant/AIAssistant";
 /* ================= TEACHER (LAZY) ================= */
+import TeacherStudentProfile from "./features/teacher/pages/studentsProfiles/TeacherStudentProfile";
+
 const TeacherLayout = lazy(() => import("./features/teacher/layout/TeacherLayout"));
 const TeacherDashboard = lazy(() => import("./features/teacher/pages/TeacherDashboard"));
 const TeacherMyClasses = lazy(() => import("./features/teacher/pages/TeacherMyClasses"));
@@ -59,6 +61,7 @@ const TeacherAssignments = lazy(() => import("./features/teacher/pages/TeacherAs
 const TeacherTests = lazy(() => import("./features/teacher/pages/TeacherTests"));
 const TeacherGradeWorkspace = lazy(() => import("./features/teacher/grades/TeacherGradeWorkspace"));
 const TeacherHelp = lazy(() => import("./features/teacher/pages/TeacherHelp"));
+
 
 /* ================= INSTITUTE ADMIN (LAZY) ================= */
 const InstituteAdminLayout = lazy(() => import("./features/InstituteAdmin/layout/AdminLayout"));
@@ -163,7 +166,6 @@ const App = () => (
           <Route path="help" element={<Help />} />
         </Route>
 
-        {/* TEACHER */}
         <Route
           path="/teacher"
           element={
@@ -177,11 +179,13 @@ const App = () => (
           <Route path="classes" element={<TeacherMyClasses />} />
           <Route path="classes/:classId/grade/:gradeId" element={<TeacherGradeWorkspace />} />
           <Route path="students" element={<TeacherStudents />} />
+          <Route path="students/:studentId" element={<TeacherStudentProfile />} />
           <Route path="content" element={<TeacherContent />} />
           <Route path="assignments" element={<TeacherAssignments />} />
           <Route path="tests" element={<TeacherTests />} />
           <Route path="help" element={<TeacherHelp />} />
         </Route>
+
 
         {/* INSTITUTE ADMIN */}
         <Route

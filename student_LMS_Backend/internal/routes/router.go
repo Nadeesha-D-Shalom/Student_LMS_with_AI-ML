@@ -354,5 +354,21 @@ func SetupRouter() *gin.Engine {
 		weekTitleHandler.Rename,
 	)
 
+	// ---------- Teacher Students ----------
+	teacherStudentRepo := teacherRepos.NewTeacherStudentRepository(database.DB)
+	teacherStudentHandler := teacherHandlers.NewTeacherStudentHandler(teacherStudentRepo)
+
+	api.GET(
+		"/teacher/students",
+		middleware.RequireRole("TEACHER"),
+		teacherStudentHandler.List,
+	)
+
+	api.GET(
+		"/teacher/students/:id",
+		middleware.RequireRole("TEACHER"),
+		teacherStudentHandler.Get,
+	)
+
 	return r
 }
