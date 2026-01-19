@@ -5,14 +5,13 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"student_LMS_Backend/internal/database"
 
-	// ----------------- student imports --------------------
 	handlers2 "student_LMS_Backend/internal/student/handlers"
 	studentRepos "student_LMS_Backend/internal/student/repositories"
 
-	// ----------------- teacher imports --------------------
 	teacherHandlers "student_LMS_Backend/internal/teacher/handlers"
 	teacherRepos "student_LMS_Backend/internal/teacher/repositories"
 
@@ -45,21 +44,26 @@ func SetupRouter() *gin.Engine {
 
 	// =====================================================
 	// FILE SERVER (PDF / DOC / SLIDE SAFE SERVING)
-	// FIXES about:blank#blocked AND 404
 	// =====================================================
 	r.GET("/uploads/*filepath", func(c *gin.Context) {
-		// Clean and secure path
 		relPath := strings.TrimPrefix(c.Param("filepath"), "/")
-		fullPath := filepath.Join("uploads", relPath)
 
-		// File must exist
-		if _, err := os.Stat(fullPath); os.IsNotExist(err) {
+		baseDir, _ := filepath.Abs("uploads")
+		requestedPath := filepath.Join(baseDir, relPath)
+		requestedPath, _ = filepath.Abs(requestedPath)
+
+		// Block path traversal
+		if !strings.HasPrefix(requestedPath, baseDir) {
+			c.Status(http.StatusForbidden)
+			return
+		}
+
+		if _, err := os.Stat(requestedPath); os.IsNotExist(err) {
 			c.Status(http.StatusNotFound)
 			return
 		}
 
-		ext := strings.ToLower(filepath.Ext(fullPath))
-
+		ext := strings.ToLower(filepath.Ext(requestedPath))
 		switch ext {
 		case ".pdf":
 			c.Header("Content-Type", "application/pdf")
@@ -74,14 +78,23 @@ func SetupRouter() *gin.Engine {
 			c.Header("Content-Disposition", "attachment")
 		}
 
-		c.File(fullPath)
+		c.File(requestedPath)
 	})
 	// =====================================================
 
 	// ===================== PUBLIC ROUTES =====================
 	r.GET("/health", handlers.HealthCheck)
 	r.POST("/auth/register", handlers.Register)
-	r.POST("/auth/login", handlers.Login)
+
+	loginLimiter := middleware.NewRateLimiter(5, time.Minute)
+
+	r.POST(
+		"/auth/login",
+		middleware.RateLimitMiddleware(loginLimiter, func(c *gin.Context) string {
+			return c.ClientIP()
+		}),
+		handlers.Login,
+	)
 	// =========================================================
 
 	// ===================== PROTECTED ROUTES =====================

@@ -3,6 +3,7 @@ package service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 )
@@ -30,8 +31,14 @@ func AskAI(message string) (*AIResponse, error) {
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("ai service returned status %d", resp.StatusCode)
+	}
+
 	var aiResp AIResponse
-	json.NewDecoder(resp.Body).Decode(&aiResp)
+	if err := json.NewDecoder(resp.Body).Decode(&aiResp); err != nil {
+		return nil, err
+	}
 
 	return &aiResp, nil
 }

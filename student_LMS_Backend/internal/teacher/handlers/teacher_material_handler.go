@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"mime/multipart"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -13,6 +14,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+const (
+	maxUploadSize = 20 << 20 // 20 MB
+)
+
+var allowedExtensions = map[string]string{
+	".pdf":  "application/pdf",
+	".doc":  "application/msword",
+	".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+	".ppt":  "application/vnd.ms-powerpoint",
+	".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+}
+
 type TeacherMaterialHandler struct {
 	Repo *teacherRepos.TeacherMaterialRepository
 }
@@ -21,11 +34,16 @@ func NewTeacherMaterialHandler(r *teacherRepos.TeacherMaterialRepository) *Teach
 	return &TeacherMaterialHandler{Repo: r}
 }
 
+/*
+POST /api/teacher/materials
+Secure file upload with validation
+*/
 func (h *TeacherMaterialHandler) Upload(c *gin.Context) {
 	teacherID := c.GetUint64("user_id")
 
-	classIDStr := c.PostForm("class_id")
-	if strings.TrimSpace(classIDStr) == "" {
+	// ---------- Validate class_id ----------
+	classIDStr := strings.TrimSpace(c.PostForm("class_id"))
+	if classIDStr == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "class_id required"})
 		return
 	}
@@ -46,47 +64,58 @@ func (h *TeacherMaterialHandler) Upload(c *gin.Context) {
 		return
 	}
 
+	// ---------- Get file ----------
 	file, err := c.FormFile("file")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "file required"})
 		return
 	}
 
+	if file.Size > maxUploadSize {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "file too large"})
+		return
+	}
+
+	ext := strings.ToLower(filepath.Ext(file.Filename))
+	expectedMime, ok := allowedExtensions[ext]
+	if !ok {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "file type not allowed"})
+		return
+	}
+
+	if !validateMimeType(file, expectedMime) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid file content"})
+		return
+	}
+
+	// ---------- Week title ----------
 	weekTitle := strings.TrimSpace(c.PostForm("week_title"))
 	if weekTitle == "" {
 		weekTitle = "General"
 	}
 
-	baseDir := "./uploads/materials"
+	// ---------- Prepare storage ----------
+	baseDir := "uploads/materials"
 	if err := os.MkdirAll(baseDir, 0755); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to create upload dir"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to prepare upload directory"})
 		return
 	}
 
-	ext := strings.ToLower(filepath.Ext(file.Filename))
 	name := strings.TrimSuffix(file.Filename, ext)
-
-	safe := strings.Map(func(r rune) rune {
-		if (r >= 'a' && r <= 'z') ||
-			(r >= 'A' && r <= 'Z') ||
-			(r >= '0' && r <= '9') ||
-			r == '-' || r == '_' {
-			return r
-		}
-		return '-'
-	}, name)
+	safeName := sanitizeFilename(name)
 
 	finalName := fmt.Sprintf(
 		"class-%d_%d_%s%s",
 		classID,
 		time.Now().Unix(),
-		safe,
+		safeName,
 		ext,
 	)
 
 	fullPath := filepath.Join(baseDir, finalName)
+
 	if err := c.SaveUploadedFile(file, fullPath); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "save failed"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "failed to save file"})
 		return
 	}
 
@@ -99,16 +128,15 @@ func (h *TeacherMaterialHandler) Upload(c *gin.Context) {
 		materialType = "DOC"
 	}
 
-	title := file.Filename
-
 	if err := h.Repo.Create(
 		classID,
 		weekTitle,
-		title,
+		file.Filename,
 		publicURL,
 		materialType,
 		teacherID,
 	); err != nil {
+		_ = os.Remove(fullPath)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "db insert failed"})
 		return
 	}
@@ -119,10 +147,13 @@ func (h *TeacherMaterialHandler) Upload(c *gin.Context) {
 	})
 }
 
+/*
+GET /api/teacher/materials
+*/
 func (h *TeacherMaterialHandler) List(c *gin.Context) {
 	teacherID := c.GetUint64("user_id")
-	classIDStr := c.Query("class_id")
 
+	classIDStr := c.Query("class_id")
 	var classID uint64
 	if _, err := fmt.Sscan(classIDStr, &classID); err != nil || classID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid class_id"})
@@ -140,38 +171,29 @@ func (h *TeacherMaterialHandler) List(c *gin.Context) {
 
 /*
 DELETE /api/teacher/materials/:id
-Deletes material from DB and file system (ownership safe)
+Safe deletion (DB + filesystem)
 */
 func (h *TeacherMaterialHandler) Delete(c *gin.Context) {
 	teacherID := c.GetUint64("user_id")
 
-	idStr := c.Param("id")
 	var materialID uint64
-	if _, err := fmt.Sscan(idStr, &materialID); err != nil || materialID == 0 {
+	if _, err := fmt.Sscan(c.Param("id"), &materialID); err != nil || materialID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
 		return
 	}
 
-	// 1) Read file_url with ownership check
 	mat, err := h.Repo.GetByIDAndTeacher(materialID, teacherID)
 	if err != nil {
 		c.JSON(http.StatusForbidden, gin.H{"error": "not allowed"})
 		return
 	}
 
-	// 2) Delete DB row (ownership safe)
-	affected, err := h.Repo.DeleteByTeacher(materialID, teacherID)
-	if err != nil {
+	if _, err := h.Repo.DeleteByTeacher(materialID, teacherID); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "delete failed"})
 		return
 	}
-	if affected == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
-		return
-	}
 
-	// 3) Delete file from disk
-	if mat.FileURL != "" {
+	if strings.HasPrefix(mat.FileURL, "/uploads/materials/") {
 		_ = os.Remove("." + mat.FileURL)
 	}
 
@@ -180,18 +202,12 @@ func (h *TeacherMaterialHandler) Delete(c *gin.Context) {
 
 /*
 PUT /api/teacher/materials/:id
-
-	{
-	  "title": "new name.pdf",
-	  "week_title": "Week 1 (Jan 10 - Jan 16)"
-	}
 */
 func (h *TeacherMaterialHandler) Update(c *gin.Context) {
 	teacherID := c.GetUint64("user_id")
 
-	idStr := c.Param("id")
 	var materialID uint64
-	if _, err := fmt.Sscan(idStr, &materialID); err != nil || materialID == 0 {
+	if _, err := fmt.Sscan(c.Param("id"), &materialID); err != nil || materialID == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
 		return
 	}
@@ -200,6 +216,7 @@ func (h *TeacherMaterialHandler) Update(c *gin.Context) {
 		Title     string `json:"title"`
 		WeekTitle string `json:"week_title"`
 	}
+
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
@@ -219,4 +236,34 @@ func (h *TeacherMaterialHandler) Update(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "material updated"})
+}
+
+// -------------------- helpers --------------------
+
+func sanitizeFilename(name string) string {
+	return strings.Map(func(r rune) rune {
+		if (r >= 'a' && r <= 'z') ||
+			(r >= 'A' && r <= 'Z') ||
+			(r >= '0' && r <= '9') ||
+			r == '-' || r == '_' {
+			return r
+		}
+		return '-'
+	}, name)
+}
+
+func validateMimeType(file *multipart.FileHeader, expected string) bool {
+	f, err := file.Open()
+	if err != nil {
+		return false
+	}
+	defer f.Close()
+
+	buf := make([]byte, 512)
+	if _, err := f.Read(buf); err != nil {
+		return false
+	}
+
+	detected := http.DetectContentType(buf)
+	return strings.HasPrefix(detected, expected)
 }
