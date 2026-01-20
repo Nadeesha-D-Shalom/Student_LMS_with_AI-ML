@@ -7,31 +7,29 @@ router = APIRouter()
 ollama = OllamaClient()
 
 
+from app.core.llm_limiter import LLM_SEMAPHORE
+
 @router.post("/chat", response_model=ChatResponse)
 async def chat(req: ChatRequest):
-    # ---------- VALIDATION ----------
     if not req.message or not req.message.strip():
         raise HTTPException(status_code=400, detail="Message is required")
 
-    # ---------- BUILD SYSTEM PROMPT ----------
     system_prompt = build_system_prompt(
         user_message=req.message,
         grade=req.grade,
-        subject=req.subject
+        subject=req.subject,
+        language=req.language
     )
 
     try:
-        answer, latency = await ollama.generate(system_prompt, req.message)
+        async with LLM_SEMAPHORE:
+            answer, latency = await ollama.generate(system_prompt, req.message)
     except Exception as e:
         raise HTTPException(status_code=502, detail=str(e))
 
     return ChatResponse(
         answer_markdown=answer,
-        followups=[
-            "Do you want examples?",
-            "Should I simplify this?",
-            "Do you want exam questions?"
-        ],
+        followups=[],
         confidence="medium",
         model=ollama.model,
         latency_ms=latency

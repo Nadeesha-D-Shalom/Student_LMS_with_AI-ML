@@ -6,7 +6,7 @@ class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=8000)
     grade: Optional[str] = None
     subject: Optional[str] = None
-    language: Optional[str] = "English"
+    language: Optional[str] = "Auto"
 
 
 class ChatResponse(BaseModel):

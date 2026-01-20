@@ -1,36 +1,35 @@
 import time
+import asyncio
 import httpx
-from app.core.config import settings
 
 
 class OllamaClient:
-    def __init__(self):
-        self.base_url = settings.ollama_base_url.rstrip("/")
-        self.model = settings.ollama_model
-        self.temperature = settings.ollama_temperature
-        self.timeout = settings.ollama_timeout_seconds
+    def __init__(self, model: str = "mistral"):
+        self.model = model
+        self.base_url = "http://127.0.0.1:11434"
 
-    async def generate(self, system_prompt: str, user_message: str):
-        url = f"{self.base_url}/api/generate"
-
-        prompt = f"{system_prompt}\n\nQuestion:\n{user_message}"
+    async def generate(self, system_prompt: str, user_prompt: str):
+        start = time.time()
 
         payload = {
             "model": self.model,
-            "prompt": prompt,
+            "prompt": user_prompt,
+            "system": system_prompt,
             "stream": False,
             "options": {
-                "temperature": self.temperature
+                "num_ctx": 2048,
+                "num_predict": 256,
+                "temperature": 0.2
             }
         }
 
-        start = time.perf_counter()
-        async with httpx.AsyncClient(timeout=self.timeout) as client:
-            response = await client.post(url, json=payload)
+        async with httpx.AsyncClient(timeout=120) as client:
+            response = await client.post(
+                f"{self.base_url}/api/generate",
+                json=payload
+            )
             response.raise_for_status()
             data = response.json()
 
-        latency_ms = int((time.perf_counter() - start) * 1000)
-        text = data.get("response", "").strip()
-
-        return text, latency_ms
+        latency = int((time.time() - start) * 1000)
+        return data["response"], latency
