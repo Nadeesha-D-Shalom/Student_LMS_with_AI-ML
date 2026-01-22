@@ -21,7 +21,6 @@ import ClassWorkspace from "./features/student/classes/ClassWorkspace";
 import LiveClasses from "./features/student/classes/LiveClasses";
 import ClassRecordings from "./features/student/classes/ClassRecordings";
 import AssignmentSubmission from "./features/student/classes/AssignmentSubmission";
-import AssignmentDetail from "./features/student/assessments/AssignmentDetail";
 
 /* ================= STUDENT ASSESSMENTS ================= */
 import Assignments from "./features/student/assessments/Assignments";
@@ -60,7 +59,8 @@ const TeacherContent = lazy(() => import("./features/teacher/pages/TeacherConten
 const TeacherAssignments = lazy(() => import("./features/teacher/pages/TeacherAssignments"));
 const TeacherTests = lazy(() => import("./features/teacher/pages/TeacherTests"));
 const TeacherGradeWorkspace = lazy(() => import("./features/teacher/grades/TeacherGradeWorkspace"));
-const TeacherHelp = lazy(() => import("./features/teacher/pages/TeacherHelp"));
+const TeacherHelp = lazy(() => import("./features/teacher/pages/TeacherHelp"));          
+const TeacherMessages = lazy(() => import("./features/teacher/pages/TeacherMessages"));
 
 
 /* ================= INSTITUTE ADMIN (LAZY) ================= */
@@ -146,7 +146,6 @@ const App = () => (
           <Route path="live-classes" element={<LiveClasses />} />
           <Route path="recordings" element={<ClassRecordings />} />
           <Route path="assignments" element={<Assignments />} />
-          <Route path="assignments/:assignmentId" element={<AssignmentDetail />} />
           <Route path="tests">
             <Route index element={<Tests />} />
             <Route path=":testId" element={<TestDetail />} />
@@ -181,9 +180,10 @@ const App = () => (
           <Route path="students" element={<TeacherStudents />} />
           <Route path="students/:studentId" element={<TeacherStudentProfile />} />
           <Route path="content" element={<TeacherContent />} />
-          <Route path="assignments" element={<TeacherAssignments />} />
+          <Route path="assignments" element={<TeacherAssignments />} />  
           <Route path="tests" element={<TeacherTests />} />
           <Route path="help" element={<TeacherHelp />} />
+          <Route path="messages" element={<TeacherMessages />} />
         </Route>
 
 
