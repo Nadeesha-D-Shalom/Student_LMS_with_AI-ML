@@ -16,29 +16,39 @@ func NewStudentAssignmentRepository() *StudentAssignmentRepository {
 	}
 }
 
-/* ===============================
-   LIST ALL ASSIGNMENTS (STUDENT)
-================================ */
+func (r *StudentAssignmentRepository) FetchStudentAssignments(
+	studentID uint64,
+	classID *uint64,
+) ([]map[string]interface{}, error) {
 
-func (r *StudentAssignmentRepository) FetchStudentAssignments(studentID uint64) ([]map[string]interface{}, error) {
-	rows, err := r.DB.Query(`
-	SELECT
-		a.id,
-		a.title,
-		a.due_date,
-		a.due_time,
-		c.class_name,
-		IF(s.assignment_id IS NULL, 'PENDING', 'SUBMITTED') AS status
-	FROM assignments a
-	JOIN classes c ON c.id = a.class_id
-	JOIN student_classes sc ON sc.class_id = c.id
-	LEFT JOIN assignment_submissions s
-		ON s.assignment_id = a.id
-		AND s.student_id = ?
-	WHERE sc.student_id = ?
-	ORDER BY a.due_date ASC
-`, studentID, studentID)
+	baseQuery := `
+		SELECT
+			a.id,
+			a.title,
+			a.due_date,
+			a.due_time,
+			c.class_name,
+			IF(s.assignment_id IS NULL, 'PENDING', 'SUBMITTED') AS status
+		FROM assignments a
+		JOIN classes c ON c.id = a.class_id
+		JOIN student_classes sc ON sc.class_id = c.id
+		LEFT JOIN assignment_submissions s
+			ON s.assignment_id = a.id
+			AND s.student_id = ?
+		WHERE sc.student_id = ?
+		  AND a.is_active = 1
+	`
 
+	args := []interface{}{studentID, studentID}
+
+	if classID != nil {
+		baseQuery += " AND a.class_id = ? "
+		args = append(args, *classID)
+	}
+
+	baseQuery += " ORDER BY a.due_date ASC "
+
+	rows, err := r.DB.Query(baseQuery, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,10 +90,6 @@ func (r *StudentAssignmentRepository) FetchStudentAssignments(studentID uint64) 
 	return items, nil
 }
 
-/* ===============================
-   ACCESS CHECK
-================================ */
-
 func (r *StudentAssignmentRepository) CanAccessAssignment(studentID, assignmentID uint64) (bool, error) {
 	var count int
 
@@ -91,15 +97,13 @@ func (r *StudentAssignmentRepository) CanAccessAssignment(studentID, assignmentI
 		SELECT COUNT(*)
 		FROM assignments a
 		JOIN student_classes sc ON sc.class_id = a.class_id
-		WHERE a.id = ? AND sc.student_id = ?
+		WHERE a.id = ?
+		  AND sc.student_id = ?
+		  AND a.is_active = 1
 	`, assignmentID, studentID).Scan(&count)
 
 	return count > 0, err
 }
-
-/* ===============================
-   ASSIGNMENT DETAIL (FIXED)
-================================ */
 
 func (r *StudentAssignmentRepository) FetchAssignmentDetail(
 	studentID, assignmentID uint64,
@@ -116,7 +120,7 @@ func (r *StudentAssignmentRepository) FetchAssignmentDetail(
 	err := r.DB.QueryRow(`
 		SELECT title, description, due_date, due_time, total_marks
 		FROM assignments
-		WHERE id = ?
+		WHERE id = ? AND is_active = 1
 	`, assignmentID).Scan(
 		&title,
 		&description,
@@ -142,53 +146,67 @@ func (r *StudentAssignmentRepository) FetchAssignmentDetail(
 		data["description"] = ""
 	}
 
-	/* ===== Submission status ===== */
-
 	var submissionURL sql.NullString
+	var submittedAt sql.NullTime
 
 	err = r.DB.QueryRow(`
-		SELECT submission_url
+		SELECT submission_url, submitted_at
 		FROM assignment_submissions
 		WHERE assignment_id = ? AND student_id = ?
-	`, assignmentID, studentID).Scan(&submissionURL)
+	`, assignmentID, studentID).Scan(&submissionURL, &submittedAt)
 
 	if err == nil && submissionURL.Valid {
 		data["status"] = "SUBMITTED"
 		data["submission_url"] = submissionURL.String
+		if submittedAt.Valid {
+			data["submitted_at"] = submittedAt.Time.Format("2006-01-02 15:04:05")
+		} else {
+			data["submitted_at"] = ""
+		}
 	} else {
 		data["status"] = "PENDING"
+		data["submission_url"] = ""
+		data["submitted_at"] = ""
 	}
 
 	return data, nil
 }
 
-/* ===============================
-   SUBMIT ASSIGNMENT
-================================ */
-
 func (r *StudentAssignmentRepository) SaveSubmission(
 	studentID, assignmentID uint64,
-	url string,
+	path string,
 ) error {
 
 	_, err := r.DB.Exec(`
 		INSERT INTO assignment_submissions
-			(assignment_id, student_id, submission_url)
-		VALUES (?, ?, ?)
-		ON DUPLICATE KEY UPDATE
-			submission_url = VALUES(submission_url)
-	`, assignmentID, studentID, url)
-
-	return err
-}
-func SaveSubmissionFile(assignmentID, studentID uint64, path string) error {
-	_, err := database.DB.Exec(`
-		INSERT INTO assignment_submissions (assignment_id, student_id, submission_url)
-		VALUES (?, ?, ?)
+			(assignment_id, student_id, submission_url, submitted_at)
+		VALUES (?, ?, ?, CURRENT_TIMESTAMP)
 		ON DUPLICATE KEY UPDATE
 			submission_url = VALUES(submission_url),
 			submitted_at = CURRENT_TIMESTAMP
 	`, assignmentID, studentID, path)
 
 	return err
+}
+
+func DeleteSubmission(studentID, assignmentID uint64) error {
+	_, err := database.DB.Exec(`
+		DELETE FROM assignment_submissions
+		WHERE assignment_id = ? AND student_id = ?
+	`, assignmentID, studentID)
+
+	return err
+}
+
+func (r *StudentAssignmentRepository) GetAssignmentDeadline(
+	assignmentID uint64,
+) (dueDate string, dueTime string, allowLate bool, err error) {
+
+	err = r.DB.QueryRow(`
+		SELECT due_date, due_time, allow_late
+		FROM assignments
+		WHERE id = ? AND is_active = 1
+	`, assignmentID).Scan(&dueDate, &dueTime, &allowLate)
+
+	return
 }

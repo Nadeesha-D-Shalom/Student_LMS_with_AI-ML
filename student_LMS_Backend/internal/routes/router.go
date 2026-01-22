@@ -370,5 +370,44 @@ func SetupRouter() *gin.Engine {
 		teacherStudentHandler.Get,
 	)
 
+	api.PUT(
+		"/teacher/assignments/:assignmentId/status",
+		middleware.RequireRole("TEACHER"),
+		teacherHandlers.ToggleAssignmentStatus,
+	)
+	api.DELETE(
+		"/student/assignments/:assignmentId/submission",
+		middleware.RequireRole("STUDENT"),
+		handlers2.RemoveStudentAssignmentSubmission,
+	)
+
+	// ---------- Teacher Assignments ----------
+	teacherAssignmentRepo := teacherRepos.NewTeacherAssignmentRepository(database.DB)
+	teacherAssignmentHandler := teacherHandlers.NewTeacherAssignmentHandler(teacherAssignmentRepo)
+
+	api.GET(
+		"/teacher/assignments",
+		middleware.RequireRole("TEACHER"),
+		teacherAssignmentHandler.List,
+	)
+
+	api.POST(
+		"/teacher/assignments",
+		middleware.RequireRole("TEACHER"),
+		teacherAssignmentHandler.Create,
+	)
+
+	api.PUT(
+		"/teacher/assignments/:assignmentId",
+		middleware.RequireRole("TEACHER"),
+		teacherAssignmentHandler.Update,
+	)
+
+	api.DELETE(
+		"/teacher/assignments/:assignmentId",
+		middleware.RequireRole("TEACHER"),
+		teacherAssignmentHandler.Delete,
+	)
+
 	return r
 }

@@ -45,8 +45,8 @@ const LiveClasses = () => {
         <h2 className="text-sm font-semibold text-slate-700">Upcoming</h2>
 
         {data.upcoming.length === 0 ? (
-          <div className="bg-white border rounded-xl p-6 text-center text-slate-500">
-            No upcoming live classes
+          <div className="bg-red-100 border rounded-xl p-6 text-center text-slate-500">
+            This Option Will be Added Future
           </div>
         ) : (
           data.upcoming.map((c) => (
@@ -81,8 +81,8 @@ const LiveClasses = () => {
         <h2 className="text-sm font-semibold text-slate-700">Past Sessions</h2>
 
         {data.past.length === 0 ? (
-          <div className="bg-white border rounded-xl p-6 text-center text-slate-500">
-            No past sessions
+          <div className="bg-red-100 border rounded-xl p-6 text-center text-slate-500">
+            This Option Will be Added Future
           </div>
         ) : (
           data.past.map((c) => (
