@@ -1,124 +1,278 @@
-import React, { useState } from "react";
-import "./teacherAssignments.css";
+import React, { useEffect, useState, useRef } from "react";
+import { apiFetch } from "../../../api/api";
 
+/* ================= CLASS DROPDOWN ================= */
+function ClassSelectDropdown({ classes, selectedClasses, toggleClass }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        type="button"
+        onClick={() => setOpen((p) => !p)}
+        className="w-full flex justify-between items-center border rounded-lg px-4 py-3 text-sm bg-white"
+      >
+        <span>
+          {selectedClasses.length === 0
+            ? "Select Classes"
+            : `${selectedClasses.length} class(es) selected`}
+        </span>
+        <span className="text-gray-400">▾</span>
+      </button>
+
+      {open && (
+        <div className="absolute z-20 mt-2 w-full bg-white border rounded-lg shadow max-h-64 overflow-auto">
+          {classes.length === 0 ? (
+            <div className="px-4 py-3 text-sm text-gray-500">
+              No classes available
+            </div>
+          ) : (
+            classes.map((cls) => (
+              <label
+                key={cls.id}
+                className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedClasses.includes(cls.id)}
+                  onChange={() => toggleClass(cls.id)}
+                  className="accent-blue-600"
+                />
+                {cls.class_name ||
+                  cls.name ||
+                  cls.subject_name ||
+                  (cls.subject && cls.grade
+                    ? `Grade ${cls.grade} ${cls.subject}`
+                    : `Class ${cls.id}`)}
+
+              </label>
+            ))
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ================= MAIN PAGE ================= */
 export default function TeacherAssignments() {
   const academicYear = "2026";
 
-  const teacherClasses = [
-    { id: "ict-grade-10", subject: "ICT", grade: 10, students: 42 },
-    { id: "physics-grade-12", subject: "Physics", grade: 12, students: 31 }
-  ];
-
-  const [selectedClasses, setSelectedClasses] = useState([]);
+  const [classes, setClasses] = useState([]);
   const [assignments, setAssignments] = useState([]);
+  const [selectedClasses, setSelectedClasses] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const [form, setForm] = useState({
     title: "",
     description: "",
-    dueDate: ""
+    due_date: "",
+    due_time: "",
+    total_marks: 100,
+    allow_late: false
   });
 
+  const [editForm, setEditForm] = useState({});
+
+  /* ================= LOAD ================= */
+  const loadAll = async () => {
+    setLoading(true);
+    try {
+      const [cls, asg] = await Promise.all([
+        apiFetch("/api/teacher/classes"),
+        apiFetch("/api/teacher/assignments")
+      ]);
+      setClasses(cls.items || []);
+      setAssignments(asg.items || []);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadAll();
+  }, []);
+
+  /* ================= HELPERS ================= */
   const toggleClass = (id) => {
-    setSelectedClasses((prev) =>
-      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
+    setSelectedClasses((p) =>
+      p.includes(id) ? p.filter((c) => c !== id) : [...p, id]
     );
   };
 
   const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((p) => ({ ...p, [name]: type === "checkbox" ? checked : value }));
+  };
+
+  const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setForm((p) => ({ ...p, [name]: value }));
+    setEditForm((p) => ({ ...p, [name]: value }));
   };
 
-  const createAssignment = () => {
-    if (
-      !form.title ||
-      !form.dueDate ||
-      selectedClasses.length === 0
-    )
+  /* ================= CREATE ================= */
+  const createAssignment = async () => {
+    if (!form.title || !form.due_date || !form.due_time || selectedClasses.length === 0) {
       return;
+    }
 
-    setAssignments((prev) => [
-      {
-        id: Date.now(),
-        ...form,
-        academicYear,
-        targets: selectedClasses,
-        date: new Date().toLocaleDateString()
-      },
-      ...prev
-    ]);
+    for (const classId of selectedClasses) {
+      await apiFetch("/api/teacher/assignments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ class_id: classId, ...form })
+      });
+    }
 
-    setForm({ title: "", description: "", dueDate: "" });
+    setForm({
+      title: "",
+      description: "",
+      due_date: "",
+      due_time: "",
+      total_marks: 100,
+      allow_late: false
+    });
     setSelectedClasses([]);
+    loadAll();
   };
+
+  /* ================= EDIT ================= */
+  const startEdit = (a) => {
+    setEditingId(a.id);
+    setEditForm({
+      title: a.title,
+      description: a.description,
+      due_date: a.due_date,
+      due_time: a.due_time
+    });
+  };
+
+  const saveEdit = async (id) => {
+    await apiFetch(`/api/teacher/assignments/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(editForm)
+    });
+    setEditingId(null);
+    loadAll();
+  };
+
+  /* ================= VISIBILITY ================= */
+  const toggleVisibility = async (id, active) => {
+    await apiFetch(`/api/teacher/assignments/${id}/status`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ is_active: !active })
+    });
+    loadAll();
+  };
+
+  if (loading) {
+    return <div className="p-6 text-gray-500">Loading…</div>;
+  }
 
   return (
-    <div className="teacher-assignments-page">
-      <h2>Assignments</h2>
-      <p className="subtitle">
-        Academic Year {academicYear} • Create once, assign to multiple classes
-      </p>
-
-      {/* CLASS SELECT */}
-      <div className="assign-class-box">
-        <h3>Select Classes</h3>
-        {teacherClasses.map((cls) => (
-          <label key={cls.id} className="assign-class-item">
-            <input
-              type="checkbox"
-              checked={selectedClasses.includes(cls.id)}
-              onChange={() => toggleClass(cls.id)}
-            />
-            {cls.subject} — Grade {cls.grade} ({cls.students} students)
-          </label>
-        ))}
+    <div className="p-6 max-w-6xl mx-auto space-y-8">
+      <div>
+        <h1 className="text-2xl font-semibold">Assignments</h1>
+        <p className="text-sm text-gray-500">
+          Academic Year {academicYear} • Create, edit, hide or enable assignments
+        </p>
       </div>
 
-      {/* FORM */}
-      <div className="assign-form">
+      {/* CLASS SELECT */}
+      <div className="bg-white border rounded-xl p-5">
+        <h2 className="font-medium mb-3">Select Classes</h2>
+        <ClassSelectDropdown
+          classes={classes}
+          selectedClasses={selectedClasses}
+          toggleClass={toggleClass}
+        />
+      </div>
+
+      {/* CREATE */}
+      <div className="bg-white border rounded-xl p-5 space-y-4">
+        <h2 className="font-medium">Create Assignment</h2>
+
         <input
-          name="title"
+          className="w-full border rounded-lg px-3 py-2"
           placeholder="Assignment title"
+          name="title"
           value={form.title}
           onChange={handleChange}
         />
+
         <textarea
+          className="w-full border rounded-lg px-3 py-2"
+          placeholder="Description"
           name="description"
-          placeholder="Description / Instructions"
           value={form.description}
           onChange={handleChange}
         />
-        <input
-          type="date"
-          name="dueDate"
-          value={form.dueDate}
-          onChange={handleChange}
-        />
+
+        <div className="grid grid-cols-2 gap-4">
+          <input type="date" name="due_date" value={form.due_date} onChange={handleChange} className="border rounded-lg px-3 py-2" />
+          <input type="time" name="due_time" value={form.due_time} onChange={handleChange} className="border rounded-lg px-3 py-2" />
+        </div>
 
         <button
-          className="teacher-primary-btn"
           onClick={createAssignment}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
         >
           Create Assignment
         </button>
       </div>
 
       {/* LIST */}
-      <div className="assign-list">
-        <h3>Published Assignments</h3>
+      <div className="space-y-4">
+        <h2 className="font-medium">Published Assignments</h2>
 
-        {assignments.length === 0 ? (
-          <p className="empty">No assignments created yet.</p>
-        ) : (
-          assignments.map((a) => (
-            <div key={a.id} className="assign-card">
-              <div className="assign-title">{a.title}</div>
-              <div className="assign-desc">{a.description}</div>
-              <div className="assign-meta">
-                Due: {a.dueDate} • {a.targets.length} class(es)
+        {assignments.map((a) => (
+          <div key={a.id} className="bg-white border rounded-xl p-5 space-y-3">
+            <div className="flex justify-between">
+              <div>
+                <h3 className="font-semibold">{a.title}</h3>
+                <p className="text-sm text-gray-500">
+                  {a.class_name} • Due {a.due_date} {a.due_time}
+                </p>
               </div>
+
+              <button
+                onClick={() => toggleVisibility(a.id, a.is_active)}
+                className="text-xs text-gray-600 hover:text-blue-600"
+              >
+                {a.is_active ? "👁 Visible" : "🚫 Hidden"}
+              </button>
             </div>
-          ))
-        )}
+
+            {editingId === a.id ? (
+              <div className="space-y-3">
+                <input className="w-full border rounded-lg px-3 py-2" name="title" value={editForm.title} onChange={handleEditChange} />
+                <textarea className="w-full border rounded-lg px-3 py-2" name="description" value={editForm.description} onChange={handleEditChange} />
+                <div className="flex gap-3">
+                  <button onClick={() => saveEdit(a.id)} className="bg-blue-600 text-white px-4 py-2 rounded-lg">Save</button>
+                  <button onClick={() => setEditingId(null)} className="border px-4 py-2 rounded-lg">Cancel</button>
+                </div>
+              </div>
+            ) : (
+              <button onClick={() => startEdit(a)} className="text-sm text-blue-600 hover:underline">
+                Edit assignment
+              </button>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
