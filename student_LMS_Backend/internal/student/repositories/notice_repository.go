@@ -1,6 +1,9 @@
 package repositories
 
-import "database/sql"
+import (
+	"database/sql"
+	"time"
+)
 
 type StudentNoticeRepository struct {
 	DB *sql.DB
@@ -10,16 +13,24 @@ func NewStudentNoticeRepository(db *sql.DB) *StudentNoticeRepository {
 	return &StudentNoticeRepository{DB: db}
 }
 
-func (r *StudentNoticeRepository) GetForStudent(studentID uint64) ([]map[string]interface{}, error) {
+func (r *StudentNoticeRepository) GetForStudent(
+	studentID uint64,
+) ([]map[string]interface{}, error) {
+
 	rows, err := r.DB.Query(`
 		SELECT
 			n.id,
 			n.class_id,
 			n.title,
 			n.content,
-			n.published_at
+			n.published_at,
+			u.full_name AS teacher_name
 		FROM notices n
-		LEFT JOIN student_classes sc ON sc.class_id = n.class_id
+		LEFT JOIN student_classes sc
+			ON sc.class_id = n.class_id
+		LEFT JOIN users u
+			ON u.id = n.published_by
+			AND u.role = 'TEACHER'
 		WHERE
 			n.is_active = 1
 			AND n.target_role IN ('STUDENT','ALL')
@@ -34,13 +45,17 @@ func (r *StudentNoticeRepository) GetForStudent(studentID uint64) ([]map[string]
 	}
 	defer rows.Close()
 
-	items := make([]map[string]interface{}, 0)
+	items := []map[string]interface{}{}
 
 	for rows.Next() {
-		var id uint64
-		var classID sql.NullInt64
-		var title, content string
-		var publishedAt string
+		var (
+			id          uint64
+			classID     sql.NullInt64
+			title       string
+			content     string
+			publishedAt time.Time
+			teacherName sql.NullString
+		)
 
 		if err := rows.Scan(
 			&id,
@@ -48,6 +63,7 @@ func (r *StudentNoticeRepository) GetForStudent(studentID uint64) ([]map[string]
 			&title,
 			&content,
 			&publishedAt,
+			&teacherName,
 		); err != nil {
 			return nil, err
 		}
@@ -58,6 +74,7 @@ func (r *StudentNoticeRepository) GetForStudent(studentID uint64) ([]map[string]
 			"title":        title,
 			"content":      content,
 			"published_at": publishedAt,
+			"teacher_name": teacherName.String,
 		})
 	}
 

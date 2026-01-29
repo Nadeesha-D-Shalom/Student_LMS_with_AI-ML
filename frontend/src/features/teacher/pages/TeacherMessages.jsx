@@ -1,12 +1,10 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 export default function TeacherMessages() {
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-semibold">Messages</h1>
-      <p className="text-sm text-gray-500">
-        Teacher messages page
-      </p>
+    <div className="h-[calc(100vh-120px)] w-full">
+      <Outlet />
     </div>
   );
 }

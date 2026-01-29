@@ -212,31 +212,6 @@ func SetupRouter() *gin.Engine {
 		studentMaterialHandler.List,
 	)
 
-	// ---------- Student Messages ----------
-	api.GET(
-		"/student/messages",
-		middleware.RequireRole("STUDENT"),
-		handlers2.GetStudentMessages,
-	)
-
-	api.GET(
-		"/student/messages/:id",
-		middleware.RequireRole("STUDENT"),
-		handlers2.GetStudentMessageThread,
-	)
-
-	api.GET(
-		"/student/messages-unread-count",
-		middleware.RequireRole("STUDENT"),
-		handlers2.GetUnreadMessageCount,
-	)
-
-	api.POST(
-		"/student/messages",
-		middleware.RequireRole("STUDENT"),
-		handlers2.CreateStudentMessage,
-	)
-
 	// ---------- Student Week Notes ----------
 	studentWeekNoteRepo := studentRepos.NewStudentWeekNoteRepository(database.DB)
 	studentWeekNoteHandler := handlers2.NewStudentWeekNoteHandler(studentWeekNoteRepo)
@@ -407,6 +382,56 @@ func SetupRouter() *gin.Engine {
 		"/teacher/assignments/:assignmentId",
 		middleware.RequireRole("TEACHER"),
 		teacherAssignmentHandler.Delete,
+	)
+
+	// ---------- Teacher Messages ----------
+	api.GET(
+		"/teacher/messages",
+		middleware.RequireRole("TEACHER"),
+		teacherHandlers.TeacherInbox,
+	)
+
+	api.GET(
+		"/teacher/messages/:threadId",
+		middleware.RequireRole("TEACHER"),
+		teacherHandlers.TeacherGetThread,
+	)
+
+	api.POST(
+		"/teacher/messages/:threadId/reply",
+		middleware.RequireRole("TEACHER"),
+		teacherHandlers.TeacherReply,
+	)
+
+	api.POST(
+		"/teacher/messages/:threadId/close",
+		middleware.RequireRole("TEACHER"),
+		teacherHandlers.TeacherCloseThread,
+	)
+
+	// ---------- Student Messages (New Thread + Stack) ----------
+	api.GET(
+		"/student/messages",
+		middleware.RequireRole("STUDENT"),
+		handlers2.StudentInbox,
+	)
+
+	api.GET(
+		"/student/messages/:threadId",
+		middleware.RequireRole("STUDENT"),
+		handlers2.StudentGetThread,
+	)
+
+	api.POST(
+		"/student/messages",
+		middleware.RequireRole("STUDENT"),
+		handlers2.StudentCreateThread,
+	)
+
+	api.POST(
+		"/student/messages/:threadId/reply",
+		middleware.RequireRole("STUDENT"),
+		handlers2.StudentReply,
 	)
 
 	return r

@@ -2,77 +2,64 @@ package handlers
 
 import (
 	"net/http"
+	"strings"
 
 	"student_LMS_Backend/internal/database"
+	studentRepos "student_LMS_Backend/internal/student/repositories"
 
 	"github.com/gin-gonic/gin"
 )
 
-type CreateMessageRequest struct {
-	Type      string  `json:"type"`
-	Subject   string  `json:"subject"`
-	TeacherID *uint64 `json:"teacher_id"`
-	Message   string  `json:"message"`
+type CreateStudentThreadRequest struct {
+	TeacherID uint64 `json:"teacher_id"`
+	Subject   string `json:"subject"`
+	Message   string `json:"message"`
 }
 
-func CreateStudentMessage(c *gin.Context) {
+func StudentCreateThread(c *gin.Context) {
 	studentID := c.GetUint64("user_id")
 
-	var req CreateMessageRequest
+	var req CreateStudentThreadRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
 		return
 	}
 
-	if req.Subject == "" || req.Message == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Subject and message are required"})
+	req.Subject = strings.TrimSpace(req.Subject)
+	req.Message = strings.TrimSpace(req.Message)
+
+	if req.TeacherID == 0 || req.Subject == "" || req.Message == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "All fields are required"})
 		return
 	}
 
-	var receiverRole string
-	var receiverID *uint64
+	threadRepo := studentRepos.NewMessageThreadRepository(database.DB)
+	stackRepo := studentRepos.NewMessageStackRepository(database.DB)
 
-	switch req.Type {
-	case "IT":
-		receiverRole = "IT_ADMIN"
-		receiverID = nil
-	case "INSTITUTE":
-		receiverRole = "ADMIN"
-		receiverID = nil
-	case "SUBJECT":
-		if req.TeacherID == nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Teacher is required"})
-			return
-		}
-		receiverRole = "TEACHER"
-		receiverID = req.TeacherID
-	default:
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid message type"})
+	// ✅ CREATE THREAD WITH PENDING STATUS
+	threadID, err := threadRepo.CreateThread(studentID, req.TeacherID, req.Subject)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create thread"})
 		return
 	}
 
-	_, err := database.DB.Exec(`
-		INSERT INTO messages (
-			student_id,
-			receiver_role,
-			receiver_id,
-			subject,
-			encrypted_content,
-			last_message_at,
-			is_seen
-		) VALUES (?, ?, ?, ?, ?, NOW(), FALSE)
-	`,
+	// First message
+	err = stackRepo.PushMessage(
+		threadID,
+		"STUDENT",
 		studentID,
-		receiverRole,
-		receiverID,
-		req.Subject,
+		"TEACHER",
+		req.TeacherID,
 		req.Message,
 	)
-
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create message"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to send message"})
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"success": true})
+	_ = threadRepo.UpdateLastMessageAt(threadID)
+
+	c.JSON(http.StatusCreated, gin.H{
+		"thread_id": threadID,
+	})
 }

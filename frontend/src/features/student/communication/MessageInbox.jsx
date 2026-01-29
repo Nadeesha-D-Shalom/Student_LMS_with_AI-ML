@@ -89,7 +89,7 @@ const MessageInbox = () => {
       {messages.map((m) => (
         <div
           key={m.id}
-          onClick={() => navigate(`/student/messages/${m.id}`)}
+          onClick={() => navigate(`/student/messages/${m.thread_id}`)}
           className={`cursor-pointer rounded-xl border p-4 transition hover:shadow-sm ${
             m.status === "PENDING" ? "bg-blue-50" : "bg-white"
           }`}

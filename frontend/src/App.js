@@ -51,6 +51,10 @@ import AIAssistant from "./features/student/assistant/AIAssistant";
 /* ================= TEACHER (LAZY) ================= */
 import TeacherStudentProfile from "./features/teacher/pages/studentsProfiles/TeacherStudentProfile";
 
+import TeacherMessageInbox from "./features/teacher/pages/messages/TeacherMessageInbox";
+import TeacherMessageThread from "./features/teacher/pages/messages/TeacherMessageThread";
+
+
 const TeacherLayout = lazy(() => import("./features/teacher/layout/TeacherLayout"));
 const TeacherDashboard = lazy(() => import("./features/teacher/pages/TeacherDashboard"));
 const TeacherMyClasses = lazy(() => import("./features/teacher/pages/TeacherMyClasses"));
@@ -59,7 +63,7 @@ const TeacherContent = lazy(() => import("./features/teacher/pages/TeacherConten
 const TeacherAssignments = lazy(() => import("./features/teacher/pages/TeacherAssignments"));
 const TeacherTests = lazy(() => import("./features/teacher/pages/TeacherTests"));
 const TeacherGradeWorkspace = lazy(() => import("./features/teacher/grades/TeacherGradeWorkspace"));
-const TeacherHelp = lazy(() => import("./features/teacher/pages/TeacherHelp"));          
+const TeacherHelp = lazy(() => import("./features/teacher/pages/TeacherHelp"));
 const TeacherMessages = lazy(() => import("./features/teacher/pages/TeacherMessages"));
 
 
@@ -180,10 +184,14 @@ const App = () => (
           <Route path="students" element={<TeacherStudents />} />
           <Route path="students/:studentId" element={<TeacherStudentProfile />} />
           <Route path="content" element={<TeacherContent />} />
-          <Route path="assignments" element={<TeacherAssignments />} />  
+          <Route path="assignments" element={<TeacherAssignments />} />
           <Route path="tests" element={<TeacherTests />} />
           <Route path="help" element={<TeacherHelp />} />
-          <Route path="messages" element={<TeacherMessages />} />
+
+          <Route path="messages" element={<TeacherMessages />}>
+            <Route index element={<TeacherMessageInbox />} />
+            <Route path=":threadId" element={<TeacherMessageThread />} />
+          </Route>
         </Route>
 
 
