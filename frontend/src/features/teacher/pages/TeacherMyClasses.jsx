@@ -202,7 +202,7 @@ export default function TeacherMyClasses() {
               Started: {cls.startDate} | Academic Year {cls.startYear}
             </div>
 
-            {/* ✅ ROUTE FIXED HERE */}
+            {/* ROUTE FIXED HERE */}
             <button
               className="teacher-grade-btn"
               onClick={() =>

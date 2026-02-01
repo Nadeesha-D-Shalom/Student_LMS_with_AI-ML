@@ -434,5 +434,11 @@ func SetupRouter() *gin.Engine {
 		handlers2.StudentReply,
 	)
 
+	api.GET(
+		"/teacher/dashboard",
+		middleware.RequireRole("TEACHER"),
+		teacherHandlers.TeacherDashboard,
+	)
+
 	return r
 }
