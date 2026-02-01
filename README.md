@@ -1,105 +1,116 @@
 # Student Learning Management System (LMS)
 
 A modern, scalable **Learning Management System (LMS)** designed to support students, instructors, and administrators through a unified digital learning platform.  
-This system focuses on **content delivery, academic management, and intelligent learning assistance** using a service-oriented architecture.
+The system emphasizes **academic workflow automation, content delivery, and intelligent learning assistance**, built using a clean, service-oriented architecture.
 
 ---
 
-## 🎯 Project Objectives
+## 🎯 Project Overview & Objectives
 
-- Centralize academic content and learning activities
+This LMS is designed to address real-world academic management challenges by providing a centralized, extensible, and secure platform.
+
+**Key objectives:**
+- Centralize academic content, assessments, and communication
 - Improve student engagement through structured digital learning
-- Support instructors with efficient course and assessment management
-- Enable scalable deployment for institutional use
-- Lay the foundation for AI-assisted learning features
+- Enable instructors to manage courses and evaluations efficiently
+- Support institutional scalability and long-term maintainability
+- Establish a strong foundation for AI-assisted learning features
 
 ---
 
-## 🧩 Core LMS Features
+## 🧩 Core System Modules
 
 ### 👨‍🎓 Student Module
-- Secure student authentication and role-based access
-- Course enrollment and learning dashboard
-- Access to lecture materials (PDFs, videos, links)
-- Assignment submission and tracking
+- Secure authentication with role-based access control
+- Personalized learning dashboard
+- Access to lecture materials (PDFs, videos, external links)
+- Assignment submission with deadline tracking
 - View grades, feedback, and academic progress
+- Student–teacher messaging and announcements
 
 ### 👩‍🏫 Instructor Module
-- Course and subject management
-- Upload and manage learning resources
-- Create assignments and assessments
-- Grade submissions and provide feedback
-- Monitor student participation and progress
+- Course, class, and subject management
+- Upload and manage academic resources
+- Create, assign, and manage assignments
+- Review submissions and provide structured feedback
+- Publish announcements and notices to targeted classes
+- Monitor student participation and performance
 
-### 🛠️ Admin Module
-- User and role management (students, instructors, admins)
-- Course and academic structure configuration
-- System monitoring and access control
-- Platform-level data management
+### 🛠️ Administration Module
+- User and role management (students, instructors, administrators)
+- Academic structure configuration (classes, subjects, schedules)
+- System-level access control and monitoring
+- Platform data management and governance
+- Prepared foundation for institute-wide scaling
 
 ---
 
-## 🧠 Intelligent Learning Support (Planned / In-Progress)
+## 🧠 Intelligent Learning Support (Planned / In Progress)
 
 - AI-powered academic question answering
-- Context-aware responses using syllabus and notes
-- Retrieval-Augmented Generation (RAG) for accuracy
+- Context-aware responses using syllabus and lecture materials
+- Retrieval-Augmented Generation (RAG) for improved accuracy
+- Modular AI services for independent evolution
 - Future support for personalized learning recommendations
 
 ---
 
 ## 🏗️ System Architecture
 
-- **Frontend**: React (Component-based UI)
-- **Backend**: Service-oriented API architecture
-- **AI Layer**: Python-based ML services (LLM + RAG)
-- **Database**: Relational database for academic data
+- **Frontend**: React (component-based UI, TailwindCSS)
+- **Backend**: Go (Gin) with RESTful APIs
+- **AI Layer**: Python-based ML services (LLM + RAG pipeline)
+- **Database**: Relational database for academic and user data
+- **Architecture**: Modular, service-oriented, production-ready
 - **Deployment**: Cloud-ready and container-friendly design
 
 ---
 
 ## 🔐 Security & Access Control
 
-- Role-based authentication and authorization
-- Secure API communication
+- JWT-based authentication
+- Strict role-based authorization (Student, Teacher, Admin, IT Admin)
+- Secure API endpoints with middleware enforcement
 - Input validation and controlled resource access
-- Designed for academic data integrity and privacy
+- Designed with academic data integrity and privacy in mind
 
 ---
 
 ## 📈 Scalability & Extensibility
 
-- Modular architecture for future expansion
-- Supports adding new academic modules easily
-- AI components can be upgraded independently
-- Suitable for single-institution or multi-tenant deployment
+- Modular codebase for easy feature expansion
+- Clear separation of frontend, backend, and AI services
+- Independent upgrade path for AI components
+- Supports both single-institution and future multi-tenant deployment
 
 ---
 
-## 🚀 Future Enhancements
+## 🚀 Planned Enhancements
 
 - Live classes and real-time notifications
-- Analytics dashboard for learning insights
+- Analytics dashboards for academic insights
 - Advanced AI tutor with adaptive learning paths
-- Mobile-optimized interface
-- Integration with external academic systems
+- Mobile-optimized user experience
+- Integration with external academic and institutional systems
 
 ---
 
-## 📚 Academic Use Case
+## 📚 Academic & Professional Value
 
-This LMS is developed as a **software engineering and applied AI project**, demonstrating:
-- Full-stack application design
-- Clean architecture principles
+This LMS is developed as a **full-stack software engineering and applied AI project**, demonstrating:
+
+- End-to-end system design and implementation
+- Clean architecture and maintainable code structure
 - Real-world academic workflow modeling
-- Practical integration of AI into education systems
+- Practical integration of AI into education platforms
+- Industry-oriented development practices
 
 ---
 
 ## 📄 License
 
-This project is developed for educational and research purposes.  
-Licensing details can be added as required.
+This project is developed for **educational and research purposes**.  
+Licensing details can be defined based on institutional or commercial requirements.
 
 ---
 
@@ -107,4 +118,4 @@ Licensing details can be added as required.
 
 **Nadeesha Shalom**  
 Software Engineering Undergraduate  
-Focus: Full-Stack Development, Learning Systems, AI-Assisted Education
+Focus Areas: Full-Stack Development, Learning Systems, AI-Assisted Education
