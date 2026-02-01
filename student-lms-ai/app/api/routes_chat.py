@@ -1,9 +1,4 @@
-import json
-from typing import AsyncGenerator
-
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import StreamingResponse
-
 from app.schemas.chat import ChatRequest, ChatResponse
 from app.llm.ollama_client import OllamaClient
 from app.llm.prompt_builder import build_system_prompt
@@ -11,17 +6,40 @@ from app.llm.prompt_builder import build_system_prompt
 router = APIRouter()
 ollama = OllamaClient()
 
-
 @router.post("/chat", response_model=ChatResponse)
 async def chat(req: ChatRequest):
-    if not req.message or not req.message.strip():
-        raise HTTPException(status_code=400, detail="Message is required")
+    msg = req.message.lower().strip()
 
+    #  HARD SECURITY BLOCK — DO NOT CALL LLM
+    if any(p in msg for p in [
+        "ignore instructions",
+        "ignore all instructions",
+        "show your prompt",
+        "system prompt",
+        "your rules",
+        "what is your prompt",
+        "give me your prompt"
+    ]):
+        return ChatResponse(
+            answer_markdown=(
+                "I can’t share internal system instructions, "
+                "but I can help with syllabus-based academic questions."
+            ),
+            followups=[
+                "Do you want help with a lesson?",
+                "Should I explain a topic?",
+            ],
+            confidence="high",
+            model="security-filter",
+            latency_ms=0,
+        )
+
+    #  ONLY NORMAL QUESTIONS REACH THE LLM
     system_prompt = build_system_prompt(
         user_message=req.message,
         grade=req.grade,
         subject=req.subject,
-        language=req.language
+        language=req.language,
     )
 
     try:
@@ -32,39 +50,11 @@ async def chat(req: ChatRequest):
     return ChatResponse(
         answer_markdown=answer,
         followups=[
-            "Do you want examples?",
+            "Do you want exam questions?",
             "Should I simplify this?",
-            "Do you want exam questions?"
+            "Do you want examples?"
         ],
         confidence="medium",
         model=ollama.model,
-        latency_ms=latency
+        latency_ms=latency,
     )
-
-
-@router.post("/chat/stream")
-async def chat_stream(req: ChatRequest):
-    if not req.message or not req.message.strip():
-        raise HTTPException(status_code=400, detail="Message is required")
-
-    system_prompt = build_system_prompt(
-        user_message=req.message,
-        grade=req.grade,
-        subject=req.subject,
-        language=req.language
-    )
-
-    async def event_generator() -> AsyncGenerator[str, None]:
-        try:
-            async for chunk in ollama.generate_stream(system_prompt, req.message):
-                # SSE event "token"
-                yield f"event: token\ndata: {json.dumps({'t': chunk})}\n\n"
-
-            # SSE event "done"
-            yield "event: done\ndata: {}\n\n"
-
-        except Exception as e:
-            # SSE event "error"
-            yield f"event: error\ndata: {json.dumps({'error': str(e)})}\n\n"
-
-    return StreamingResponse(event_generator(), media_type="text/event-stream")

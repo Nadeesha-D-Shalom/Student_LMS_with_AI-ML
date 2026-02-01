@@ -16,13 +16,12 @@ type AIRequest struct {
 }
 
 func RegisterAIRoutes(r *gin.RouterGroup) {
-	aiLimiter := middleware.NewRateLimiter(10, time.Minute)
+	limiter := middleware.NewRateLimiter(10, time.Minute)
 
 	r.POST(
 		"/ai/chat",
-		middleware.RateLimitMiddleware(aiLimiter, func(c *gin.Context) string {
-			uid := c.GetUint64("user_id")
-			if uid != 0 {
+		middleware.RateLimitMiddleware(limiter, func(c *gin.Context) string {
+			if uid := c.GetUint64("user_id"); uid != 0 {
 				return fmt.Sprintf("uid:%d", uid)
 			}
 			return c.ClientIP()
@@ -30,17 +29,17 @@ func RegisterAIRoutes(r *gin.RouterGroup) {
 		func(c *gin.Context) {
 			var req AIRequest
 			if err := c.ShouldBindJSON(&req); err != nil || req.Message == "" {
-				c.JSON(http.StatusBadRequest, gin.H{"error": "Message is required"})
+				c.JSON(http.StatusBadRequest, gin.H{"error": "Message required"})
 				return
 			}
 
-			response, err := service.AskAI(req.Message)
+			resp, err := service.AskAI(req.Message)
 			if err != nil {
 				c.JSON(http.StatusBadGateway, gin.H{"error": err.Error()})
 				return
 			}
 
-			c.JSON(http.StatusOK, response)
+			c.JSON(http.StatusOK, resp)
 		},
 	)
 }

@@ -19,9 +19,14 @@ type AIResponse struct {
 }
 
 func AskAI(message string) (*AIResponse, error) {
-	reqBody, _ := json.Marshal(AIRequest{Message: message})
+	reqBody, _ := json.Marshal(AIRequest{
+		Message: message,
+	})
 
-	client := &http.Client{Timeout: 120 * time.Second}
+	client := &http.Client{
+		Timeout: 180 * time.Second,
+	}
+
 	req, _ := http.NewRequest("POST", AI_URL, bytes.NewBuffer(reqBody))
 	req.Header.Set("Content-Type", "application/json")
 
@@ -32,7 +37,7 @@ func AskAI(message string) (*AIResponse, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("ai service returned status %d", resp.StatusCode)
+		return nil, fmt.Errorf("AI service returned %d", resp.StatusCode)
 	}
 
 	var aiResp AIResponse
