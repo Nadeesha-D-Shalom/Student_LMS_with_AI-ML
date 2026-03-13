@@ -1,6 +1,7 @@
 {
   "name": "frontend",
-  "version": "0.1.0",
+  "version": "1.02.0",
+  "homepage": "https://nadeesha-d-shalom.github.io/Student_LMS_with_AI-ML/",
   "private": true,
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
